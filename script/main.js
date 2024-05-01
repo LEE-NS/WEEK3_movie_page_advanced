@@ -167,7 +167,7 @@ main.addEventListener("click", (e) => {
 });
 // 영화 카드의 상세 페이지로 이동
 
-const URL = new URLSearchParams([
+const url = new URLSearchParams([
   ["id", null],
   ["mode", "dark"],
 ]);
@@ -175,13 +175,13 @@ const URL = new URLSearchParams([
 
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {
-    const MOVIE_ID = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-    URL.set("id", MOVIE_ID); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
-    for (const param of URL) {
+    const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
+    URL.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
+    for (const param of url) {
       console.log(param);
     }
-    const URL_QUERY = URL.toString(); // 쿼리들을 문자열로 바꾼다.
-    location.href = `html/detail.html?${URL_QUERY}`; // 이동할 페이지에 쿼리들을 적용해준다.
+    const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
+    location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
 
     // 남은 부분 : 쿼리 값을 읽어서 페이지 양식에 맞게
   }
