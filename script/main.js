@@ -248,7 +248,7 @@ searchInput.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
         let text = searchInput.value;
         if (text === "") {
-            alert("검색어를 입력해주세요");
+            alert("한 글자 이상 입력해 주세요!");
             searchInput.focus();
             return;
         }
@@ -267,3 +267,12 @@ searchInput.addEventListener("keydown", async (e) => {
 
 /* searchTotitle이 끝나고 나서 실행 */
 
+
+const INPUT_VALIDATION = document.querySelector('.input-wrap input'); // 유효성 검사를 위한 인풋창 지정
+const INPUT_VALIDATION_MAX_LENGTH = 30;
+INPUT_VALIDATION.addEventListener('input', function() {
+    if(this.value.length > INPUT_VALIDATION_MAX_LENGTH) {
+        alert ("30글자를 초과하셨습니다. 다시 입력해 주세요!")
+        this.value = "";
+    }
+});
