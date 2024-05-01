@@ -1,10 +1,21 @@
-  .backBtn {
+  .homeBtn {
     position: fixed;
     left: 20px;
     top: 20px;
     width: 40px;
     height: 40px;
-    background-image: url(../image/backBtn.png);
+    background-image: url(../image/homeBtn.png);
     background-size: contain;
     cursor: pointer;
   }
+
+.backBtn {
+  position: fixed;
+  left: 100px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background-image: url(../image/backBtn.png);
+  background-size: contain;
+  cursor: pointer;
+}
