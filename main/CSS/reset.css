@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: default;
+    user-select: none;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+}
+button {
+    border: none;
+    background: none;
+    border-radius: 0;
+    cursor: pointer;
+    color: inherit;
+}
+input {
+    border: none;
+    background: none;
+}
+ul {
+    list-style: none;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}

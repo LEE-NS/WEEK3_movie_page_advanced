@@ -1,36 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="reset.css">
-    <title>Movie Collection</title>
-
-</head>
-
- <body>
-    <header class="title">
-        <h2>🌠 평점 높은 영화 순위 🌠</h2>
-    </header>
-
-    <form class="search">
-        <label>영화 검색:</label>
-        <input type="text" id="searchInput" placeholder="영화 제목 입력" >
-        <button type ="button"id="searchBtn">검색</button>
-    </form>
-
-    <section class="movieList">
-        <div class="movieCard" id = "movieCard">
-            <img src="", class = "movieImg">
-            <h4 class="movieTitle"></h4>
-            <p class ="overView"></p>
-            <p class = "rating"></p>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+        />
+        <title>Sample Cinema</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Prompt:wght@600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./CSS/reset.css" />
+        <link rel="stylesheet" href="./CSS/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="modal-wrap">
+            <div class="modal">
+                <p class="modal-text">
+                    <span class="m-name"></span>&nbsp;의 ID는&nbsp;<span class="m-id"></span>&nbsp;입니다.
+                </p>
+                <p class="confirm">확인</p>
+            </div>
         </div>
-    </section>
-
-    <script src="main.js"></script>
-</body>
-
+        <div id="wrap">
+            <div id="header-wrap">
+                <header>
+                    <ul>
+                        <li>
+                            <div class="button-wrap">
+                                <button class="search" tabindex="-1">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                                <div class="input-wrap">
+                                    <input
+                                        type="text"
+                                        placeholder="검색할 영화 제목을 입력하세요"
+                                    />
+                                    <div class="loading-spinner">
+                                        <p class="spinner-inner"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-wrap">
+                                <button class="total" tabindex="-1">
+                                    <i class="fa-solid fa-house"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <!-- 검색 버튼, 전체 목록 -->
+                        <li>
+                            <div class="button-wrap">
+                                <button class="darkmode" tabindex="-1">
+                                    <i
+                                        class="fa-solid fa-circle-half-stroke"
+                                    ></i>
+                                </button>
+                            </div>
+                        </li>
+                        <!-- 다크 모드 -->
+                    </ul>
+                </header>
+            </div>
+            <div id="contents-wrap">
+                <main>
+                    <h1 class="main-bg" href="#">
+                        <a href="#">Sample Cinema</a>
+                    </h1>
+                    <!-- 타이틀 -->
+                    <div class="movie-list-wrap">
+                        <div class="movie-list-place">
+                            <h2 class="list-name">현재 상영 중</h2>
+                            <div class="list-wrap">
+                                <ul>
+                                    <!-- 영화 카드가 들어온다. -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 영화 리스트 -->
+                        <div class="movie-list-place">
+                            <h2 class="list-name">인기 순</h2>
+                            <div class="list-wrap">
+                                <ul>
+                                    <!-- 영화 카드가 들어온다. -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 영화 리스트 -->
+                        <div class="movie-list-place">
+                            <h2 class="list-name">높은 평점 순</h2>
+                            <div class="list-wrap">
+                                <ul>
+                                    <!-- 영화 카드가 들어온다. -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 영화 리스트 -->
+                        <div class="movie-list-place">
+                            <h2 class="list-name">개봉 예정</h2>
+                            <div class="list-wrap">
+                                <ul>
+                                    <!-- 영화 카드가 들어온다. -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 영화 리스트 -->
+                    </div>
+                </main>
+                <footer>
+                    <p class="copyright">
+                        © 2024 Sample Cinema, Inc. All Rights Reserved
+                    </p>
+                </footer>
+            </div>
+        </div>
+        <script src="./script/main.js"></script>
+    </body>
 </html>
