@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>영화 상세 페이지</title>
-    <link rel ="stylesheet" href="../CSS/detail.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../CSS/detail.css" />
+    <script defer src="../script/detail.js"></script>
+  </head>
+  <body>
     <a href="../index.html">
-        <div class ="backBtn"></div>
+      <div class="backBtn"></div>
     </a>
-    
-    안녕하세요
-</body>
+
+    <main>
+      <!--리뷰 읽고 쓰기 테스트용-->
+      <div>
+        <p>리뷰 테스트용</p>
+        <form id="reviewForm">
+          <input id="movieId" type="text" placeholder="movieid" />
+          <input id="reviewUserName" type="text" placeholder="아이디" />
+          <input
+            id="reviewUserPassword"
+            type="password"
+            placeholder="비밀번호"
+          />
+          <textarea
+            id="reviewArea"
+            class="textarea"
+            cols="50"
+            rows="10"
+            placeholder="리뷰 내용을 작성"
+          >
+          </textarea>
+          <button type="submit">버튼</button>
+        </form>
+        <div>
+          <ul class="review-box"></ul>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

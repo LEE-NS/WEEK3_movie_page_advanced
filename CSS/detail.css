@@ -1,10 +1,19 @@
-  .backBtn {
-    position: fixed;
-    left: 20px;
-    top: 20px;
-    width: 40px;
-    height: 40px;
-    background-image: url(../image/backBtn.png);
-    background-size: contain;
-    cursor: pointer;
-  }
+.backBtn {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background-image: url(../image/homeBtn.png);
+  background-size: contain;
+  cursor: pointer;
+}
+
+.textarea {
+  resize: none;
+}
+.textarea::placeholder {
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: bold;
+}
