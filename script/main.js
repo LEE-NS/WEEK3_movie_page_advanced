@@ -273,6 +273,11 @@ searchInput.addEventListener("keydown", async (e) => {
       searchInput.focus();
       return;
     }
+    
+    if(text.length > INPUT_VALIDATION_MAX_LENGTH) {
+      console.log ("최대 30자까지 입력 가능합니다. 다시 입력해 주세요!");
+      return;
+    }
     let resultArr = searchToTitle(text);
 
     spinner(isSpin); // 검색 중인 1초동안 로딩 스피너가 돌아간다.
@@ -289,10 +294,21 @@ searchInput.addEventListener("keydown", async (e) => {
 /* searchTotitle이 끝나고 나서 실행 */
 
 const INPUT_VALIDATION = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
-const INPUT_VALIDATION_MAX_LENGTH = 30;
+
+const INPUT_VALIDATION_MAX_LENGTH = 30; // 인풋 최대 길이 30 설정
+
+const MESSAGE_DISPLAY = document.createElement("div"); // 메세지 표시 div 생성
+
+MESSAGE_DISPLAY.classList.add("message"); // message 클래스 추가
+
+INPUT_VALIDATION.parentNode.appendChild(MESSAGE_DISPLAY); // 요소 부모에다가 메세지 표시 요소 추가
 INPUT_VALIDATION.addEventListener("input", function () {
-  if (this.value.length > INPUT_VALIDATION_MAX_LENGTH) {
-    alert("30글자를 초과하셨습니다. 다시 입력해 주세요!");
-    this.value = "";
+  // input 이벤트에 대한 리스너 추가
+  const INPUT_LENGTH = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
+  if (INPUT_LENGTH > INPUT_VALIDATION_MAX_LENGTH) {
+    // 길이가 제한을 초과하는지 확인
+    MESSAGE_DISPLAY.textContent = `${INPUT_LENGTH} 글자 수를 초과하였습니다. 다시 입력해 주세요!`;
+  } else {
+    MESSAGE_DISPLAY.textContent = "";
   }
 });
