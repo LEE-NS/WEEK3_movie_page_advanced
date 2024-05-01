@@ -1,4 +1,5 @@
 let reviewMap = null;
+const reviewBox = document.querySelector(".review-box");
 
 const getMovieReview = () => {
   reviewMap = localStorage.getItem("review") || new Map();
@@ -8,23 +9,38 @@ const getMovieReview = () => {
   }
 };
 
-const createReview = ({ userName, userPassword, reviewString }) => {
-  const reviewBox = document.querySelector(".review-box");
-
+const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   const temp = `
-    <li>
-      <div>${userName}</div>
-      <div>${userPassword}</div>
-      <div>${reviewString}</div>
+    <li key=${reviewId}>
+      <div>
+        <div>${userName}</div>
+        <div>${userPassword}</div>
+        <div>${reviewString}</div>
+      </div>
+      <div> 
+        <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
+      </div>
     </li>
   `;
 
   reviewBox.innerHTML += temp;
+  const deleteBtns = [
+    ...document.querySelectorAll(".review-box-delete-button"),
+  ];
+  console.log(deleteBtns);
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const _key = e.target.getAttribute("review-id");
+      const li = document.querySelector(`li[key=${_key}]`);
+      reviewBox.removeChild(li);
+    });
+  });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   getMovieReview();
 
+  // 아이디 가져와서 넣을곳 현재 2임.
   reviewMap.get("2")?.forEach((data) => {
     createReview(data);
   });
@@ -45,7 +61,15 @@ reviewButton.addEventListener("submit", (e) => {
   const reviewString = reviewArea.value;
 
   const map = reviewMap.get(movieId);
-  const reviewId = map?.length || 0;
+  let reviewId = "";
+  do {
+    reviewId = Math.random().toString(36).substring(2, 11);
+    console.log(
+      reviewId[0],
+      typeof reviewId[0],
+      Number.isInteger(+reviewId[0])
+    );
+  } while (Number.isInteger(+reviewId[0]));
 
   const temp = {
     reviewId,
