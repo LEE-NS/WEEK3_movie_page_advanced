@@ -1,9 +1,9 @@
 let reviewMap = null;
 const reviewBox = document.querySelector(".review-box");
+const reviewForm = document.querySelector("#reviewForm");
 
 const getMovieReview = () => {
   reviewMap = localStorage.getItem("review") || new Map();
-
   if (reviewMap.length) {
     reviewMap = new Map(JSON.parse(reviewMap));
   }
@@ -24,10 +24,11 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   `;
 
   reviewBox.innerHTML += temp;
+
   const deleteBtns = [
     ...document.querySelectorAll(".review-box-delete-button"),
   ];
-  console.log(deleteBtns);
+
   deleteBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const _key = e.target.getAttribute("review-id");
@@ -46,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const reviewButton = document.querySelector("#reviewForm");
-
-reviewButton.addEventListener("submit", (e) => {
+reviewForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const movieId = document.getElementById("movieId").value;
