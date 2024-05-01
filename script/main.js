@@ -25,7 +25,7 @@ const spinnerOuter = document.querySelector(".loading-spinner");
 const spinnerInner = document.querySelector(".spinner-inner");
 
 let movieListWrap = main.querySelector(".movie-list-wrap");
-const sections = ["now_playing", "popular", "top_rated", "upcoming"];
+const SECTIONS = ["now_playing", "popular", "top_rated", "upcoming"];
 const listName = document.querySelectorAll(".list-name"); //리스트 타이틀
 
 const options = {
@@ -41,7 +41,7 @@ function searchToTitle(text) {
   const modText = text.toUpperCase().split(" ").join("");
   let allTitles = [];
 
-  sections.forEach((section) => {
+  SECTIONS.forEach((section) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
       options
@@ -82,7 +82,7 @@ function searchResult(allTitles, text) {
   movieListWrap.innerHTML += resultArea;
   //검색 결과 표시 공간 확보
 
-  sections.forEach((section) => {
+  SECTIONS.forEach((section) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
       options
@@ -129,7 +129,7 @@ function createCard(movie, target) {
   target.innerHTML += movieCard;
 } // target에 movieCard를 넣어주는 함수
 
-sections.forEach((section) => {
+SECTIONS.forEach((section) => {
   function spreadContents(listNum) {
     let listingSection = listName
       .item(listNum)
