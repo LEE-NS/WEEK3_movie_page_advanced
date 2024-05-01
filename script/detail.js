@@ -25,7 +25,7 @@ const createReview = ({ userName, userPassword, reviewString }) => {
 document.addEventListener("DOMContentLoaded", () => {
   getMovieReview();
 
-  reviewMap.get("2").forEach((data) => {
+  reviewMap.get("2")?.forEach((data) => {
     createReview(data);
   });
 });
@@ -44,23 +44,24 @@ reviewButton.addEventListener("submit", (e) => {
   const userPassword = reviewUserPassword.value;
   const reviewString = reviewArea.value;
 
+  const map = reviewMap.get(movieId);
+  const reviewId = map?.length || 0;
+
   const temp = {
+    reviewId,
     userName,
     userPassword,
     reviewString,
   };
 
-  if (reviewMap.get(movieId)) {
-    const map = reviewMap.get(movieId);
-    const reviewId = map.length;
-    reviewMap.set(movieId, [...map, { reviewId, ...temp }]);
+  if (map == null) {
+    reviewMap.set(movieId, [{ ...temp }]);
   } else {
-    reviewMap.set(movieId, [{ reviewId: 0, ...temp }]);
+    reviewMap.set(movieId, [...map, { ...temp }]);
   }
 
-  localStorage.setItem("review", JSON.stringify([...reviewMap]));
-
   createReview(temp);
+  localStorage.setItem("review", JSON.stringify([...reviewMap]));
 
   reviewUserName.value = "";
   reviewUserPassword.value = "";
