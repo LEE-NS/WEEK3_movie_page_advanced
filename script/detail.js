@@ -4,6 +4,7 @@
 let reviewMap = null;
 let deleteButtons = null;
 let updateButtons = null;
+
 const reviewBox = document.querySelector(".review-box");
 const reviewForm = document.querySelector("#reviewForm");
 
