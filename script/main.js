@@ -289,14 +289,13 @@ searchInput.addEventListener("keydown", async (e) => {
 /* searchTotitle이 끝나고 나서 실행 */
 
 const INPUT_VALIDATION = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
-
+const INPUT_WRAP = document.querySelector(".input-wrap"); // input-wrap 클래스 선택
 const INPUT_VALIDATION_MAX_LENGTH = 30; // 인풋 최대 길이 30 설정
-
 const MESSAGE_DISPLAY = document.createElement("div"); // 메세지 표시 div 생성
 
 MESSAGE_DISPLAY.classList.add("message"); // message 클래스 추가
 
-INPUT_VALIDATION.parentNode.appendChild(MESSAGE_DISPLAY); // 요소 부모에다가 메세지 표시 요소 추가
+INPUT_WRAP.appendChild(MESSAGE_DISPLAY); // input-wrap 요소에 MESSAGE_DISPLAY 추가
 INPUT_VALIDATION.addEventListener("input", function () {
   // input 이벤트에 대한 리스너 추가
   const INPUT_LENGTH = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정

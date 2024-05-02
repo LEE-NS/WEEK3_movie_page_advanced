@@ -51,6 +51,14 @@ body {
     text-align: center;
     color: #dedede;
 }
+.message {
+    position: fixed;
+    margin: 90px 0px 0px 25px;
+    color:#f54d4d;
+    font-size: 20px;
+    font-weight: 600;
+    width:100%;
+}
 .confirm {
     width: 150px;
     height: 40px;
