@@ -39,26 +39,32 @@ inputBtn.addEventListener('click', () => {
     alert('비밀번호는 6글자 이상 입력해주세요.');
   } else if (comment === '') {
     alert('내용을 입력해주세요.');
+  } else {
+    alert('등록 완료');
   }
 });
 
 // 댓글 애니메이션
 let move = () => {
   let button = document.querySelector('.openClose');
-  let showComment = button.getAttribute('data-open') === 'true';
-  button.setAttribute('data-open', !showComment);
+  let is_CommentBtn = button.getAttribute('data-open') === 'true';
+  button.setAttribute('data-open', !is_CommentBtn);
   let commentBox = document.querySelector('.commentBox');
 
-  if (showComment) {
+  if (is_CommentBtn) {
     commentBox.style.display = 'block';
     button.innerText = '>';
     setTimeout(() => {
       commentBox.classList.add('close');
       commentBox.classList.remove('open');
+      button.classList.add('closeBtn');
+      button.classList.remove('openBtn');
     }, 100);
   } else {
     commentBox.classList.add('open');
     commentBox.classList.remove('close');
+    button.classList.add('openBtn');
+    button.classList.remove('closeBtn');
     button.innerText = '<';
     setTimeout(() => {
       commentBox.style.display = 'none';

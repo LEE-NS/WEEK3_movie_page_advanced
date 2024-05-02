@@ -353,7 +353,9 @@ body {
 }
 
 .bodyBox {
+  width: 50%;
   position: relative;
+  float: right;
 }
 
 .openClose {
@@ -362,17 +364,19 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
+  padding-top: 40%;
   position: absolute;
+  left: -3%;
 }
 
 .commentBox {
   /* border: 1px solid white; */
   padding: 20px;
-  width: 800px;
+  width: 100%;
   height: auto;
-  float: right;
   position: relative;
 }
+
 .close {
   transform: translateX(0px);
   transition-property: all;
@@ -380,11 +384,27 @@ body {
   transition-delay: 0.5s;
 }
 
+.closeBtn {
+  transform: translateX(0px);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+  position: absolute;
+}
+
 .open {
   transform: translateX(100%);
   transition-property: all;
   transition-duration: 1.5s;
   transition-delay: 0.5s;
+}
+
+.openBtn {
+  transform: translateX(1880%);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+  position: absolute;
 }
 
 .commentInput {
