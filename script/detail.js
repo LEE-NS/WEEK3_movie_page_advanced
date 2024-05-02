@@ -86,7 +86,8 @@ const deleteButtonClickHandler = () => {
       const passwordCancelButton = document.createElement("button");
       passwordCancelButton.innerText = "X";
       passwordCancelButton.addEventListener("click", () => {
-        console.log("X");
+        // 열려있는 다른 비밀번호 창을 다 지움
+        deleteReviewForm();
       });
 
       // passwordDiv에 input,button들 조합해서 넣음
@@ -97,6 +98,7 @@ const deleteButtonClickHandler = () => {
       );
 
       // 비밀번호 입력창은 1개만 띄울거임(임의로 정함)
+      // 그래서 열려있는 다른 비밀번호 창을 다 지움
       deleteReviewForm();
 
       // li밑에 비밀번호 입력창 새로 만듬
