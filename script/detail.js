@@ -110,10 +110,15 @@ const deleteButtonClickHandler = () => {
 // review html 만드는 함수
 const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   const temp = `
-    <li>
-      <div>${userName}</div>
-      <div>${userPassword}</div>
-      <div>${reviewString}</div>
+    <li key=${reviewId}>
+      <div>
+        <div>${userName}</div>
+        <div>${userPassword}</div>
+        <div>${reviewString}</div>
+      </div>
+      <div> 
+        <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
+      </div>
     </li>
   `;
 
@@ -205,26 +210,25 @@ const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
 const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
 const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
 
-const movieIdInput = document.querySelector('#movieId');
+const movieIdInput = document.querySelector("#movieId");
 
 movieIdInput.value = movieId;
 
 // 상세 페이지에 해당하는 리뷰 불러오기
 function reviewParse() {
-
-  let movieReviews = JSON.parse(localStorage.getItem("review"));
+  let movieReviews = JSON.parse(localStorage.getItem("review")); // localStorage에 저장된 리뷰들 파싱
 
   let reviewsArr = movieReviews.filter((review) => {
     if (review[0] == movieId) {
       return review[1];
     }
-  });
+  }); // 쿼리에서 가져온 영화 id와 localStorage에 저장된 영화 id가 일치하면 해당하는 리뷰를 가지고 온다.
 
-  let reviewsFromId = reviewsArr[0][1];
+  let reviewsFromId = reviewsArr[0][1]; // 리뷰를 모은 객체가 있는 index
 
-  reviewsFromId.forEach(reviewFromId => {
-    createReview(reviewFromId)
-  })
-};
+  reviewsFromId.forEach((reviewFromId) => {
+    createReview(reviewFromId);
+  }); // 리뷰 표시란에 모두 표시해준다.
+}
 
 reviewParse();

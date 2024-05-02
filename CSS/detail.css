@@ -7,13 +7,6 @@ textarea::placeholder {
   font-style: italic;
   font-weight: bold;
 }
-#movieId {
-  display: none;
-}
-.user-password {
-  display: none;
-  background-color: aqua;
-}
 .homeBtn {
   position: fixed;
   left: 20px;
