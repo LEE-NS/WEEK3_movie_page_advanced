@@ -1,10 +1,18 @@
-.textarea {
+textarea {
   resize: none;
+  padding: 10px;
 }
-.textarea::placeholder {
+textarea::placeholder {
   font-size: 1.2em;
   font-style: italic;
   font-weight: bold;
+}
+#movieId {
+  display: none;
+}
+.user-password {
+  display: none;
+  background-color: aqua;
 }
 .homeBtn {
   position: fixed;

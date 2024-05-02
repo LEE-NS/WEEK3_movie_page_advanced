@@ -13,9 +13,9 @@ const createReview = ({ userName, userPassword, reviewString }) => {
 
   const temp = `
     <li>
-      <div>${userName}</div>
-      <div>${userPassword}</div>
-      <div>${reviewString}</div>
+      <div class="user-name">${userName}</div>
+      <div class="user-password">${userPassword}</div>
+      <div class="review-str">${reviewString}</div>
     </li>
   `;
 
@@ -68,7 +68,6 @@ reviewButton.addEventListener("submit", (e) => {
   reviewArea.value = "";
 });
 
-
 // 뒤로가기 함수
 function backSpace() {
   window.history.back();
@@ -83,31 +82,27 @@ document.querySelector(".backBtn").addEventListener("click", function () {
 const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
 const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
 const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
-console.log(movieId);
 
-const SECTIONS = ["now_playing", "popular", "top_rated", "upcoming"];
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTE4NTdhNTg1MThiOWVjZWRjMzE4ZDVkYjE1OWRkOSIsInN1YiI6IjY2MjhhZmRmNjNkOTM3MDE0YTcyMmMxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrKj2Zyb565lbyPKH1RQSzBsq3AYrMAoFe7QZKm-P2Q",
-  },
+const movieIdInput = document.querySelector('#movieId');
+
+movieIdInput.value = movieId;
+
+// 상세 페이지에 해당하는 리뷰 불러오기
+function reviewParse() {
+
+  let movieReviews = JSON.parse(localStorage.getItem("review"));
+
+  let reviewsArr = movieReviews.filter((review) => {
+    if (review[0] == movieId) {
+      return review[1];
+    }
+  });
+
+  let reviewsFromId = reviewsArr[0][1];
+
+  reviewsFromId.forEach(reviewFromId => {
+    createReview(reviewFromId)
+  })
 };
 
-SECTIONS.forEach((section) => {
-  fetch(
-    `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
-    options
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      data["results"].forEach((movie) => {
-        if (movie["id"] === movieId) {
-          console.log(movie["id"]);
-        }
-      });
-    });
-});
-
+reviewParse();
