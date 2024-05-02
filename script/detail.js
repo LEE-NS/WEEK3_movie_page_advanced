@@ -60,7 +60,6 @@ const deleteButtonClickHandler = () => {
          * 만약 두번째 세번째 등 첫번째가 아니라면 코드변경 필요함
          */
         const inputPassword = passwordDiv.firstChild.value;
-        // movieId "2"로 하드코딩
         // 현재 key와 reviewId비교한 데이터의 유저패스워드를 가져옴
         const password = reviewMap
           .get(movieId)
@@ -70,8 +69,6 @@ const deleteButtonClickHandler = () => {
           // 삭제
           reviewBox.removeChild(li);
 
-          // 하드코딩
-          // movieId 가져와서 넣어야할 곳 현재 "2"
           // reviewId와 key가 다른것만 가져옴
           const filteredMap = reviewMap
             .get(movieId)
@@ -140,8 +137,6 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
 document.addEventListener("DOMContentLoaded", () => {
   getMovieReview();
 
-  // 하드코딩
-  // movieId 가져와서 넣어야할 곳 현재 "2"
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
   });
