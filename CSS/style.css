@@ -53,8 +53,8 @@ body {
 }
 .message {
     position: fixed;
-    margin: 90px 0px 0px 25px;
-    color:#f54d4d;
+    margin: 90px 0px 0px 30px;
+    color:#9599d1;
     font-size: 20px;
     font-weight: 600;
     width:100%;
