@@ -1,7 +1,8 @@
-.textarea {
+textarea {
   resize: none;
+  padding: 10px;
 }
-.textarea::placeholder {
+textarea::placeholder {
   font-size: 1.2em;
   font-style: italic;
   font-weight: bold;
@@ -16,7 +17,6 @@
   background-size: contain;
   cursor: pointer;
 }
-
 .backBtn {
   position: fixed;
   left: 100px;

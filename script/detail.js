@@ -304,29 +304,3 @@ function backSpace() {
 document.querySelector(".backBtn").addEventListener("click", function () {
   backSpace();
 });
-
-const SECTIONS = ["now_playing", "popular", "top_rated", "upcoming"];
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTE4NTdhNTg1MThiOWVjZWRjMzE4ZDVkYjE1OWRkOSIsInN1YiI6IjY2MjhhZmRmNjNkOTM3MDE0YTcyMmMxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrKj2Zyb565lbyPKH1RQSzBsq3AYrMAoFe7QZKm-P2Q",
-  },
-};
-
-SECTIONS.forEach((section) => {
-  fetch(
-    `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
-    options
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(data);
-      data["results"].forEach((movie) => {
-        if (movie["id"] === movieId) {
-          // console.log(movie["id"]);
-        }
-      });
-    });
-});

@@ -290,7 +290,10 @@ searchInput.addEventListener("keydown", async (e) => {
 
 // 검색 유효성 검사 기능 구현
 const input_Validation = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
-const input_Wrap = document.querySelector(".input-wrap"); // input-wrap 클래스 선택
+
+const input_Wrap= document.querySelector(".input-wrap"); // input-wrap 클래스 선택
+
+
 const input_Validation_MaxLength = 30; // 인풋 최대 길이 30 설정
 const message_Display = document.createElement("div"); // 메세지 표시 div 생성
 
@@ -302,9 +305,7 @@ input_Validation.addEventListener("input", function () {
   const input_Length = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
   if (input_Length > input_Validation_MaxLength) {
     // 길이가 제한을 초과하는지 확인
-
-    message_Display.textContent =
-      "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
+    message_Display.textContent = "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
   } else {
     message_Display.textContent = "";
   }
