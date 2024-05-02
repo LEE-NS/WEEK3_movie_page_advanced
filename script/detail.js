@@ -110,15 +110,10 @@ const deleteButtonClickHandler = () => {
 // review html 만드는 함수
 const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   const temp = `
-    <li key=${reviewId}>
-      <div>
-        <div>${userName}</div>
-        <div>${userPassword}</div>
-        <div>${reviewString}</div>
-      </div>
-      <div> 
-        <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
-      </div>
+    <li>
+      <div>${userName}</div>
+      <div>${userPassword}</div>
+      <div>${reviewString}</div>
     </li>
   `;
 
