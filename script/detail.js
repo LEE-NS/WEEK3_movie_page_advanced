@@ -6,6 +6,12 @@ let deleteButtons = null;
 const reviewBox = document.querySelector(".review-box");
 const reviewForm = document.querySelector("#reviewForm");
 
+//query에서 id값 읽어오기
+const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
+const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
+const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
+console.log("MOVIEID", movieId);
+
 // localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
   // localStorage에 없으면 new Map()으로 만듬
@@ -57,7 +63,7 @@ const deleteButtonClickHandler = () => {
         // movieId "2"로 하드코딩
         // 현재 key와 reviewId비교한 데이터의 유저패스워드를 가져옴
         const password = reviewMap
-          .get("2")
+          .get(movieId)
           .filter((data) => data.reviewId === key)[0].userPassword;
         // 비밀번호가 맞다면
         if (password === inputPassword) {
@@ -68,10 +74,10 @@ const deleteButtonClickHandler = () => {
           // movieId 가져와서 넣어야할 곳 현재 "2"
           // reviewId와 key가 다른것만 가져옴
           const filteredMap = reviewMap
-            .get("2")
+            .get(movieId)
             .filter((data) => data.reviewId !== key);
           // reviewMap에 삭제한 리뷰 제외하고 다시 저장함
-          reviewMap.set("2", filteredMap);
+          reviewMap.set(movieId, filteredMap);
           // localStorage에 다시 저장함.
           localStorage.setItem("review", JSON.stringify([...reviewMap]));
           alert("삭제되었습니다.");
@@ -136,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 하드코딩
   // movieId 가져와서 넣어야할 곳 현재 "2"
-  reviewMap.get("2")?.forEach((data) => {
+  reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
   });
 });
@@ -146,7 +152,6 @@ reviewForm.addEventListener("submit", (e) => {
   // 새로고침 방지
   e.preventDefault();
 
-  const movieId = document.getElementById("movieId").value;
   let reviewUserName = document.querySelector("#reviewUserName");
   let reviewUserPassword = document.querySelector("#reviewUserPassword");
   let reviewArea = document.querySelector("#reviewArea");
@@ -204,12 +209,6 @@ function backSpace() {
 document.querySelector(".backBtn").addEventListener("click", function () {
   backSpace();
 });
-
-//query에서 id값 읽어오기
-const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
-const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
-const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
-console.log(movieId);
 
 const SECTIONS = ["now_playing", "popular", "top_rated", "upcoming"];
 const options = {
