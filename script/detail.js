@@ -163,7 +163,7 @@ const updateButtonClickHandler = () => {
             reviewMap
               .get(movieId)
               .find((data) => data.reviewId === key).reviewString = input.value;
-
+            // console.log(reviewMap);
             localStorage.setItem("review", JSON.stringify([...reviewMap]));
             deleteReviewForm();
             alert("리뷰가 수정되었습니다.");
