@@ -302,6 +302,7 @@ input_Validation.addEventListener("input", function () {
   const input_Length = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
   if (input_Length > input_Validation_MaxLength) {
     // 길이가 제한을 초과하는지 확인
+
     message_Display.textContent =
       "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
   } else {
