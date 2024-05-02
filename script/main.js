@@ -21,11 +21,7 @@ const footer = document.querySelector("footer");
 const headerNav = document.querySelector("#header-wrap header ul");
 const modal = document.querySelector(".modal-wrap");
 
-const spinnerOuter = document.querySelector(".loading-spinner");
-const spinnerInner = document.querySelector(".spinner-inner");
-
 let movieListWrap = main.querySelector(".movie-list-wrap");
-const SECTIONS = ["now_playing", "popular", "top_rated", "upcoming"];
 const listName = document.querySelectorAll(".list-name"); //리스트 타이틀
 
 const options = {
@@ -37,33 +33,41 @@ const options = {
   },
 }; // 영화 API 사용자 정보
 
+function response(page) {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
+    options
+  );
+}; //페이지에 따라 fetch해서 response를 반환
+
 function searchToTitle(text) {
   const modText = text.toUpperCase().split(" ").join("");
   let allTitles = [];
 
-  SECTIONS.forEach((section) => {
+  for(let page = 1; page <= 20; page++) {
     fetch(
-      `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
+      `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
       options
     )
-      .then((response) => response.json())
-      .then((data) => {
-        data["results"].forEach((movie) => {
-          let titleData = movie["title"];
-          let modTitleData = titleData.toUpperCase().split(" ").join(""); //공백 없는 영화 타이틀
-          let titleArrSize = modTitleData.length - modText.length + 1;
-          let splitTitle = [];
-          for (let j = 0; j < titleArrSize; j++) {
-            splitTitle.push(modTitleData.substring(j, j + modText.length));
-          }
-          if (splitTitle.includes(modText)) {
-            allTitles.push(titleData);
-          } //입력된 텍스트가 같은 음절 수로 나눠진 대상의 배열에 있다면 results 배열에 넣는다.
-        });
+    .then((response) => response.json())
+    .then((data) => {
+      data["results"].forEach((movie) => {
+        let titleData = movie["title"];
+        let modTitleData = titleData.toUpperCase().split(" ").join(""); //공백 없는 영화 타이틀
+        let titleArrSize = modTitleData.length - modText.length + 1;
+        let splitTitle = [];
+        for (let j = 0; j < titleArrSize; j++) {
+          splitTitle.push(modTitleData.substring(j, j + modText.length));
+        }
+        if (splitTitle.includes(modText)) {
+          allTitles.push(titleData);
+        } //입력된 텍스트가 같은 음절 수로 나눠진 대상의 배열에 있다면 results 배열에 넣는다.
       });
-  });
-  return allTitles;
-} //검색 후 중복되어있는 타이틀 배열을 반환하는 함수
+    });
+  }
+  return allTitles; //검색 후 중복되어있는 타이틀 배열을 반환하는 함수  
+};
+
 
 function searchResult(allTitles, text) {
   let uniqTitles = allTitles.filter((elem, index) => {
@@ -82,85 +86,75 @@ function searchResult(allTitles, text) {
   movieListWrap.innerHTML += resultArea;
   //검색 결과 표시 공간 확보
 
-  SECTIONS.forEach((section) => {
+  for(let page = 1; page <= 20; page++) {
     fetch(
-      `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
+      `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
       options
     )
-      .then((response) => response.json())
-      .then((data) => {
-        data["results"].forEach((movie) => {
-          let searchResultArea =
-            movieListWrap.childNodes[1].childNodes[3].childNodes[1];
-          let title = movie["title"];
+    .then((response) => response.json())
+    .then((data) => {
+      data["results"].forEach((movie) => {
+        let searchResultArea =
+          movieListWrap.childNodes[1].childNodes[3].childNodes[1];
+        let title = movie["title"];
 
-          if (uniqTitles.includes(title) && uniqTitles.length !== 0) {
-            createCard(movie, searchResultArea);
-            uniqTitles.splice(uniqTitles.indexOf(title), 1); // 등록이 끝난 요소는 배열에서 제거
-          } else if (uniqTitles.length === 0) {
-            return; //검색된 결과를 나타낼 것이 없으면 종료
-          }
-        });
-      });
-  });
-} //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
+        if (uniqTitles.includes(title) && uniqTitles.length !== 0) {
+          createCard(movie, searchResultArea);
+          uniqTitles.splice(uniqTitles.indexOf(title), 1); // 등록이 끝난 요소는 배열에서 제거
+        } else if (uniqTitles.length === 0) {
+          return;
+        } //검색된 결과를 나타낼 것이 없으면 종료
+      }); 
+    });
+  }
+}; //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
 
 function createCard(movie, target) {
   let movieCard = `
-                <li class="movie-card">
-                    <img src="https://image.tmdb.org/t/p/w500${
-                      movie["backdrop_path"]
-                    }" alt="">
-                    <h3 class="movie-name">${movie["title"]}</h3>
-                    <h4 class="original-name">${movie["original_title"]}</h4>
-                    <p class="release-date">${movie["release_date"].slice(
-                      0,
-                      4
-                    )}</p>
-                    <p class="movie-detail">${
-                      movie["overview"] || "등록된 줄거리가 없습니다."
-                    }</p>
-                    <p class="movie-rate">⭐&nbsp;${movie[
-                      "vote_average"
-                    ].toFixed(1)}</p>
-                    <p class="movie-id">${movie["id"]}</p>
-                </li>
-                `;
+    <li class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500${
+          movie["backdrop_path"]
+        }" alt="">
+        <h3 class="movie-name">${movie["title"]}</h3>
+        <h4 class="original-name">${movie["original_title"]}</h4>
+        <p class="release-date">${movie["release_date"].slice(
+          0,
+          4
+        )}</p>
+        <p class="movie-detail">${
+          movie["overview"] || "등록된 줄거리가 없습니다."
+        }</p>
+        <p class="movie-rate">⭐&nbsp;${movie[
+          "vote_average"
+        ].toFixed(1)}</p>
+        <p class="movie-id">${movie["id"]}</p>
+    </li>
+    `;
   target.innerHTML += movieCard;
 } // target에 movieCard를 넣어주는 함수
 
-SECTIONS.forEach((section) => {
-  function spreadContents(listNum) {
-    let listingSection = listName
-      .item(listNum)
-      .nextSibling.nextSibling.childNodes.item(1);
-    fetch(
-      `https://api.themoviedb.org/3/movie/${section}?language=ko&page=1`,
-      options
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        data["results"].forEach((movie) => {
-          createCard(movie, listingSection);
-        });
-      });
-  } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
 
-  switch (section) {
-    case "now_playing":
-      spreadContents(0);
-      break;
-    case "popular":
-      spreadContents(1);
-      break;
-    case "top_rated":
-      spreadContents(2);
-      break;
-    case "upcoming":
-      spreadContents(3);
-      break;
-  } // 들어오는 URL의 첫번째 쿼리값(영화 리스트업 조건)에 따라 서로 다른 섹션에 컨텐츠를 배치한다.
-}); // 4개의 카테고리의 각 1페이지의 컨텐츠들을 해당 영역에 배치
+
+for(let page = 1; page <= 2; page++) {
+  spreadContents(page)
+}; // 1,2 페이지의 콘텐츠를 메인에 게시
+
+function spreadContents(page) {
+  let listingSection = listName
+    .item(0)
+    .nextSibling.nextSibling.childNodes.item(1);
+  fetch(
+    `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
+    options
+  )
+  .then((response) => response.json())
+  .then((data) => {
+    data["results"].forEach((movie) => {
+      createCard(movie, listingSection);
+    });
+  });
+} // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
+
 
 main.addEventListener("click", (e) => {
   deliverQuery(e);
@@ -187,7 +181,9 @@ const searchBtn = document.querySelector(".search");
 const cancelIcon = searchBtn.querySelector(".fa-xmark");
 const magnifyIcon = searchBtn.querySelector(".fa-magnifying-glass");
 const totalBtn = document.querySelector(".total");
-const darkmodeBtn = document.querySelector(".darkmode");
+
+const spinnerOuter = document.querySelector(".loading-spinner");
+const spinnerInner = document.querySelector(".spinner-inner");
 
 const inputWrap = document.querySelector(".input-wrap");
 const searchInput = inputWrap.querySelector("input");
@@ -202,27 +198,6 @@ totalBtn.addEventListener("click", () => {
 searchBtn.addEventListener("click", () => {
   isClickedSearch = !isClickedSearch;
   searchInputToggle(isClickedSearch);
-});
-
-darkmodeBtn.addEventListener("click", () => {
-  isClickedLight = !isClickedLight;
-  if (isClickedLight) {
-    headerNav.style.backgroundColor = "#d9d9d9";
-    body.style.backgroundColor = "#f1f1f1";
-    footer.style.color = "#53464b";
-
-    listName.forEach((elem) => {
-      elem.style.color = "#53464b";
-    });
-  } else {
-    headerNav.style.backgroundColor = "#272727";
-    body.style.backgroundColor = "#0c0c0c";
-    footer.style.color = "#aa9ca1";
-
-    listName.forEach((elem) => {
-      elem.style.color = "#b4a0a7";
-    });
-  }
 });
 
 function searchInputToggle(isClickedSearch) {
@@ -269,7 +244,7 @@ searchInput.addEventListener("keydown", async (e) => {
       return;
     }
 
-    if (text.length > INPUT_VALIDATION_MAX_LENGTH) {
+    if (text.length > inputValidationMaxLength) {
       console.log("최대 30자까지 입력 가능합니다. 다시 입력해 주세요!");
       return;
     }
@@ -282,24 +257,19 @@ searchInput.addEventListener("keydown", async (e) => {
       isClickedSearch = !isClickedSearch;
       searchInputToggle(isClickedSearch); // input 영역 제거
       //검색 버튼 동작 off
-    }, 1000);
+    }, 3000);
   }
 });
 
-/* searchTotitle이 끝나고 나서 실행 */
+/* searchToTitle이 끝나고 나서 실행 */
 
 // 검색 유효성 검사 기능 구현
-const inputValidation = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
-
-const inputWrap1= document.querySelector(".input-wrap"); // input-wrap 클래스 선택
-
-
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
 const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
 
 messageDisplay.classList.add("message"); // message 클래스 추가
 
-inputWrap1.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
+inputWrap.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
 inputValidation.addEventListener("input", function () {
   // input 이벤트에 대한 리스너 추가
   const inputLength = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
