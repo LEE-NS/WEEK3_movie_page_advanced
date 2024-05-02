@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>영화 상세 페이지</title>
-    <link rel="stylesheet" href="../CSS/detail.css" />
     <link rel="stylesheet" href="/CSS/reset.css" />
-    <link rel="stylesheet" href="/CSS/style.css" />
-    <script type="module" src="comment.js"></script>
+    <link rel ="stylesheet" href="../CSS/detail.css">
+    <link rel="icon" href="../image/favicon.ico">
+    <script type="module" src="/script/comment.js"></script>
   </head>
   <body>
+</head>
+<body>
     <a href="../index.html">
       <div class="homeBtn"></div>
     </a>
@@ -26,6 +28,7 @@
             <h2>감상평 <span class="count"></span></h2>
             <input id="userId" type="text" placeholder="아이디" />
             <input id="userPassword" type="password" placeholder="비밀번호" />
+            <p class="checkMsg"></p>
             <textarea
               class="comment"
               name=""
@@ -41,19 +44,34 @@
         <!-- 댓글 확인 -->
         <div class="commentCheck">
           <div class="commentCard">
-            <h4 id="userName">이름 <span class="date">날짜</span></h4>
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
-            <h4 id="userName">이름 <span class="date">날짜</span></h4>
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
-            <h4 id="userName">이름 <span class="date">날짜</span></h4>
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
           </div>
         </div>
       </div>
@@ -62,3 +80,5 @@
     <script src="../script/detail.js"></script>
   </body>
 </html>
+
+

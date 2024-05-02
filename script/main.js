@@ -29,28 +29,22 @@ const sections = ['now_playing', 'popular', 'top_rated', 'upcoming'];
 const listName = document.querySelectorAll('.list-name'); //리스트 타이틀
 
 const options = {
-<<<<<<< HEAD
   method: 'GET',
   headers: {
     accept: 'application/json',
     Authorization:
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTE4NTdhNTg1MThiOWVjZWRjMzE4ZDVkYjE1OWRkOSIsInN1YiI6IjY2MjhhZmRmNjNkOTM3MDE0YTcyMmMxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrKj2Zyb565lbyPKH1RQSzBsq3AYrMAoFe7QZKm-P2Q',
-=======
   method: "GET",
   headers: {
     accept: "application/json",
     Authorization:
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTE4NTdhNTg1MThiOWVjZWRjMzE4ZDVkYjE1OWRkOSIsInN1YiI6IjY2MjhhZmRmNjNkOTM3MDE0YTcyMmMxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrKj2Zyb565lbyPKH1RQSzBsq3AYrMAoFe7QZKm-P2Q",
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
   },
 }; // 영화 API 사용자 정보
 
 function searchToTitle(text) {
-<<<<<<< HEAD
   const modText = text.toUpperCase().split(' ').join('');
-=======
   const modText = text.toUpperCase().split(" ").join("");
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
   let allTitles = [];
 
   sections.forEach((section) => {
@@ -60,15 +54,14 @@ function searchToTitle(text) {
     )
       .then((response) => response.json())
       .then((data) => {
-<<<<<<< HEAD
+
         data['results'].forEach((movie) => {
           let titleData = movie['title'];
           let modTitleData = titleData.toUpperCase().split(' ').join(''); //공백 없는 영화 타이틀
-=======
+
         data["results"].forEach((movie) => {
           let titleData = movie["title"];
           let modTitleData = titleData.toUpperCase().split(" ").join(""); //공백 없는 영화 타이틀
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
           let titleArrSize = modTitleData.length - modText.length + 1;
           let splitTitle = [];
           for (let j = 0; j < titleArrSize; j++) {
@@ -96,11 +89,11 @@ function searchResult(allTitles, text) {
         </div>
     </div>
     `;
-<<<<<<< HEAD
+
   movieListWrap.innerHTML = '';
-=======
+
   movieListWrap.innerHTML = "";
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
+
   movieListWrap.innerHTML += resultArea;
   //검색 결과 표시 공간 확보
 
@@ -111,17 +104,16 @@ function searchResult(allTitles, text) {
     )
       .then((response) => response.json())
       .then((data) => {
-<<<<<<< HEAD
+
         data['results'].forEach((movie) => {
           let searchResultArea =
             movieListWrap.childNodes[1].childNodes[3].childNodes[1];
           let title = movie['title'];
-=======
+
         data["results"].forEach((movie) => {
           let searchResultArea =
             movieListWrap.childNodes[1].childNodes[3].childNodes[1];
           let title = movie["title"];
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
 
           if (uniqTitles.includes(title) && uniqTitles.length !== 0) {
             createCard(movie, searchResultArea);
@@ -138,38 +130,34 @@ function createCard(movie, target) {
   let movieCard = `
                 <li class="movie-card">
                     <img src="https://image.tmdb.org/t/p/w500${
-<<<<<<< HEAD
                       movie['backdrop_path']
                     }" alt="">
                     <h3 class="movie-name">${movie['title']}</h3>
                     <h4 class="original-name">${movie['original_title']}</h4>
                     <p class="release-date">${movie['release_date'].slice(
-=======
+
                       movie["backdrop_path"]
                     }" alt="">
                     <h3 class="movie-name">${movie["title"]}</h3>
                     <h4 class="original-name">${movie["original_title"]}</h4>
                     <p class="release-date">${movie["release_date"].slice(
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
                       0,
                       4
                     )}</p>
                     <p class="movie-detail">${
-<<<<<<< HEAD
                       movie['overview'] || '등록된 줄거리가 없습니다.'
                     }</p>
                     <p class="movie-rate">⭐&nbsp;${movie[
                       'vote_average'
                     ].toFixed(1)}</p>
                     <p class="movie-id">${movie['id']}</p>
-=======
+
                       movie["overview"] || "등록된 줄거리가 없습니다."
                     }</p>
                     <p class="movie-rate">⭐&nbsp;${movie[
                       "vote_average"
                     ].toFixed(1)}</p>
                     <p class="movie-id">${movie["id"]}</p>
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
                 </li>
                 `;
   target.innerHTML += movieCard;
@@ -186,18 +174,15 @@ sections.forEach((section) => {
     )
       .then((response) => response.json())
       .then((data) => {
-<<<<<<< HEAD
         data['results'].forEach((movie) => {
-=======
+
         data["results"].forEach((movie) => {
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
           createCard(movie, listingSection);
         });
       });
   } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
 
   switch (section) {
-<<<<<<< HEAD
     case 'now_playing':
       spreadContents(0);
       break;
@@ -208,7 +193,7 @@ sections.forEach((section) => {
       spreadContents(2);
       break;
     case 'upcoming':
-=======
+
     case "now_playing":
       spreadContents(0);
       break;
@@ -219,13 +204,11 @@ sections.forEach((section) => {
       spreadContents(2);
       break;
     case "upcoming":
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
       spreadContents(3);
       break;
   } // 들어오는 URL의 첫번째 쿼리값(영화 리스트업 조건)에 따라 서로 다른 섹션에 컨텐츠를 배치한다.
 }); // 4개의 카테고리의 각 1페이지의 컨텐츠들을 해당 영역에 배치
 
-<<<<<<< HEAD
 main.addEventListener('click', (e) => {
   if (e.target.parentNode.className === 'movie-card') {
     console.log(e.target.parentNode);
@@ -247,10 +230,9 @@ main.addEventListener('click', (e) => {
       modal.style.display = 'none';
     });
   } // 클릭한 타켓의 부모노드의 클래스 이름이 "movie_card" 일때만 alert 출력 (다른 곳을 이벤트 발생 시 콘솔에 출력되는 오류 방지)
-=======
+
 main.addEventListener("click", (e) => {
   deliverQuery(e);
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
 });
 // 영화 카드의 상세 페이지로 이동
 
@@ -287,13 +269,12 @@ const searchInput = inputWrap.querySelector('input');
 let isClickedLight = false;
 let isClickedSearch = false;
 
-<<<<<<< HEAD
 totalBtn.addEventListener('click', () => {
   window.location.reload();
 });
 
 searchBtn.addEventListener('click', () => {
-=======
+
 totalBtn.addEventListener("click", () => {
   window.location.reload();
 });
@@ -304,7 +285,6 @@ searchBtn.addEventListener("click", () => {
   searchInputToggle(isClickedSearch);
 });
 
-<<<<<<< HEAD
 darkmodeBtn.addEventListener('click', () => {
   isClickedLight = !isClickedLight;
   if (isClickedLight) {
@@ -322,7 +302,7 @@ darkmodeBtn.addEventListener('click', () => {
 
     listName.forEach((elem) => {
       elem.style.color = '#b4a0a7';
-=======
+
 darkmodeBtn.addEventListener("click", () => {
   isClickedLight = !isClickedLight;
   if (isClickedLight) {
@@ -340,14 +320,12 @@ darkmodeBtn.addEventListener("click", () => {
 
     listName.forEach((elem) => {
       elem.style.color = "#b4a0a7";
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
     });
   }
 });
 
 function searchInputToggle(isClickedSearch) {
   if (isClickedSearch) {
-<<<<<<< HEAD
     inputWrap.classList.add('input-wrap-toggle');
     cancelIcon.classList.add('cancel-icon-toggle');
     magnifyIcon.classList.add('magnify-icon-toggle');
@@ -363,7 +341,7 @@ body.addEventListener('keydown', (e) => {
     inputWrap.classList.remove('input-wrap-toggle');
     cancelIcon.classList.remove('cancel-icon-toggle');
     magnifyIcon.classList.remove('magnify-icon-toggle');
-=======
+
     inputWrap.classList.add("input-wrap-toggle");
     cancelIcon.classList.add("cancel-icon-toggle");
     magnifyIcon.classList.add("magnify-icon-toggle");
@@ -379,7 +357,6 @@ body.addEventListener("keydown", (e) => {
     inputWrap.classList.remove("input-wrap-toggle");
     cancelIcon.classList.remove("cancel-icon-toggle");
     magnifyIcon.classList.remove("magnify-icon-toggle");
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
     isClickedSearch = false;
   }
 });
@@ -389,7 +366,6 @@ let isSpin = false;
 function spinner(isSpin) {
   isSpin === !isSpin;
   if (isSpin) {
-<<<<<<< HEAD
     spinnerOuter.setAttribute('style', 'display: none;');
     spinnerInner.setAttribute('style', 'display: none;');
   } else {
@@ -430,7 +406,6 @@ searchInput.addEventListener("keydown", async (e) => {
       console.log ("최대 30자까지 입력 가능합니다. 다시 입력해 주세요!");
       return;
     }
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
     let resultArr = searchToTitle(text);
 
     spinner(isSpin); // 검색 중인 1초동안 로딩 스피너가 돌아간다.
@@ -445,8 +420,7 @@ searchInput.addEventListener("keydown", async (e) => {
 });
 
 /* searchTotitle이 끝나고 나서 실행 */
-<<<<<<< HEAD
-=======
+
 
 const INPUT_VALIDATION = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
 
@@ -467,4 +441,3 @@ INPUT_VALIDATION.addEventListener("input", function () {
     MESSAGE_DISPLAY.textContent = "";
   }
 });
->>>>>>> 04d05fa0b213d60a1d1ab5542f1c9acc7a027984
