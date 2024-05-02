@@ -53,8 +53,8 @@ body {
 }
 .message {
     position: fixed;
-    margin: 90px 0px 0px 30px;
-    color:#9599d1;
+    margin: 90px 0px 0px 35px;
+    color:#878ccb;
     font-size: 20px;
     font-weight: 600;
     width:100%;
@@ -323,20 +323,6 @@ main ul .movie-card:hover {
   to {
     transform: rotate(360deg);
   }
-}
-.message {
-    position: fixed;
-    margin: 100px 0px 0px 15px;
-    width: 100%;
-    color: #ff4747;
-    font-size: 18px;
-}
-.message {
-    position: fixed;
-    margin: 100px 0px 0px 15px;
-    width: 100%;
-    color: #ff4747;
-    font-size: 18px;
 }
 .loading-spinner, .spinner-inner {
     display: none;
