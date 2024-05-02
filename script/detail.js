@@ -157,11 +157,14 @@ const updateButtonClickHandler = () => {
           const updateConfirmButton = document.createElement("button");
           updateConfirmButton.innerText = "확인";
           updateConfirmButton.addEventListener("click", () => {
-            console.log("수정 확인");
             const reviewContent = li.querySelector(".review-content");
             const input = li.querySelector(".update-test");
             reviewContent.textContent = input.value;
-            console.log(reviewMap);
+            reviewMap
+              .get(movieId)
+              .find((data) => data.reviewId === key).reviewString = input.value;
+
+            localStorage.setItem("review", JSON.stringify([...reviewMap]));
             deleteReviewForm();
           });
 
