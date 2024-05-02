@@ -2,6 +2,7 @@
 // data는 movieId별로 review를 여러개 가져야함.
 // review는 reviewid와 username, userpassword, reviewString(내용)을 가짐
 let reviewMap = null;
+let deleteButtons = null;
 const reviewBox = document.querySelector(".review-box");
 const reviewForm = document.querySelector("#reviewForm");
 
@@ -17,31 +18,10 @@ const getMovieReview = () => {
   }
 };
 
-// review html 만드는 함수
-const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
-  const temp = `
-    <li key=${reviewId}>
-      <div>
-        <div>${userName}</div>
-        <div>${userPassword}</div>
-        <div>${reviewString}</div>
-      </div>
-      <div> 
-        <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
-      </div>
-    </li>
-  `;
-
-  // 맨처음 선언한 reviewBox 안에 temp html을 더하면서 생성함.
-  reviewBox.innerHTML += temp;
-
-  // 생성할때마다 삭제버튼을 등록하기 위해 매번 다시 가져옴
-  const deleteBtns = [
-    ...document.querySelectorAll(".review-box-delete-button"),
-  ];
-
+// 삭제버튼 클릭 시 삭제해주는 함수
+const deleteButtonClickHandler = () => {
   // 가져온 삭제버튼을 순회하면서 click 이벤트 감지
-  deleteBtns.forEach((btn) => {
+  deleteButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       // 각 버튼 클릭시 review-id라는 key를 가져옴
       const key = e.target.getAttribute("review-id");
@@ -63,6 +43,29 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
       localStorage.setItem("review", JSON.stringify([...reviewMap]));
     });
   });
+};
+
+// review html 만드는 함수
+const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
+  const temp = `
+    <li key=${reviewId}>
+      <div>
+        <div>${userName}</div>
+        <div>${userPassword}</div>
+        <div>${reviewString}</div>
+      </div>
+      <div> 
+        <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
+      </div>
+    </li>
+  `;
+
+  // 맨처음 선언한 reviewBox 안에 temp html을 더하면서 생성함.
+  reviewBox.innerHTML += temp;
+
+  // 생성할때마다 삭제버튼을 등록하기 위해 매번 다시 가져옴
+  deleteButtons = [...document.querySelectorAll(".review-box-delete-button")];
+  deleteButtonClickHandler();
 };
 
 // DOM이 만들어 진 후 실행되는 함수
