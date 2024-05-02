@@ -166,11 +166,11 @@ const updateButtonClickHandler = () => {
 
             localStorage.setItem("review", JSON.stringify([...reviewMap]));
             deleteReviewForm();
+            alert("리뷰가 수정되었습니다.");
           });
 
           passwordDiv.append(input, updateConfirmButton);
           li.querySelector(".test").append(passwordDiv);
-          alert("리뷰가 수정되었습니다.");
         } else if (!inputPassword.length) {
           alert("비밀번호를 입력해주세요.");
         } else {
