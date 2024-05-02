@@ -1,3 +1,11 @@
+.textarea {
+  resize: none;
+}
+.textarea::placeholder {
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: bold;
+}
 .homeBtn {
   position: fixed;
   left: 20px;
@@ -8,7 +16,6 @@
   background-size: contain;
   cursor: pointer;
 }
-
 .backBtn {
   position: fixed;
   left: 100px;
