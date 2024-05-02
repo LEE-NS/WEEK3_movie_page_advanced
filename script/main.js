@@ -269,13 +269,13 @@ const messageDisplay = document.createElement("div"); // 메세지 표시 div �
 
 messageDisplay.classList.add("message"); // message 클래스 추가
 
-input_Wrap.appendChild(message_Display); // input-wrap 요소에 MESSAGE_DISPLAY 추가
-input_Validation.addEventListener("input", function () {
+inputWrap.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
+inputValidation.addEventListener("input", function () {
   // input 이벤트에 대한 리스너 추가
   const inputLength = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
   if (inputLength > inputValidationMaxLength) {
     // 길이가 제한을 초과하는지 확인
-    message_Display.textContent = "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
+    messageDisplay.textContent = "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
   } else {
     messageDisplay.textContent = "";
   }
