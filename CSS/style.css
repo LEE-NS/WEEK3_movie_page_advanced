@@ -217,6 +217,27 @@ main {
     font-weight: 600;
     font-size: 60px;
 }
+
+.sort-wrap {
+    width: 300px;
+    height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-wrap button {
+    font-size: 1rem;
+    color: #fff;
+    background-color: #53464b;
+
+    width: 30%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+
 main .movie-list-place {
     width: 1020px;
     margin: 100px auto;
