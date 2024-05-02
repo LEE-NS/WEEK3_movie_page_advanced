@@ -1,14 +1,23 @@
+// review Data 저장할 map변수
+// data는 movieId별로 review를 여러개 가져야함.
+// review는 reviewid와 username, userpassword, reviewString(내용)을 가짐
 let reviewMap = null;
 const reviewBox = document.querySelector(".review-box");
 const reviewForm = document.querySelector("#reviewForm");
 
+// localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
+  // localStorage에 없으면 new Map()으로 만듬
   reviewMap = localStorage.getItem("review") || new Map();
+
+  // 길이가 있다는것은 데이터가 있다는것
   if (reviewMap.length) {
+    // localStorage에서 가져올땐 js객체로 가져오기 위해 JSON.parse로 가져옴
     reviewMap = new Map(JSON.parse(reviewMap));
   }
 };
 
+// review html 만드는 함수
 const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   const temp = `
     <li key=${reviewId}>
@@ -23,31 +32,41 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
     </li>
   `;
 
+  // 맨처음 선언한 reviewBox 안에 temp html을 더하면서 생성함.
   reviewBox.innerHTML += temp;
 
+  // 생성할때마다 삭제버튼을 등록하기 위해 매번 다시 가져옴
   const deleteBtns = [
     ...document.querySelectorAll(".review-box-delete-button"),
   ];
 
+  // 가져온 삭제버튼을 순회하면서 click 이벤트 감지
   deleteBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const _key = e.target.getAttribute("review-id");
-      const li = document.querySelector(`li[key=${_key}]`);
+      // 각 버튼 클릭시 review-id라는 key를 가져옴
+      const key = e.target.getAttribute("review-id");
+      // 가져온 key로 삭제해야될 li node를 찾음
+      const li = document.querySelector(`li[key=${key}]`);
+      // 삭제
       reviewBox.removeChild(li);
     });
   });
 };
 
+// DOM이 만들어 진 후 실행되는 함수
 document.addEventListener("DOMContentLoaded", () => {
   getMovieReview();
-
-  // 아이디 가져와서 넣을곳 현재 2임.
+  console.log(reviewMap);
+  // movieId 가져와서 넣어야할 곳
+  // 현재 2로 하드코딩
   reviewMap.get("2")?.forEach((data) => {
     createReview(data);
   });
 });
 
+// submit 이벤트 발생시 리뷰 등록하는 함수
 reviewForm.addEventListener("submit", (e) => {
+  // 새로고침 방지
   e.preventDefault();
 
   const movieId = document.getElementById("movieId").value;
@@ -59,17 +78,18 @@ reviewForm.addEventListener("submit", (e) => {
   const userPassword = reviewUserPassword.value;
   const reviewString = reviewArea.value;
 
+  // movieId를 key로써 map에 접근해서 데이터 가져옴
   const map = reviewMap.get(movieId);
+
   let reviewId = "";
+  // reviewId는 랜덤한 값으로 설정함
+  // 근데 li의 key로써 쓰려면 숫자로 시작하면 안됨
+  // 그래서 숫자로 시작하는지 do-while 돌면서 확인함
   do {
     reviewId = Math.random().toString(36).substring(2, 11);
-    console.log(
-      reviewId[0],
-      typeof reviewId[0],
-      Number.isInteger(+reviewId[0])
-    );
   } while (Number.isInteger(+reviewId[0]));
 
+  // 새로 만든 리뷰 객체
   const temp = {
     reviewId,
     userName,
@@ -77,15 +97,22 @@ reviewForm.addEventListener("submit", (e) => {
     reviewString,
   };
 
+  // map이 비어있다는건 review가 없다는 것, 즉 첫 리뷰
   if (map == null) {
     reviewMap.set(movieId, [{ ...temp }]);
   } else {
+    // map이 있으면 기존꺼에 temp를 붙여줌
     reviewMap.set(movieId, [...map, { ...temp }]);
   }
 
+  // reivew 생성
   createReview(temp);
+
+  // localStorage에 data 저장
+  // localStorage는 js객체를 저장못함, 그래서 저장할수있게 변경해야함
   localStorage.setItem("review", JSON.stringify([...reviewMap]));
 
+  // 저장 후 input들 비워줌
   reviewUserName.value = "";
   reviewUserPassword.value = "";
   reviewArea.value = "";
