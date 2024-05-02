@@ -49,6 +49,18 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
       const li = document.querySelector(`li[key=${key}]`);
       // 삭제
       reviewBox.removeChild(li);
+      console.log(reviewMap);
+
+      // 하드코딩
+      // movieId 가져와서 넣어야할 곳 현재 "2"
+      // reviewId와 key가 다른것만 가져옴
+      const filteredMap = reviewMap
+        .get("2")
+        .filter((data) => data.reviewId !== key);
+      // reviewMap에 삭제한 리뷰 제외하고 다시 저장함
+      reviewMap.set("2", filteredMap);
+      // localStorage에 다시 저장함.
+      localStorage.setItem("review", JSON.stringify([...reviewMap]));
     });
   });
 };
@@ -56,9 +68,9 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
 // DOM이 만들어 진 후 실행되는 함수
 document.addEventListener("DOMContentLoaded", () => {
   getMovieReview();
-  console.log(reviewMap);
-  // movieId 가져와서 넣어야할 곳
-  // 현재 2로 하드코딩
+
+  // 하드코딩
+  // movieId 가져와서 넣어야할 곳 현재 "2"
   reviewMap.get("2")?.forEach((data) => {
     createReview(data);
   });
