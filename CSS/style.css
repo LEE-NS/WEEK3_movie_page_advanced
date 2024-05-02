@@ -331,6 +331,13 @@ main ul .movie-card:hover {
     color: #ff4747;
     font-size: 18px;
 }
+.message {
+    position: fixed;
+    margin: 100px 0px 0px 15px;
+    width: 100%;
+    color: #ff4747;
+    font-size: 18px;
+}
 .loading-spinner, .spinner-inner {
     display: none;
     position: absolute;

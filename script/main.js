@@ -290,7 +290,10 @@ searchInput.addEventListener("keydown", async (e) => {
 
 // 검색 유효성 검사 기능 구현
 const input_Validation = document.querySelector(".input-wrap input"); // 유효성 검사를 위한 인풋창 지정
+
 const input_Wrap= document.querySelector(".input-wrap"); // input-wrap 클래스 선택
+
+
 const input_Validation_MaxLength = 30; // 인풋 최대 길이 30 설정
 const message_Display = document.createElement("div"); // 메세지 표시 div 생성
 
