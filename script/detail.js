@@ -8,11 +8,9 @@ let updateButtons = null;
 const reviewBox = document.querySelector(".review-box");
 const reviewForm = document.querySelector("#reviewForm");
 
-//query에서 id값 읽어오기
 const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
 const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
 const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
-console.log("MOVIEID", movieId);
 
 // localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
@@ -26,184 +24,145 @@ const getMovieReview = () => {
   }
 };
 
-// 삭제버튼 클릭시 다른(모든) 비밀번호 입력칸 다지우기
+// 삭제버튼 클릭시 다른(모든) 비밀번호 입력칸(password-box 자식) 다지우기
 const deleteReviewForm = () => {
-  const deleteAnotherReviewForm = document.querySelectorAll(".test");
+  const deleteAnotherReviewForm = document.querySelectorAll(
+    ".review-password-box"
+  );
   deleteAnotherReviewForm?.forEach((AnotherReviewForm) =>
     AnotherReviewForm.replaceChildren()
   );
 };
 
-// 삭제버튼 클릭 시 삭제해주는 함수
-const deleteButtonClickHandler = () => {
-  // 가져온 삭제버튼을 순회하면서 click 이벤트 감지
-  deleteButtons.forEach((btn) => {
+// passwordDiv 생성 함수
+const createPasswordDiv = (confirmHandler, key, li, buttonType) => {
+  // div 만들고 className 정해줌
+  const passwordDiv = document.createElement("div");
+  passwordDiv.className = "password-div";
+
+  // 비밀번호 입력할 input 만들고 placeholder,type 정해줌
+  const passwordInput = document.createElement("input");
+  passwordInput.id = "review-password";
+  passwordInput.placeholder = "비밀번호";
+  passwordInput.type = "password";
+
+  // 비밀번호 입력 확인 버튼 만들고 text 및 click 이벤트 설정함.
+  const passwordConfirmButton = document.createElement("button");
+  passwordConfirmButton.innerText = "확인";
+  passwordConfirmButton.addEventListener("click", () =>
+    confirmHandler(passwordDiv, key, li, buttonType)
+  );
+
+  // 비밀번호 입력창 닫을 버튼 만들고 text및 click 이벤트 설정함.
+  const passwordCancelButton = document.createElement("button");
+  passwordCancelButton.innerText = "X";
+  passwordCancelButton.addEventListener("click", () => deleteReviewForm());
+
+  // passwordDiv에 input,button들 조합해서 넣음
+  passwordDiv.append(
+    passwordInput,
+    passwordConfirmButton,
+    passwordCancelButton
+  );
+  return passwordDiv;
+};
+
+// update 로직이 있는 함수
+const isUpdate = (li, key) => {
+  // 수정
+  console.log("update");
+  const filteredReviewData = reviewMap
+    .get(movieId)
+    .filter((data) => data.reviewId === key)[0];
+  deleteReviewForm();
+
+  const passwordDiv = document.createElement("div");
+  passwordDiv.className = "password-div";
+
+  const input = document.createElement("input");
+  input.value = filteredReviewData.reviewString;
+  input.className = "update-test";
+
+  const updateConfirmButton = document.createElement("button");
+  updateConfirmButton.innerText = "확인";
+  updateConfirmButton.addEventListener("click", () => {
+    const reviewContent = li.querySelector(".review-content");
+    const input = li.querySelector(".update-test");
+    reviewContent.textContent = input.value;
+    reviewMap.get(movieId).find((data) => data.reviewId === key).reviewString =
+      input.value;
+    // console.log(reviewMap);
+    localStorage.setItem("review", JSON.stringify([...reviewMap]));
+    deleteReviewForm();
+    alert("리뷰가 수정되었습니다.");
+  });
+
+  passwordDiv.append(input, updateConfirmButton);
+  li.querySelector(".review-password-box").append(passwordDiv);
+};
+
+// delete 로직이 있는 함수
+const isDelete = (li, key) => {
+  // 삭제
+  console.log("delete");
+  reviewBox.removeChild(li);
+  // reviewId와 key가 다른것만 가져옴
+  const filteredMap = reviewMap
+    .get(movieId)
+    .filter((data) => data.reviewId !== key);
+  // reviewMap에 삭제한 리뷰 제외하고 다시 저장함
+  reviewMap.set(movieId, filteredMap);
+  // localStorage에 다시 저장함.
+  localStorage.setItem("review", JSON.stringify([...reviewMap]));
+  alert("삭제되었습니다.");
+};
+
+// delete와 update handler
+const deleteAndUpdateHandler = (div, key, li, buttonType) => {
+  /**
+   * 현재 비밀번호 입력하는 input은 passwordDiv의 첫번째 자식이므로 가능한 코드
+   * 만약 두번째 세번째 등 첫번째가 아니라면 코드변경 필요함
+   */
+  const inputPassword = div.firstChild.value;
+  // 현재 key와 reviewId비교한 데이터의 유저패스워드를 가져옴
+  const password = reviewMap
+    .get(movieId)
+    .filter((data) => data.reviewId === key)[0].userPassword;
+  // 비밀번호가 맞다면
+  if (password === inputPassword) {
+    if (buttonType === "delete") {
+      isDelete(li, key);
+    } else {
+      isUpdate(li, key);
+    }
+  } else if (!inputPassword.length) {
+    alert("비밀번호를 입력해주세요.");
+  } else {
+    alert("비밀번호가 틀립니다.");
+  }
+};
+
+// 삭제 및 수정 버튼 클릭 시
+const buttonClickHandler = (buttons, buttonType = "delete") => {
+  buttons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       // 각 버튼 클릭시 review-id라는 key를 가져옴
       const key = e.target.getAttribute("review-id");
       // 가져온 key로 삭제해야될 li node를 찾음
       const li = document.querySelector(`li[key=${key}]`);
-
-      // div 만들고 className 정해줌
-      const passwordDiv = document.createElement("div");
-      passwordDiv.className = "password-div";
-
-      // 비밀번호 입력할 input 만들고 placeholder,type 정해줌
-      const passwordInput = document.createElement("input");
-      passwordInput.placeholder = "비밀번호";
-      passwordInput.type = "password";
-
-      // 비밀번호 입력 확인 버튼 만들고 text 및 click 이벤트 설정함.
-      const passwordConfirmButton = document.createElement("button");
-      passwordConfirmButton.innerText = "확인";
-      passwordConfirmButton.addEventListener("click", () => {
-        /**
-         * 현재 비밀번호 입력하는 input은 passwordDiv의 첫번째 자식이므로 가능한 코드
-         * 만약 두번째 세번째 등 첫번째가 아니라면 코드변경 필요함
-         */
-        const inputPassword = passwordDiv.firstChild.value;
-        // 현재 key와 reviewId비교한 데이터의 유저패스워드를 가져옴
-        const password = reviewMap
-          .get(movieId)
-          .filter((data) => data.reviewId === key)[0].userPassword;
-        // 비밀번호가 맞다면
-        if (password === inputPassword) {
-          // 삭제
-          reviewBox.removeChild(li);
-
-          // reviewId와 key가 다른것만 가져옴
-          const filteredMap = reviewMap
-            .get(movieId)
-            .filter((data) => data.reviewId !== key);
-          // reviewMap에 삭제한 리뷰 제외하고 다시 저장함
-          reviewMap.set(movieId, filteredMap);
-          // localStorage에 다시 저장함.
-          localStorage.setItem("review", JSON.stringify([...reviewMap]));
-          alert("삭제되었습니다.");
-        } else if (!inputPassword.length) {
-          alert("비밀번호를 입력해주세요.");
-        } else {
-          alert("비밀번호가 틀립니다.");
-        }
-      });
-
-      // 비밀번호 입력창 닫을 버튼 만들고 text및 click 이벤트 설정함.
-      const passwordCancelButton = document.createElement("button");
-      passwordCancelButton.innerText = "X";
-      passwordCancelButton.addEventListener("click", () => {
-        // 열려있는 다른 비밀번호 창을 다 지움
-        deleteReviewForm();
-      });
-
-      // passwordDiv에 input,button들 조합해서 넣음
-      passwordDiv.append(
-        passwordInput,
-        passwordConfirmButton,
-        passwordCancelButton
+      const div = createPasswordDiv(
+        deleteAndUpdateHandler,
+        key,
+        li,
+        buttonType
       );
-
-      // 비밀번호 입력창은 1개만 띄울거임(임의로 정함)
-      // 그래서 열려있는 다른 비밀번호 창을 다 지움
       deleteReviewForm();
-
       // li밑에 비밀번호 입력창 새로 만듬
-      li.querySelector(".test").append(passwordDiv);
+      li.querySelector(".review-password-box").append(div);
     });
   });
 };
 
-// 수정버튼 클릭 시
-const updateButtonClickHandler = () => {
-  // 가져온 수정버튼을 순회하면서 click 이벤트 감지
-  updateButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      // 각 버튼 클릭시 review-id라는 key를 가져옴
-      const key = e.target.getAttribute("review-id");
-      // 가져온 key로 삭제해야될 li node를 찾음
-      const li = document.querySelector(`li[key=${key}]`);
-
-      // div 만들고 className 정해줌
-      const passwordDiv = document.createElement("div");
-      passwordDiv.className = "password-div";
-
-      // 비밀번호 입력할 input 만들고 placeholder,type 정해줌
-      const passwordInput = document.createElement("input");
-      passwordInput.placeholder = "비밀번호";
-      passwordInput.type = "password";
-
-      // 비밀번호 입력 확인 버튼 만들고 text 및 click 이벤트 설정함.
-      const passwordConfirmButton = document.createElement("button");
-      passwordConfirmButton.innerText = "확인";
-      passwordConfirmButton.addEventListener("click", () => {
-        /**
-         * 현재 비밀번호 입력하는 input은 passwordDiv의 첫번째 자식이므로 가능한 코드
-         * 만약 두번째 세번째 등 첫번째가 아니라면 코드변경 필요함
-         */
-        const inputPassword = passwordDiv.firstChild.value;
-        // 현재 key와 reviewId비교한 데이터의 유저패스워드를 가져옴
-        const filteredReviewData = reviewMap
-          .get(movieId)
-          .filter((data) => data.reviewId === key)[0];
-        const password = filteredReviewData.userPassword;
-        // 비밀번호가 맞다면
-        if (password === inputPassword) {
-          // 수정
-          deleteReviewForm();
-
-          const passwordDiv = document.createElement("div");
-          passwordDiv.className = "password-div";
-          const input = document.createElement("input");
-          input.value = filteredReviewData.reviewString;
-          input.className = "update-test";
-          const updateConfirmButton = document.createElement("button");
-          updateConfirmButton.innerText = "확인";
-          updateConfirmButton.addEventListener("click", () => {
-            const reviewContent = li.querySelector(".review-content");
-            const input = li.querySelector(".update-test");
-            reviewContent.textContent = input.value;
-            reviewMap
-              .get(movieId)
-              .find((data) => data.reviewId === key).reviewString = input.value;
-            // console.log(reviewMap);
-            localStorage.setItem("review", JSON.stringify([...reviewMap]));
-            deleteReviewForm();
-            alert("리뷰가 수정되었습니다.");
-          });
-
-          passwordDiv.append(input, updateConfirmButton);
-          li.querySelector(".test").append(passwordDiv);
-        } else if (!inputPassword.length) {
-          alert("비밀번호를 입력해주세요.");
-        } else {
-          alert("비밀번호가 틀립니다.");
-        }
-      });
-
-      // 비밀번호 입력창 닫을 버튼 만들고 text및 click 이벤트 설정함.
-      const passwordCancelButton = document.createElement("button");
-      passwordCancelButton.innerText = "X";
-      passwordCancelButton.addEventListener("click", () => {
-        // 열려있는 다른 비밀번호 창을 다 지움
-        deleteReviewForm();
-      });
-
-      // passwordDiv에 input,button들 조합해서 넣음
-      passwordDiv.append(
-        passwordInput,
-        passwordConfirmButton,
-        passwordCancelButton
-      );
-
-      // 비밀번호 입력창은 1개만 띄울거임(임의로 정함)
-      // 그래서 열려있는 다른 비밀번호 창을 다 지움
-      deleteReviewForm();
-
-      // li밑에 비밀번호 입력창 새로 만듬
-
-      li.querySelector(".test").append(passwordDiv);
-    });
-  });
-};
 // review html 만드는 함수
 const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   const temp = `
@@ -217,7 +176,7 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
         <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
         <button review-id=${reviewId} class="review-box-update-button">수정</button>
       </div>
-      <div class="test">
+      <div class="review-password-box">
       </div>
     </li>
   `;
@@ -225,11 +184,12 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   // 맨처음 선언한 reviewBox 안에 temp html을 더하면서 생성함.
   reviewBox.innerHTML += temp;
 
-  // 생성할때마다 삭제버튼을 등록하기 위해 매번 다시 가져옴
+  // 생성할때마다 삭제, 수정버튼을 등록하기 위해 매번 다시 가져옴
   deleteButtons = [...document.querySelectorAll(".review-box-delete-button")];
   updateButtons = [...document.querySelectorAll(".review-box-update-button")];
-  deleteButtonClickHandler();
-  updateButtonClickHandler();
+
+  buttonClickHandler(deleteButtons);
+  buttonClickHandler(updateButtons, "update");
 };
 
 // DOM이 만들어 진 후 실행되는 함수
