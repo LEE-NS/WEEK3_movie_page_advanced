@@ -38,36 +38,35 @@ function response(page) {
     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
     options
   );
-}; //페이지에 따라 fetch해서 response를 반환
+} //페이지에 따라 fetch해서 response를 반환
 
 function searchToTitle(text) {
   const modText = text.toUpperCase().split(" ").join("");
   let allTitles = [];
 
-  for(let page = 1; page <= 20; page++) {
+  for (let page = 1; page <= 20; page++) {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
       options
     )
-    .then((response) => response.json())
-    .then((data) => {
-      data["results"].forEach((movie) => {
-        let titleData = movie["title"];
-        let modTitleData = titleData.toUpperCase().split(" ").join(""); //공백 없는 영화 타이틀
-        let titleArrSize = modTitleData.length - modText.length + 1;
-        let splitTitle = [];
-        for (let j = 0; j < titleArrSize; j++) {
-          splitTitle.push(modTitleData.substring(j, j + modText.length));
-        }
-        if (splitTitle.includes(modText)) {
-          allTitles.push(titleData);
-        } //입력된 텍스트가 같은 음절 수로 나눠진 대상의 배열에 있다면 results 배열에 넣는다.
+      .then((response) => response.json())
+      .then((data) => {
+        data["results"].forEach((movie) => {
+          let titleData = movie["title"];
+          let modTitleData = titleData.toUpperCase().split(" ").join(""); //공백 없는 영화 타이틀
+          let titleArrSize = modTitleData.length - modText.length + 1;
+          let splitTitle = [];
+          for (let j = 0; j < titleArrSize; j++) {
+            splitTitle.push(modTitleData.substring(j, j + modText.length));
+          }
+          if (splitTitle.includes(modText)) {
+            allTitles.push(titleData);
+          } //입력된 텍스트가 같은 음절 수로 나눠진 대상의 배열에 있다면 results 배열에 넣는다.
+        });
       });
-    });
   }
-  return allTitles; //검색 후 중복되어있는 타이틀 배열을 반환하는 함수  
-};
-
+  return allTitles; //검색 후 중복되어있는 타이틀 배열을 반환하는 함수
+}
 
 function searchResult(allTitles, text) {
   let uniqTitles = allTitles.filter((elem, index) => {
@@ -86,28 +85,28 @@ function searchResult(allTitles, text) {
   movieListWrap.innerHTML += resultArea;
   //검색 결과 표시 공간 확보
 
-  for(let page = 1; page <= 20; page++) {
+  for (let page = 1; page <= 20; page++) {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
       options
     )
-    .then((response) => response.json())
-    .then((data) => {
-      data["results"].forEach((movie) => {
-        let searchResultArea =
-          movieListWrap.childNodes[1].childNodes[3].childNodes[1];
-        let title = movie["title"];
+      .then((response) => response.json())
+      .then((data) => {
+        data["results"].forEach((movie) => {
+          let searchResultArea =
+            movieListWrap.childNodes[1].childNodes[3].childNodes[1];
+          let title = movie["title"];
 
-        if (uniqTitles.includes(title) && uniqTitles.length !== 0) {
-          createCard(movie, searchResultArea);
-          uniqTitles.splice(uniqTitles.indexOf(title), 1); // 등록이 끝난 요소는 배열에서 제거
-        } else if (uniqTitles.length === 0) {
-          return;
-        } //검색된 결과를 나타낼 것이 없으면 종료
-      }); 
-    });
+          if (uniqTitles.includes(title) && uniqTitles.length !== 0) {
+            createCard(movie, searchResultArea);
+            uniqTitles.splice(uniqTitles.indexOf(title), 1); // 등록이 끝난 요소는 배열에서 제거
+          } else if (uniqTitles.length === 0) {
+            return;
+          } //검색된 결과를 나타낼 것이 없으면 종료
+        });
+      });
   }
-}; //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
+} //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
 
 function createCard(movie, target) {
   let movieCard = `
@@ -117,27 +116,20 @@ function createCard(movie, target) {
         }" alt="">
         <h3 class="movie-name">${movie["title"]}</h3>
         <h4 class="original-name">${movie["original_title"]}</h4>
-        <p class="release-date">${movie["release_date"].slice(
-          0,
-          4
-        )}</p>
+        <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
         <p class="movie-detail">${
           movie["overview"] || "등록된 줄거리가 없습니다."
         }</p>
-        <p class="movie-rate">⭐&nbsp;${movie[
-          "vote_average"
-        ].toFixed(1)}</p>
+        <p class="movie-rate">⭐&nbsp;${movie["vote_average"].toFixed(1)}</p>
         <p class="movie-id">${movie["id"]}</p>
     </li>
     `;
   target.innerHTML += movieCard;
 } // target에 movieCard를 넣어주는 함수
 
-
-
-for(let page = 1; page <= 2; page++) {
-  spreadContents(page)
-}; // 1,2 페이지의 콘텐츠를 메인에 게시
+for (let page = 1; page <= 2; page++) {
+  spreadContents(page);
+} // 1,2 페이지의 콘텐츠를 메인에 게시
 
 function spreadContents(page) {
   let listingSection = listName
@@ -147,14 +139,13 @@ function spreadContents(page) {
     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
     options
   )
-  .then((response) => response.json())
-  .then((data) => {
-    data["results"].forEach((movie) => {
-      createCard(movie, listingSection);
+    .then((response) => response.json())
+    .then((data) => {
+      data["results"].forEach((movie) => {
+        createCard(movie, listingSection);
+      });
     });
-  });
 } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
-
 
 main.addEventListener("click", (e) => {
   deliverQuery(e);
@@ -170,7 +161,8 @@ const url = new URLSearchParams([
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-    url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
+    url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정\
+    url.set("mode", body.className === "" ? "dark" : "light")
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
   }
@@ -180,7 +172,12 @@ function deliverQuery(e) {
 const searchBtn = document.querySelector(".search");
 const cancelIcon = searchBtn.querySelector(".fa-xmark");
 const magnifyIcon = searchBtn.querySelector(".fa-magnifying-glass");
-const totalBtn = document.querySelector(".total");
+
+const topBtnWrap = document.querySelector(".top-btn-wrap");
+const topBtn = topBtnWrap.querySelector(".top-btn");
+const VISIBLE_POINT = 1300;
+
+const modeBtn = document.querySelector(".light-mode")
 
 const spinnerOuter = document.querySelector(".loading-spinner");
 const spinnerInner = document.querySelector(".spinner-inner");
@@ -191,14 +188,28 @@ const searchInput = inputWrap.querySelector("input");
 let isClickedLight = false;
 let isClickedSearch = false;
 
-totalBtn.addEventListener("click", () => {
-  window.location.reload();
+window.addEventListener("scroll", () => {
+  VISIBLE_POINT < document.documentElement.scrollTop
+    ? topBtnWrap.classList.add("visible") : topBtnWrap.classList.remove("visible");
+});
+
+topBtn.addEventListener("click", () => {
+  document.documentElement.scrollTop = 0;
+});
+
+modeBtn.addEventListener("click", () => {
+  isClickedLight = !isClickedLight;
+  if (isClickedLight) {
+    body.classList.add("light");
+  } else {
+    body.classList.remove("light");
+  }
 });
 
 searchBtn.addEventListener("click", () => {
   isClickedSearch = !isClickedSearch;
   searchInputToggle(isClickedSearch);
-});
+}); // search 버튼
 
 function searchInputToggle(isClickedSearch) {
   if (isClickedSearch) {
@@ -210,7 +221,7 @@ function searchInputToggle(isClickedSearch) {
     cancelIcon.classList.remove("cancel-icon-toggle");
     magnifyIcon.classList.remove("magnify-icon-toggle");
   }
-}
+} //search 버튼 토글
 
 body.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -219,7 +230,7 @@ body.addEventListener("keydown", (e) => {
     magnifyIcon.classList.remove("magnify-icon-toggle");
     isClickedSearch = false;
   }
-});
+}); // input 창이 열려있을 경우 esc 누르면 닫힘
 
 let isSpin = false;
 
@@ -270,12 +281,13 @@ const messageDisplay = document.createElement("div"); // 메세지 표시 div �
 messageDisplay.classList.add("message"); // message 클래스 추가
 
 inputWrap.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
-inputValidation.addEventListener("input", function () {
+searchInput.addEventListener("input", function () {
   // input 이벤트에 대한 리스너 추가
   const inputLength = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
   if (inputLength > inputValidationMaxLength) {
     // 길이가 제한을 초과하는지 확인
-    messageDisplay.textContent = "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
+    messageDisplay.textContent =
+      "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
   } else {
     messageDisplay.textContent = "";
   }

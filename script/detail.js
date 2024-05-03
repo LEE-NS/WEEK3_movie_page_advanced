@@ -11,6 +11,7 @@ const reviewForm = document.querySelector("#reviewForm");
 const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
 const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
 const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
+const currMode = urlParams.get("mode") // urlParams에서 "mode"에 해당하는 값을 가져온다.
 
 // localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
@@ -264,3 +265,7 @@ function backSpace() {
 document.querySelector(".backBtn").addEventListener("click", function () {
   backSpace();
 });
+
+// 메인 페이지의 dark/light 설정에 따라 페이지 모드 전환
+const body = document.querySelector("body")
+currMode === "dark" ? body.classList.remove('light') : body.classList.add('light');
