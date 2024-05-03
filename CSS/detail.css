@@ -1,3 +1,8 @@
+
+body {
+  background-color: #0c0c0c;
+}
+
 textarea {
   resize: none;
   padding: 10px;
@@ -29,6 +34,7 @@ textarea::placeholder {
   background-size: contain;
   cursor: pointer;
 }
+
 
 /* 댓글 */
 .bodyBox {
@@ -235,3 +241,8 @@ textarea::placeholder {
   margin-bottom: 40px;
   padding: 5px;
 }
+
+.light {
+  background-color: #dedede !important;
+}
+

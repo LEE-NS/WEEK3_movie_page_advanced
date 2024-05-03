@@ -21,8 +21,10 @@ const footer = document.querySelector('footer');
 const headerNav = document.querySelector('#header-wrap header ul');
 const modal = document.querySelector('.modal-wrap');
 
-let movieListWrap = main.querySelector('.movie-list-wrap');
-const listName = document.querySelectorAll('.list-name'); //리스트 타이틀
+
+let movieListWrap = main.querySelector(".movie-list-wrap");
+const listName = document.querySelectorAll(".list-name"); //리스트 타이틀
+
 
 const options = {
   method: 'GET',
@@ -112,16 +114,17 @@ function createCard(movie, target) {
   let movieCard = `
     <li class="movie-card">
         <img src="https://image.tmdb.org/t/p/w500${
-          movie['backdrop_path']
+          movie["backdrop_path"]
         }" alt="">
-        <h3 class="movie-name">${movie['title']}</h3>
-        <h4 class="original-name">${movie['original_title']}</h4>
-        <p class="release-date">${movie['release_date'].slice(0, 4)}</p>
+        <h3 class="movie-name">${movie["title"]}</h3>
+        <h4 class="original-name">${movie["original_title"]}</h4>
+        <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
         <p class="movie-detail">${
-          movie['overview'] || '등록된 줄거리가 없습니다.'
+          movie["overview"] || "등록된 줄거리가 없습니다."
         }</p>
-        <p class="movie-rate">⭐&nbsp;${movie['vote_average'].toFixed(1)}</p>
-        <p class="movie-id">${movie['id']}</p>
+        <p class="movie-rate">⭐&nbsp;${movie["vote_average"].toFixed(1)}</p>
+        <p class="movie-id">${movie["id"]}</p>
+
     </li>
     `;
   target.innerHTML += movieCard;
@@ -141,41 +144,53 @@ function spreadContents(page) {
   )
     .then((response) => response.json())
     .then((data) => {
-      data['results'].forEach((movie) => {
+
+      data["results"].forEach((movie) => {
+
         createCard(movie, listingSection);
       });
     });
 } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
 
-main.addEventListener('click', (e) => {
+
+main.addEventListener("click", (e) => {
+
   deliverQuery(e);
 });
 // 영화 카드의 상세 페이지로 이동
 
 const url = new URLSearchParams([
-  ['id', null],
-  ['mode', 'dark'],
+  ["id", null],
+  ["mode", "dark"],
+
 ]);
 // (다크 모드 완성해두기)
 
 function deliverQuery(e) {
-  if (e.target.parentNode.className === 'movie-card') {
+  if (e.target.parentNode.className === "movie-card") {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-    url.set('id', movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정\
-    url.set('mode', body.className === '' ? 'dark' : 'light');
+    url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정\
+    url.set("mode", body.className === "" ? "dark" : "light")
+
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
   }
 }
 
 /* dynamic button action */
-const searchBtn = document.querySelector('.search');
-const cancelIcon = searchBtn.querySelector('.fa-xmark');
-const magnifyIcon = searchBtn.querySelector('.fa-magnifying-glass');
+const searchBtn = document.querySelector(".search");
+const cancelIcon = searchBtn.querySelector(".fa-xmark");
+const magnifyIcon = searchBtn.querySelector(".fa-magnifying-glass");
 
-const topBtnWrap = document.querySelector('.top-btn-wrap');
-const topBtn = topBtnWrap.querySelector('.top-btn');
+const topBtnWrap = document.querySelector(".top-btn-wrap");
+const topBtn = topBtnWrap.querySelector(".top-btn");
 const VISIBLE_POINT = 1300;
+
+const modeBtn = document.querySelector(".light-mode")
+
+const spinnerOuter = document.querySelector(".loading-spinner");
+const spinnerInner = document.querySelector(".spinner-inner");
+
 
 const modeBtn = document.querySelector('.light-mode');
 
@@ -188,26 +203,27 @@ const searchInput = inputWrap.querySelector('input');
 let isClickedLight = false;
 let isClickedSearch = false;
 
-window.addEventListener('scroll', () => {
+
+window.addEventListener("scroll", () => {
   VISIBLE_POINT < document.documentElement.scrollTop
-    ? topBtnWrap.classList.add('visible')
-    : topBtnWrap.classList.remove('visible');
+    ? topBtnWrap.classList.add("visible") : topBtnWrap.classList.remove("visible");
 });
 
-topBtn.addEventListener('click', () => {
+topBtn.addEventListener("click", () => {
   document.documentElement.scrollTop = 0;
 });
 
-modeBtn.addEventListener('click', () => {
+modeBtn.addEventListener("click", () => {
   isClickedLight = !isClickedLight;
   if (isClickedLight) {
-    body.classList.add('light');
+    body.classList.add("light");
   } else {
-    body.classList.remove('light');
+    body.classList.remove("light");
   }
 });
 
-searchBtn.addEventListener('click', () => {
+searchBtn.addEventListener("click", () => {
+
   isClickedSearch = !isClickedSearch;
   searchInputToggle(isClickedSearch);
 }); // search 버튼
@@ -257,7 +273,9 @@ searchInput.addEventListener('keydown', async (e) => {
     }
 
     if (text.length > inputValidationMaxLength) {
-      console.log('최대 30자까지 입력 가능합니다. 다시 입력해 주세요!');
+
+      console.log("최대 30자까지 입력 가능합니다. 다시 입력해 주세요!");
+
       return;
     }
     let resultArr = searchToTitle(text);
@@ -274,29 +292,31 @@ searchInput.addEventListener('keydown', async (e) => {
 });
 
 /* searchToTitle이 끝나고 나서 실행 */
-
 // 검색 유효성 검사 기능 구현
 
-const inputValidation = document.querySelector('.input-wrap input'); //input-wrap 요소 안 input
+const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input 
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
-const messageDisplay = document.createElement('div'); // 메세지 표시 div 생성
-messageDisplay.classList.add('message'); // message 클래스 추가
+const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
+messageDisplay.classList.add("message"); // message 클래스 추가
 
 inputWrap.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
-searchInput.addEventListener('input', function () {
+searchInput.addEventListener("input", function () {
+
   // input 이벤트에 대한 리스너 추가
   const inputLength = this.value.length; // 이벤트가 발생한 input 요소의 value 길이 측정
   if (inputLength > inputValidationMaxLength) {
     // 길이가 제한을 초과하는지 확인
     messageDisplay.textContent =
-      '최대 글자 수를 초과했습니다. 다시 입력해 주세요!';
+
+      "최대 글자 수를 초과했습니다. 다시 입력해 주세요!";
   } else {
-    messageDisplay.textContent = '';
+    messageDisplay.textContent = "";
   }
 });
 
-const circle = document.querySelector('.circle');
-body.addEventListener('mousemove', (event) => {
+const circle = document.querySelector(".circle");
+body.addEventListener("mousemove", event => {
   circle.style.top = `${event.clientY}px`;
   circle.style.left = `${event.clientX}px`;
-});
+})
+

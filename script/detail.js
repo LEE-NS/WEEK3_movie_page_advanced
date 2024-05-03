@@ -5,18 +5,22 @@ let reviewMap = null;
 let deleteButtons = null;
 let updateButtons = null;
 
-const reviewBox = document.querySelector('.review-box');
-const reviewForm = document.querySelector('#reviewForm');
+
+const reviewBox = document.querySelector(".review-box");
+const reviewForm = document.querySelector("#reviewForm");
 
 const url = new URL(location.href); // 현재 페이지의 url을 url에 저장
 const urlParams = url.searchParams; // urlParams에 현재 url의 파라미터 저장
-const movieId = urlParams.get('id'); // urlParams에서 "id"에 해당하는 값을 가져온다.
-const currMode = urlParams.get('mode'); // urlParams에서 "mode"에 해당하는 값을 가져온다.
+const movieId = urlParams.get("id"); // urlParams에서 "id"에 해당하는 값을 가져온다.
+const currMode = urlParams.get("mode") // urlParams에서 "mode"에 해당하는 값을 가져온다.
+
 
 // localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
   // localStorage에 없으면 new Map()으로 만듬
-  reviewMap = localStorage.getItem('review') || new Map();
+
+  reviewMap = localStorage.getItem("review") || new Map();
+
 
   // 길이가 있다는것은 데이터가 있다는것
   if (reviewMap.length) {
@@ -28,7 +32,9 @@ const getMovieReview = () => {
 // 삭제버튼 클릭시 다른(모든) 비밀번호 입력칸(password-box 자식) 다지우기
 const deleteReviewForm = () => {
   const deleteAnotherReviewForm = document.querySelectorAll(
-    '.review-password-box'
+
+    ".review-password-box"
+
   );
   deleteAnotherReviewForm?.forEach((AnotherReviewForm) =>
     AnotherReviewForm.replaceChildren()
@@ -38,26 +44,30 @@ const deleteReviewForm = () => {
 // passwordDiv 생성 함수
 const createPasswordDiv = (confirmHandler, key, li, buttonType) => {
   // div 만들고 className 정해줌
-  const passwordDiv = document.createElement('div');
-  passwordDiv.className = 'password-div';
+
+  const passwordDiv = document.createElement("div");
+  passwordDiv.className = "password-div";
 
   // 비밀번호 입력할 input 만들고 placeholder,type 정해줌
-  const passwordInput = document.createElement('input');
-  passwordInput.id = 'review-password';
-  passwordInput.placeholder = '비밀번호';
-  passwordInput.type = 'password';
+  const passwordInput = document.createElement("input");
+  passwordInput.id = "review-password";
+  passwordInput.placeholder = "비밀번호";
+  passwordInput.type = "password";
 
   // 비밀번호 입력 확인 버튼 만들고 text 및 click 이벤트 설정함.
-  const passwordConfirmButton = document.createElement('button');
-  passwordConfirmButton.innerText = '확인';
-  passwordConfirmButton.addEventListener('click', () =>
+  const passwordConfirmButton = document.createElement("button");
+  passwordConfirmButton.innerText = "확인";
+  passwordConfirmButton.addEventListener("click", () =>
+
     confirmHandler(passwordDiv, key, li, buttonType)
   );
 
   // 비밀번호 입력창 닫을 버튼 만들고 text및 click 이벤트 설정함.
-  const passwordCancelButton = document.createElement('button');
-  passwordCancelButton.innerText = 'X';
-  passwordCancelButton.addEventListener('click', () => deleteReviewForm());
+
+  const passwordCancelButton = document.createElement("button");
+  passwordCancelButton.innerText = "X";
+  passwordCancelButton.addEventListener("click", () => deleteReviewForm());
+
 
   // passwordDiv에 input,button들 조합해서 넣음
   passwordDiv.append(
@@ -71,41 +81,48 @@ const createPasswordDiv = (confirmHandler, key, li, buttonType) => {
 // update 로직이 있는 함수
 const isUpdate = (li, key) => {
   // 수정
-  console.log('update');
+
+  console.log("update");
+
   const filteredReviewData = reviewMap
     .get(movieId)
     .filter((data) => data.reviewId === key)[0];
   deleteReviewForm();
 
-  const passwordDiv = document.createElement('div');
-  passwordDiv.className = 'password-div';
 
-  const input = document.createElement('input');
+  const passwordDiv = document.createElement("div");
+  passwordDiv.className = "password-div";
+
+  const input = document.createElement("input");
   input.value = filteredReviewData.reviewString;
-  input.className = 'update-test';
+  input.className = "update-test";
 
-  const updateConfirmButton = document.createElement('button');
-  updateConfirmButton.innerText = '확인';
-  updateConfirmButton.addEventListener('click', () => {
-    const reviewContent = li.querySelector('.review-content');
-    const input = li.querySelector('.update-test');
+  const updateConfirmButton = document.createElement("button");
+  updateConfirmButton.innerText = "확인";
+  updateConfirmButton.addEventListener("click", () => {
+    const reviewContent = li.querySelector(".review-content");
+    const input = li.querySelector(".update-test");
+
     reviewContent.textContent = input.value;
     reviewMap.get(movieId).find((data) => data.reviewId === key).reviewString =
       input.value;
     // console.log(reviewMap);
-    localStorage.setItem('review', JSON.stringify([...reviewMap]));
+
+    localStorage.setItem("review", JSON.stringify([...reviewMap]));
     deleteReviewForm();
-    alert('리뷰가 수정되었습니다.');
+    alert("리뷰가 수정되었습니다.");
   });
 
   passwordDiv.append(input, updateConfirmButton);
-  li.querySelector('.review-password-box').append(passwordDiv);
+  li.querySelector(".review-password-box").append(passwordDiv);
 };
 
 // delete 로직이 있는 함수
 const isDelete = (li, key) => {
   // 삭제
-  console.log('delete');
+
+  console.log("delete");
+
   reviewBox.removeChild(li);
   // reviewId와 key가 다른것만 가져옴
   const filteredMap = reviewMap
@@ -114,8 +131,9 @@ const isDelete = (li, key) => {
   // reviewMap에 삭제한 리뷰 제외하고 다시 저장함
   reviewMap.set(movieId, filteredMap);
   // localStorage에 다시 저장함.
-  localStorage.setItem('review', JSON.stringify([...reviewMap]));
-  alert('삭제되었습니다.');
+
+  localStorage.setItem("review", JSON.stringify([...reviewMap]));
+  alert("삭제되었습니다.");
 };
 
 // delete와 update handler
@@ -131,7 +149,7 @@ const deleteAndUpdateHandler = (div, key, li, buttonType) => {
     .filter((data) => data.reviewId === key)[0].userPassword;
   // 비밀번호가 맞다면
   if (password === inputPassword) {
-    if (buttonType === 'delete') {
+    if (buttonType === "delete") {
       isDelete(li, key);
     } else {
       isUpdate(li, key);
@@ -149,6 +167,18 @@ const buttonClickHandler = (buttons, buttonType = 'delete') => {
     btn.addEventListener('click', (e) => {
       // 각 버튼 클릭시 review-id라는 key를 가져옴
       const key = e.target.getAttribute('review-id');
+    alert("비밀번호를 입력해주세요.");
+  } else {
+    alert("비밀번호가 틀립니다.");
+  }
+};
+
+// 삭제 및 수정 버튼 클릭 시
+const buttonClickHandler = (buttons, buttonType = "delete") => {
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // 각 버튼 클릭시 review-id라는 key를 가져옴
+      const key = e.target.getAttribute("review-id");
       // 가져온 key로 삭제해야될 li node를 찾음
       const li = document.querySelector(`li[key=${key}]`);
       const div = createPasswordDiv(
@@ -160,6 +190,7 @@ const buttonClickHandler = (buttons, buttonType = 'delete') => {
       deleteReviewForm();
       // li밑에 비밀번호 입력창 새로 만듬
       li.querySelector('.review-password-box').append(div);
+      li.querySelector(".review-password-box").append(div);
     });
   });
 };
@@ -186,15 +217,16 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   reviewBox.innerHTML += temp;
 
   // 생성할때마다 삭제, 수정버튼을 등록하기 위해 매번 다시 가져옴
-  deleteButtons = [...document.querySelectorAll('.review-box-delete-button')];
-  updateButtons = [...document.querySelectorAll('.review-box-update-button')];
+  deleteButtons = [...document.querySelectorAll(".review-box-delete-button")];
+  updateButtons = [...document.querySelectorAll(".review-box-update-button")];
 
   buttonClickHandler(deleteButtons);
-  buttonClickHandler(updateButtons, 'update');
+  buttonClickHandler(updateButtons, "update");
 };
 
 // DOM이 만들어 진 후 실행되는 함수
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+
   getMovieReview();
 
   reviewMap.get(movieId)?.forEach((data) => {
@@ -203,13 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // submit 이벤트 발생시 리뷰 등록하는 함수
-reviewForm.addEventListener('submit', (e) => {
+reviewForm.addEventListener("submit", (e) => {
   // 새로고침 방지
   e.preventDefault();
 
-  let reviewUserName = document.querySelector('#reviewUserName');
-  let reviewUserPassword = document.querySelector('#reviewUserPassword');
-  let reviewArea = document.querySelector('#reviewArea');
+  let reviewUserName = document.querySelector("#reviewUserName");
+  let reviewUserPassword = document.querySelector("#reviewUserPassword");
+  let reviewArea = document.querySelector("#reviewArea");
 
   console.log(reviewUserName);
   const userName = reviewUserName.value;
@@ -219,7 +251,7 @@ reviewForm.addEventListener('submit', (e) => {
   // movieId를 key로써 map에 접근해서 데이터 가져옴
   const map = reviewMap.get(movieId);
 
-  let reviewId = '';
+  let reviewId = "";
   // reviewId는 랜덤한 값으로 설정함
   // 근데 li의 key로써 쓰려면 숫자로 시작하면 안됨
   // 그래서 숫자로 시작하는지 do-while 돌면서 확인함
@@ -248,12 +280,13 @@ reviewForm.addEventListener('submit', (e) => {
 
   // localStorage에 data 저장
   // localStorage는 js객체를 저장못함, 그래서 저장할수있게 변경해야함
-  localStorage.setItem('review', JSON.stringify([...reviewMap]));
+  localStorage.setItem("review", JSON.stringify([...reviewMap]));
 
   // 저장 후 input들 비워줌
-  reviewUserName.value = '';
-  reviewUserPassword.value = '';
-  reviewArea.value = '';
+  reviewUserName.value = "";
+  reviewUserPassword.value = "";
+  reviewArea.value = "";
+
 });
 
 // 뒤로가기 함수
@@ -262,12 +295,18 @@ function backSpace() {
 }
 
 // 뒤로가기 기능
-document.querySelector('.backBtn').addEventListener('click', function () {
+
+document.querySelector(".backBtn").addEventListener("click", function () {
   backSpace();
 });
 
 // 메인 페이지의 dark/light 설정에 따라 페이지 모드 전환
+
 const body = document.querySelector('body');
 currMode === 'dark'
   ? body.classList.remove('light')
   : body.classList.add('light');
+
+const body = document.querySelector("body")
+currMode === "dark" ? body.classList.remove('light') : body.classList.add('light');
+
