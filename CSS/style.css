@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-
 @keyframes slide {
   to {
     opacity: 1;
@@ -10,8 +9,8 @@
     opacity: 0;
     transform: translateX(-150%);
   }
-
 }
+
 body {
   background-color: #0c0c0c;
 }
@@ -71,12 +70,12 @@ body {
   color: #dedede;
 }
 .message {
-    position: fixed;
-    margin: 90px 0px 0px 35px;
-    color:#878ccb;
-    font-size: 20px;
-    font-weight: 600;
-    width:100%;
+  position: fixed;
+  margin: 90px 0px 0px 35px;
+  color: #878ccb;
+  font-size: 20px;
+  font-weight: 600;
+  width: 100%;
 }
 .confirm {
   width: 150px;
@@ -162,7 +161,6 @@ header ul li .button-wrap {
 }
 
 .button-wrap button i {
-i {
   font-size: 16px;
 }
 .button-wrap .input-wrap {
@@ -208,7 +206,6 @@ i {
 .magnify-icon-toggle {
   opacity: 0 !important;
   text-indent: -99999px !important;
-
 }
 .top-btn-wrap {
   position: fixed;
@@ -249,18 +246,13 @@ main {
   overflow-y: auto;
 }
 
-/* main {
-  overflow-y: auto;
-} */
-
 .main-bg {
   width: 100%;
   height: 300px;
   line-height: 300px;
   text-align: center;
 
-
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -274,8 +266,6 @@ main {
   color: #aa9ca1;
 }
 .main-bg a {
-  font-family: 'Prompt', sans-serif;
-
   font-family: "Prompt", sans-serif;
   font-weight: 600;
   font-size: 60px;
@@ -291,19 +281,16 @@ main {
 
   animation: slide 0.9s ease-in-out;
 }
+
 .movie-list-wrap {
   animation: slide 1.3s ease-in-out;
 }
-.main-bg a {
-  font-family: "Prompt", sans-serif;
 
-  font-weight: 600;
-  font-size: 60px;
-}
 main .movie-list-place {
   width: 1020px;
   margin: 100px auto;
 }
+
 main .list-name {
   width: 100%;
   padding: 0 50px 50px;
@@ -314,8 +301,8 @@ main .list-name {
   color: #b4a0a7;
 
   color: #998189;
-
 }
+
 .list-name .result-num {
   display: inline-block;
   font-size: 20px;
@@ -422,16 +409,18 @@ main ul .movie-card:hover {
   left: 50%;
   margin-top: -75px;
   border-radius: 100%;
+}
 
-.loading-spinner, .spinner-inner {
-    display: none;
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    top: 50%;
-    left: 50%;
-    margin-top: -75px;
-    border-radius: 100%;
+.loading-spinner,
+.spinner-inner {
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  margin-top: -75px;
+  border-radius: 100%;
 }
 .loading-spinner {
   margin-left: -175px;
