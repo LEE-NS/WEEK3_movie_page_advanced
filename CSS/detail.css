@@ -1,5 +1,8 @@
 HEAD body {
-  background-color: #0c0c0c;
+}
+
+body {
+  background-color: white;
 }
 
 textarea {
@@ -292,6 +295,10 @@ textarea::placeholder {
   text-shadow: 0 0 20px #f9bf3b;
 }
 /* star */
+
+.light {
+  background-color: #dedede !important;
+}
 
 .light {
   background-color: #dedede !important;
