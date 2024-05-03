@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+
+@keyframes slide {
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  from {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+
+}
 body {
   background-color: #0c0c0c;
 }
@@ -10,10 +22,17 @@ body {
 #header-wrap {
   width: 100px;
   background-color: #191919;
+  background-color: #2727275e;
 }
 #contents-wrap {
   width: calc(100% - 100px);
   margin: 0 auto;
+}
+.circle {
+  position: fixed;
+  border-radius: 30%;
+  transform: translate(30px, 0px);
+  pointer-events: none;
 }
 
 /* modal */
@@ -141,7 +160,9 @@ header ul li .button-wrap {
   color: #272727;
   transition: all 0.2s;
 }
+
 .button-wrap button i {
+i {
   font-size: 16px;
 }
 .button-wrap .input-wrap {
@@ -156,6 +177,8 @@ header ul li .button-wrap {
 }
 .button-wrap .input-wrap input {
   width: 320px;
+  width: 420px;
+
   height: 50px;
   position: absolute;
   left: 20px;
@@ -185,6 +208,38 @@ header ul li .button-wrap {
 .magnify-icon-toggle {
   opacity: 0 !important;
   text-indent: -99999px !important;
+
+}
+.top-btn-wrap {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  bottom: 10px;
+  right: 99999px;
+  opacity: 0;
+
+  transition: opacity 0.5s;
+}
+.top-btn {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border-radius: 25px;
+  box-shadow: 0 0 5px 1px #000000;
+
+  background-color: #53464b;
+  transition: all 0.2s;
+}
+.top-btn:hover {
+  background-color: #967f87;
+  color: #272727;
+  transition: all 0.2s;
+}
+.visible {
+  right: 10px !important;
+  opacity: 1 !important;
 }
 
 /* 우측 컨텐츠 */
@@ -193,13 +248,19 @@ header ul li .button-wrap {
 main {
   overflow-y: auto;
 }
+
+/* main {
+  overflow-y: auto;
+} */
+
 .main-bg {
   width: 100%;
   height: 300px;
   line-height: 300px;
   text-align: center;
 
-  font-family: "Prompt", sans-serif;
+
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -213,7 +274,29 @@ main {
   color: #aa9ca1;
 }
 .main-bg a {
+  font-family: 'Prompt', sans-serif;
+
   font-family: "Prompt", sans-serif;
+  font-weight: 600;
+  font-size: 60px;
+
+  letter-spacing: 2px;
+
+  background: url(../image/main_bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 55%;
+
+  color: #aa9ca1;
+
+  animation: slide 0.9s ease-in-out;
+}
+.movie-list-wrap {
+  animation: slide 1.3s ease-in-out;
+}
+.main-bg a {
+  font-family: "Prompt", sans-serif;
+
   font-weight: 600;
   font-size: 60px;
 }
@@ -248,7 +331,11 @@ main .list-name {
 
   font-size: 40px;
   font-weight: 600;
+
   color: #b4a0a7;
+
+  color: #998189;
+
 }
 .list-name .result-num {
   display: inline-block;
@@ -345,6 +432,18 @@ main ul .movie-card:hover {
     transform: rotate(360deg);
   }
 }
+
+.loading-spinner,
+.spinner-inner {
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  margin-top: -75px;
+  border-radius: 100%;
+
 .loading-spinner, .spinner-inner {
     display: none;
     position: absolute;
@@ -373,4 +472,172 @@ footer {
 footer .copyright {
   height: 100px;
   line-height: 100px;
+}
+
+/* 댓글 */
+body {
+  overflow-x: hidden;
+}
+
+.bodyBox {
+  width: 50%;
+  position: relative;
+  float: right;
+}
+
+.openClose {
+  background-color: transparent;
+  color: white;
+  width: 50px;
+  height: 50px;
+  font-size: 35px;
+  padding-top: 40%;
+  position: absolute;
+  left: -3%;
+}
+
+.commentBox {
+  /* border: 1px solid white; */
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.close {
+  transform: translateX(0px);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+}
+
+.closeBtn {
+  transform: translateX(0px);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+  position: absolute;
+}
+
+.open {
+  transform: translateX(100%);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+}
+
+.openBtn {
+  transform: translateX(1880%);
+  transition-property: all;
+  transition-duration: 1.5s;
+  transition-delay: 0.5s;
+  position: absolute;
+}
+
+.commentInput {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid white;
+
+  display: flex;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.commentCheck {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+
+  display: flex;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.commentInput h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.commentInput input {
+  background-color: white;
+  width: 120px;
+  height: 25px;
+  cursor: text;
+  padding: 5px;
+  margin: 0px 5px 10px 0px;
+  border-radius: 5px;
+  border: none;
+}
+
+.comment {
+  resize: none;
+  font-size: 15px;
+  width: 100%;
+  cursor: text;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.inputBtn,
+.deleteBtn {
+  background-color: white;
+  width: 100px;
+  height: 30px;
+  float: right;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.inputBtn:hover {
+  background-color: white;
+  color: black;
+  transition-duration: 0.3s;
+  transition-delay: 0.3s;
+}
+.deleteBtn:hover {
+  background-color: red;
+  border: no;
+  transition-duration: 0.3s;
+  transition-delay: 0.3s;
+}
+
+.commentBox h4 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.commentContent {
+  font-size: 20px;
+  height: auto;
+  width: 95%;
+  color: white;
+  cursor: text;
+}
+
+.commentCard {
+  width: 100%;
+  height: auto;
+  margin-bottom: 40px;
+  padding: 5px;
+}
+
+/* mode */
+.light {
+  background-color: #dedede !important;
 }

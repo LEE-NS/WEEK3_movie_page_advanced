@@ -1,3 +1,8 @@
+
+body {
+  background-color: #0c0c0c;
+}
+
 textarea {
   resize: none;
   padding: 10px;
@@ -7,6 +12,7 @@ textarea::placeholder {
   font-style: italic;
   font-weight: bold;
 }
+
 .homeBtn {
   position: fixed;
   left: 20px;
@@ -17,6 +23,7 @@ textarea::placeholder {
   background-size: contain;
   cursor: pointer;
 }
+
 .backBtn {
   position: fixed;
   left: 100px;
@@ -27,3 +34,215 @@ textarea::placeholder {
   background-size: contain;
   cursor: pointer;
 }
+
+
+/* 댓글 */
+.bodyBox {
+  /* width: 40%; */
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  max-width: 700px;
+  display: flex;
+  /* top: -50px;
+  margin-left: 60%; */
+}
+
+.openClose {
+  background-color: transparent;
+  color: black;
+  width: 50px;
+  height: 50px;
+  font-size: 35px;
+  margin: auto 0;
+  /* position: relative;
+  top: 450px;
+  left: -40px; */
+}
+
+.commentBox {
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  overflow: scroll;
+  background-color: white;
+}
+
+.open {
+  transform: translateX(0px);
+  transition-property: all;
+  transition-duration: 1s;
+  transition-delay: 0.2s;
+}
+
+.close {
+  transform: translateX(calc(100% - 50px));
+  transition-property: all;
+  transition-duration: 1s;
+  transition-delay: 0.2s;
+}
+
+.commentInput {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid black;
+
+  display: flex;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.commentCheck {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+
+  display: flex;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.commentInput h2 {
+  color: black;
+  margin-bottom: 10px;
+}
+
+.commentInput input {
+  background-color: black;
+  width: 120px;
+  height: 25px;
+  cursor: text;
+  padding: 5px;
+  margin: 0px 5px 3px 0px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+}
+
+.checkMsg {
+  display: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: red;
+}
+
+.comment {
+  resize: none;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+  cursor: text;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+
+.inputBtn,
+.deleteBtn,
+.editBtn {
+  background-color: black;
+  font-size: 15px;
+  width: 100px;
+  height: 30px;
+  float: right;
+  background-color: transparent;
+  border: 1.5px solid black;
+  color: black;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.editBtn {
+  margin-right: 10px;
+}
+
+.inputBtn:hover {
+  background-color: black;
+  color: white;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
+}
+.deleteBtn:hover {
+  background-color: red;
+  border: red;
+  color: white;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
+}
+.editBtn:hover {
+  background-color: blueviolet;
+  border: blueviolet;
+  color: white;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
+}
+
+.commentBox h4 {
+  width: 160px;
+  color: black;
+  margin-bottom: 10px;
+  cursor: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+#commentPassword {
+  width: 120px;
+  height: 25px;
+  cursor: text;
+  background-color: black;
+  color: wheat;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 7px;
+}
+
+.checkPassword {
+  display: none;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: red;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.commentContent {
+  font-size: 20px;
+  height: auto;
+  width: 95%;
+  color: black;
+  cursor: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+.commentCard {
+  width: 100%;
+  height: auto;
+  margin-bottom: 40px;
+  padding: 5px;
+}
+
+.light {
+  background-color: #dedede !important;
+}
+
