@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./CSS/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="icon" href="./image/favicon.ico">
+  <script defer src="./script/main.js"></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                 <i class="fa-solid fa-xmark"></i>
               </button>
               <div class="input-wrap">
-                <input type="text" placeholder="검색할 영화 제목을 입력하세요" />
+                <input type="text" placeholder="제목 입력 후 Enter로 검색" />
                 <div class="loading-spinner">
                   <p class="spinner-inner"></p>
                 </div>
@@ -72,34 +73,7 @@
             <button id="vote-average">별점 순</button>
           </div>
           <div class="movie-list-place">
-            <h2 class="list-name">현재 상영 중</h2>
-            <div class="list-wrap">
-              <ul>
-                <!-- 영화 카드가 들어온다. -->
-              </ul>
-            </div>
-          </div>
-          <!-- 영화 리스트 -->
-          <div class="movie-list-place">
-            <h2 class="list-name">인기 순</h2>
-            <div class="list-wrap">
-              <ul>
-                <!-- 영화 카드가 들어온다. -->
-              </ul>
-            </div>
-          </div>
-          <!-- 영화 리스트 -->
-          <div class="movie-list-place">
-            <h2 class="list-name">높은 평점 순</h2>
-            <div class="list-wrap">
-              <ul>
-                <!-- 영화 카드가 들어온다. -->
-              </ul>
-            </div>
-          </div>
-          <!-- 영화 리스트 -->
-          <div class="movie-list-place">
-            <h2 class="list-name">개봉 예정</h2>
+            <h2 class="list-name">인기순 TOP 40</h2>
             <div class="list-wrap">
               <ul>
                 <!-- 영화 카드가 들어온다. -->
@@ -116,7 +90,6 @@
       </footer>
     </div>
   </div>
-  <script src="./script/main.js"></script>
 </body>
 
 </html>
