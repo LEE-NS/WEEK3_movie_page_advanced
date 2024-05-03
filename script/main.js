@@ -293,3 +293,9 @@ searchInput.addEventListener("input", function () {
     messageDisplay.textContent = "";
   }
 });
+
+const circle = document.querySelector(".circle");
+body.addEventListener("mousemove", event => {
+  circle.style.top = `${event.clientY}px`;
+  circle.style.left = `${event.clientX}px`;
+})
