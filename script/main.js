@@ -148,27 +148,24 @@ function spreadContents(page) {
     });
 } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
 
-main.addEventListener("click", (e) => {
+body.addEventListener("click", (e) => {
   deliverQuery(e);
 });
 // 영화 카드의 상세 페이지로 이동
 
 const url = new URLSearchParams([
   ["id", null],
-  ["mode", "dark"],
 ]);
 // (다크 모드 완성해두기)
 
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-    url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정\
-    url.set("mode", body.className === "" ? "dark" : "light");
-
+    url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
-  }
-}
+  };
+};
 
 /* dynamic button action */
 const searchBtn = document.querySelector(".search");
@@ -187,7 +184,6 @@ const spinnerInner = document.querySelector(".spinner-inner");
 const inputWrap = document.querySelector(".input-wrap");
 const searchInput = inputWrap.querySelector("input");
 
-let isClickedLight = false;
 let isClickedSearch = false;
 
 window.addEventListener("scroll", () => {
@@ -201,11 +197,24 @@ topBtn.addEventListener("click", () => {
 });
 
 modeBtn.addEventListener("click", () => {
-  isClickedLight = !isClickedLight;
-  if (isClickedLight) {
+  lightSwitch();
+});
+
+function lightSwitch() {
+  if(localStorage.getItem("mode") === "dark") {
     body.classList.add("light");
+    localStorage.setItem("mode", "light");
   } else {
     body.classList.remove("light");
+    localStorage.setItem("mode", "dark");
+  }
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  if(localStorage.getItem("mode") === "dark") {
+    body.classList.remove("light");
+  } else {
+    body.classList.add("light");
   }
 });
 
