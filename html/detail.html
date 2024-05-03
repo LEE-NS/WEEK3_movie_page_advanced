@@ -4,10 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>영화 상세 페이지</title>
-
-    <link rel="stylesheet" href="../CSS/detail.css" />
-    <link rel="icon" href="../image/favicon.ico" />
+    <link rel="stylesheet" href="/CSS/reset.css" />
+    <link rel ="stylesheet" href="../CSS/detail.css">
+    <link rel="icon" href="../image/favicon.ico">
+    <script type="module" src="/script/comment.js"></script>
     <script defer src="../script/detail.js"></script>
+  </head>
+  <body>
+</head>
+<body>
+    <a href="../index.html">
+      <div class="homeBtn"></div>
+    </a>
+    <div class="backBtn"></div>
+
+    안녕하세요
+
+    <!-- 댓글 입력 -->
+    <div class="bodyBox">
+      <button type="button" class="openClose">></button>
+      <div class="commentBox">
+        <form action="">
+          <div class="commentInput">
+            <h2>감상평 <span class="count"></span></h2>
+            <input id="userId" type="text" placeholder="아이디" />
+            <input id="userPassword" type="password" placeholder="비밀번호" />
+            <p class="checkMsg"></p>
+            <textarea
+              class="comment"
+              name=""
+              id=""
+              cols="90"
+              rows="3"
+              placeholder="내용을 입력해주세요"
+            ></textarea>
+            <button class="inputBtn" type="button">등록</button>
+          </div>
+        </form>
+
+        <!-- 댓글 확인 -->
+        <div class="commentCheck">
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </head>
   <body>
     <a href="../index.html">
