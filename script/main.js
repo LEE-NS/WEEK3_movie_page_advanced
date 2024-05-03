@@ -122,6 +122,7 @@ function createCard(movie, target) {
         }</p>
         <p class="movie-rate">⭐&nbsp;${movie["vote_average"].toFixed(1)}</p>
         <p class="movie-id">${movie["id"]}</p>
+
     </li>
     `;
   target.innerHTML += movieCard;
@@ -175,7 +176,7 @@ const topBtnWrap = document.querySelector(".top-btn-wrap");
 const topBtn = topBtnWrap.querySelector(".top-btn");
 const VISIBLE_POINT = 1300;
 
-const modeBtn = document.querySelector(".light-mode")
+const modeBtn = document.querySelector(".light-mode");
 
 const spinnerOuter = document.querySelector(".loading-spinner");
 const spinnerInner = document.querySelector(".spinner-inner");
@@ -187,7 +188,8 @@ let isClickedSearch = false;
 
 window.addEventListener("scroll", () => {
   VISIBLE_POINT < document.documentElement.scrollTop
-    ? topBtnWrap.classList.add("visible") : topBtnWrap.classList.remove("visible");
+    ? topBtnWrap.classList.add("visible")
+    : topBtnWrap.classList.remove("visible");
 });
 
 topBtn.addEventListener("click", () => {
@@ -267,6 +269,7 @@ searchInput.addEventListener("keydown", async (e) => {
 
     if (text.length > inputValidationMaxLength) {
       console.log("최대 30자까지 입력 가능합니다. 다시 입력해 주세요!");
+
       return;
     }
     let resultArr = searchToTitle(text);
@@ -283,10 +286,9 @@ searchInput.addEventListener("keydown", async (e) => {
 });
 
 /* searchToTitle이 끝나고 나서 실행 */
-
 // 검색 유효성 검사 기능 구현
 
-const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input 
+const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
 const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
 messageDisplay.classList.add("message"); // message 클래스 추가
@@ -305,7 +307,7 @@ searchInput.addEventListener("input", function () {
 });
 
 const circle = document.querySelector(".circle");
-body.addEventListener("mousemove", event => {
+body.addEventListener("mousemove", (event) => {
   circle.style.top = `${event.clientY}px`;
   circle.style.left = `${event.clientX}px`;
-})
+});
