@@ -1,6 +1,7 @@
 HEAD body {
   background-color: #0c0c0c;
 }
+
 textarea {
   resize: none;
   padding: 10px;
@@ -242,3 +243,4 @@ textarea::placeholder {
 .light {
   background-color: #dedede !important;
 }
+
