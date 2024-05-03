@@ -264,9 +264,10 @@ searchInput.addEventListener("keydown", async (e) => {
 /* searchToTitle이 끝나고 나서 실행 */
 
 // 검색 유효성 검사 기능 구현
+
+const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input 
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
 const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
-
 messageDisplay.classList.add("message"); // message 클래스 추가
 
 inputWrap.appendChild(messageDisplay); // input-wrap 요소에 MESSAGE_DISPLAY 추가
