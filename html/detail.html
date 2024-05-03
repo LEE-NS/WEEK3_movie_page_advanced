@@ -45,30 +45,42 @@
         <div class="commentCheck">
           <div class="commentCard">
             <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
             <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
             <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
             <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
             <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
             <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
             <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
             <button class="editBtn" type="button">수정</button>
           </div>
           <div class="commentCard">
             <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
+            <p class="commentContent">내용</p>
+            <button class="deleteBtn" type="button">삭제</button>
+            <button class="editBtn" type="button">수정</button>
+          </div>
+          <div class="commentCard">
+            <h4 id="userName">이름<input id="commentPassword" type="password" placeholder="비밀번호" /></h4>
+            <p class="checkPassword"></p>
             <p class="commentContent">내용</p>
             <button class="deleteBtn" type="button">삭제</button>
             <button class="editBtn" type="button">수정</button>
@@ -78,7 +90,43 @@
     </div>
 
     <script src="../script/detail.js"></script>
+
+
+    <link rel="stylesheet" href="../CSS/detail.css" />
+    <link rel="icon" href="../image/favicon.ico" />
+    <script defer src="../script/detail.js"></script>
+  </head>
+  <body>
+    <a href="../index.html">
+      <div class="homeBtn"></div>
+    </a>
+    <div class="backBtn"></div>
+
+    <main>
+      <!--리뷰 읽고 쓰기 테스트용-->
+      <div>
+        <p>리뷰 테스트용</p>
+        <form id="reviewForm">
+          <input id="reviewUserName" type="text" placeholder="아이디" />
+          <input
+            id="reviewUserPassword"
+            type="password"
+            placeholder="비밀번호"
+          />
+          <textarea
+            id="reviewArea"
+            class="textarea"
+            cols="50"
+            rows="10"
+            placeholder="리뷰 내용을 작성"
+          ></textarea>
+          <button type="submit">버튼</button>
+        </form>
+        <div>
+          <ul class="review-box"></ul>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
-
 

@@ -10,32 +10,44 @@ for (let i = 0; i < deleteBtn.length; i++) {
   deleteBtn[i].addEventListener('click', () => {
     // let passwordInput = prompt('비밀번호를 입력해주세요.', '');
     let commentPassword = document.querySelectorAll('#commentPassword');
+    let checkPassword = document.querySelectorAll('.checkPassword');
+
     if (Number(commentPassword[i].value) === 1234) {
       alert('비밀번호가 같습니다.');
+      checkPassword[i].style.display = 'none';
       commentPassword[i].value = '';
     } else {
-      alert('비밀번호가 다릅니다.');
+      checkPassword[i].innerText = '비밀번호가 다릅니다.';
+      checkPassword[i].style.display = 'block';
     }
   });
 }
 
-// 수정 버튼
+// // 수정 버튼
 for (let i = 0; i < editBtn.length; i++) {
   editBtn[i].addEventListener('click', () => {
     let commentPassword = document.querySelectorAll('#commentPassword');
+    let checkPassword = document.querySelectorAll('.checkPassword');
+
     if (Number(commentPassword[i].value) === 1234) {
       alert('비밀번호가 같습니다.');
+      checkPassword[i].style.display = 'none';
       commentPassword[i].value = '';
     } else {
-      alert('비밀번호가 다릅니다.');
+      checkPassword[i].innerText = '비밀번호가 다릅니다.';
+      checkPassword[i].style.display = 'block';
     }
   });
 }
 
 // 댓글 수량 확인
-for (let i = 0; i < commentCard.length; i++) {
-  commentCount.innerText = commentCard.length;
-}
+let count = () => {
+  for (let i = 0; i < commentCard.length; i++) {
+    commentCount.innerText = commentCard.length;
+  }
+};
+
+count();
 
 // 댓글 애니메이션 버튼
 openCloseBtn.addEventListener('click', () => {
@@ -80,6 +92,7 @@ let move = () => {
     button.innerText = '>';
     bodyBox.classList.add('open');
     bodyBox.classList.remove('close');
+    count();
   } else {
     bodyBox.classList.add('close');
     bodyBox.classList.remove('open');
