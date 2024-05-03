@@ -243,6 +243,10 @@ textarea::placeholder {
   padding: 5px;
 }
 
+.commentStar {
+  color: #f9bf3b;
+}
+
 /* star */
 .rating {
   margin: 0px auto;
