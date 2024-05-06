@@ -177,13 +177,35 @@ const buttonClickHandler = (buttons, buttonType = "delete") => {
 };
 
 // review html 만드는 함수
-const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
+const createReview = ({
+  reviewId,
+  userIdValue,
+  userPasswordValue,
+  userCommentValue,
+}) => {
+  // 이름 18자 까지만
+  const html = `
+    <li class="commentCard">
+      <div class="comment-card-info">
+        <h4 id="userName">${userIdValue}</h4>
+        <input
+          id="commentPassword"
+          type="password"
+          placeholder="비밀번호"
+        />
+      </div>
+      <p class="checkPassword"></p>
+      <p class="commentContent">${userCommentValue}</p>
+      <button review-id=${reviewId} class="deleteBtn" type="button">삭제</button>
+      <button review-id=${reviewId} class="editBtn" type="button">수정</button>
+    </li>
+  `;
   const temp = `
     <li key=${reviewId}>
       <div>
-        <div class="reviewer">${userName}</div>
-        <div>${userPassword}</div>
-        <div class="review-content">${reviewString}</div>
+        <div class="reviewer">${userIdValue}</div>
+        <div>${userPasswordValue}</div>
+        <div class="review-content">${userCommentValue}</div>
       </div>
       <div> 
         <button review-id=${reviewId} class="review-box-delete-button">삭제</button>
@@ -195,7 +217,7 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
   `;
 
   // 맨처음 선언한 reviewBox 안에 temp html을 더하면서 생성함.
-  reviewBox.innerHTML += temp;
+  reviewBox.innerHTML += html;
 
   // 생성할때마다 삭제, 수정버튼을 등록하기 위해 매번 다시 가져옴
   deleteButtons = [...document.querySelectorAll(".review-box-delete-button")];
@@ -208,7 +230,7 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
 // DOM이 만들어 진 후 실행되는 함수
 document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("mode") !== "dark") {
-    body.classList.add("light")
+    body.classList.add("light");
   } // 페이지 진입 시 화면 모드 결정
 
   getMovieReview();
@@ -223,14 +245,13 @@ reviewForm.addEventListener("submit", (e) => {
   // 새로고침 방지
   e.preventDefault();
 
-  let reviewUserName = document.querySelector("#reviewUserName");
-  let reviewUserPassword = document.querySelector("#reviewUserPassword");
-  let reviewArea = document.querySelector("#reviewArea");
+  let userId = document.querySelector("#userId");
+  let userPassword = document.querySelector("#userPassword");
+  let userComment = document.querySelector("#userComment");
 
-  console.log(reviewUserName);
-  const userName = reviewUserName.value;
-  const userPassword = reviewUserPassword.value;
-  const reviewString = reviewArea.value;
+  const userIdValue = userId.value;
+  const userPasswordValue = userPassword.value;
+  const userCommentValue = userComment.value;
 
   // movieId를 key로써 map에 접근해서 데이터 가져옴
   const map = reviewMap.get(movieId);
@@ -246,9 +267,9 @@ reviewForm.addEventListener("submit", (e) => {
   // 새로 만든 리뷰 객체
   const temp = {
     reviewId,
-    userName,
-    userPassword,
-    reviewString,
+    userIdValue,
+    userPasswordValue,
+    userCommentValue,
   };
 
   // map이 비어있다는건 review가 없다는 것, 즉 첫 리뷰
@@ -267,9 +288,9 @@ reviewForm.addEventListener("submit", (e) => {
   localStorage.setItem("review", JSON.stringify([...reviewMap]));
 
   // 저장 후 input들 비워줌
-  reviewUserName.value = "";
-  reviewUserPassword.value = "";
-  reviewArea.value = "";
+  userId.value = "";
+  userPassword.value = "";
+  userComment.value = "";
 });
 
 // 뒤로가기 함수

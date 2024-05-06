@@ -1,3 +1,4 @@
+@import "comment.css";
 
 body {
   background-color: #0c0c0c;
@@ -34,7 +35,6 @@ textarea::placeholder {
   background-size: contain;
   cursor: pointer;
 }
-
 
 /* 댓글 */
 .bodyBox {
@@ -245,4 +245,3 @@ textarea::placeholder {
 .light {
   background-color: #dedede !important;
 }
-
