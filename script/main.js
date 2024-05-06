@@ -153,9 +153,7 @@ body.addEventListener("click", (e) => {
 });
 // 영화 카드의 상세 페이지로 이동
 
-const url = new URLSearchParams([
-  ["id", null],
-]);
+const url = new URLSearchParams([["id", null]]);
 // (다크 모드 완성해두기)
 
 function deliverQuery(e) {
@@ -164,8 +162,8 @@ function deliverQuery(e) {
     url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
-  };
-};
+  }
+}
 
 /* dynamic button action */
 const searchBtn = document.querySelector(".search");
@@ -201,17 +199,17 @@ modeBtn.addEventListener("click", () => {
 });
 
 function lightSwitch() {
-  if(localStorage.getItem("mode") === "dark") {
+  if (localStorage.getItem("mode") === "dark") {
     body.classList.add("light");
     localStorage.setItem("mode", "light");
   } else {
     body.classList.remove("light");
     localStorage.setItem("mode", "dark");
   }
-};
+}
 
-window.addEventListener('DOMContentLoaded', () => {
-  if(localStorage.getItem("mode") === "dark") {
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("mode") === "dark") {
     body.classList.remove("light");
   } else {
     body.classList.add("light");
