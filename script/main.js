@@ -154,7 +154,6 @@ body.addEventListener("click", (e) => {
 // 영화 카드의 상세 페이지로 이동
 
 const url = new URLSearchParams([["id", null]]);
-// (다크 모드 완성해두기)
 
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {

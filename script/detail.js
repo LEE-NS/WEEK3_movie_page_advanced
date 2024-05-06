@@ -208,7 +208,7 @@ const createReview = ({ reviewId, userName, userPassword, reviewString }) => {
 // DOM이 만들어 진 후 실행되는 함수
 document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("mode") !== "dark") {
-    body.classList.add("light")
+    body.classList.add("light");
   } // 페이지 진입 시 화면 모드 결정
 
   getMovieReview();
