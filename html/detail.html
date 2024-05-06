@@ -15,10 +15,11 @@
   <body>
     <a class="homeBtn" href="../index.html"></a>
     <div class="backBtn"></div>
-    <!-- 댓글 입력 -->
-    <div class="bodyBox">
-      <button type="button" class="openClose">></button>
-      <div class="commentBox">
+    <!-- 리뷰 창 -->
+    <div class="review">
+      <button type="button" class="review-open-close-button">></button>
+      <div class="review-main">
+        <!-- 리뷰 입력 -->
         <form id="reviewForm">
           <div class="commentInput">
             <h2>리뷰 작성 <span class="count"></span></h2>
@@ -35,24 +36,27 @@
             <button class="inputBtn" type="submit">등록</button>
           </div>
         </form>
-
-        <!-- 댓글 확인 -->
-        <div class="commentCheck">
-          <ul class="review-box">
-            <li class="commentCard">
-              <div class="comment-card-info">
+        <!-- 리뷰 확인 -->
+        <div class="review-box">
+          <ul class="review-list">
+            <li class="review-card">
+              <div class="review-card-info">
                 <h4 id="userName">이름</h4>
                 <input
-                  id="commentPassword"
+                  id="review-input-password"
                   type="password"
                   placeholder="비밀번호"
                 />
               </div>
-
-              <p class="checkPassword"></p>
-              <p class="commentContent">내용</p>
-              <button class="deleteBtn" type="button">삭제</button>
-              <button class="editBtn" type="button">수정</button>
+              <p class="review-check-password"></p>
+              <p class="review-content">
+                내용
+                <input class="reivew-content-update-input" type="text" />
+              </p>
+              <div class="review-button-box">
+                <button class="review-button-delete" type="button">삭제</button>
+                <button class="review-button-update" type="button">수정</button>
+              </div>
             </li>
           </ul>
         </div>
