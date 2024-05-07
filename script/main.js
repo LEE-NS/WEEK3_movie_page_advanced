@@ -135,21 +135,77 @@ for (let page = 1; page <= 2; page++) {
   spreadContents(page);
 } // 1,2 페이지의 콘텐츠를 메인에 게시
 
+// function spreadContents(page) {
+//   let listingSection = listName
+//     .item(0)
+//     .nextSibling.nextSibling.childNodes.item(1);
+//   fetch(
+//     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
+//     options
+//   )
+//     .then((response) => response.json())
+//     .then((data) => {
+//       data["results"].forEach((movie) => {
+//         createCard(movie, listingSection);
+//       });
+//     });
+// } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
+
+const POINT_BTN = document.querySelector("#vote-average-btn"); // 별점 순 버튼
+const DATE_BTN = document.querySelector("#release-date-btn"); // 개봉일 순 버튼
+const TITLE_BTN = document.querySelector("#title-btn"); // 제목 순 버튼
+
+// 들어온 영화 데이터를 저장할 변수
+let movieData = [];
+
+// 페이지 로드 시 영화 데이터 가져오는 함수
 function spreadContents(page) {
-  let listingSection = listName
-    .item(0)
-    .nextSibling.nextSibling.childNodes.item(1);
   fetch(
     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
     options
   )
     .then((response) => response.json())
     .then((data) => {
-      data["results"].forEach((movie) => {
-        createCard(movie, listingSection);
-      });
+      movieData = movieData.concat(data.results);
+      displayMovies(movieData);
     });
-} // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
+}
+
+// 들어온 영화 데이터를 화면에 표시하는 함수
+function displayMovies(data) {
+  let listingSection = listName
+    .item(0)
+    .nextSibling.nextSibling.childNodes.item(1);
+  listingSection.innerHTML = "";
+  data.forEach((movie) => {
+    createCard(movie, listingSection);
+  });
+}
+
+// 별점 내림차순 정렬 버튼
+POINT_BTN.addEventListener("click", () => {
+  displayMovies(movieData.sort((a, b) => b.vote_average - a.vote_average));
+});
+
+// 개봉일 내림차순 정렬 버튼
+DATE_BTN.addEventListener("click", () => {
+  displayMovies(
+    movieData.sort(
+      (a, b) => new Date(b.release_date) - new Date(a.release_date)
+    )
+  );
+});
+
+// 제목 오름차순 정렬 버튼
+TITLE_BTN.addEventListener("click", () => {
+  displayMovies(
+    movieData.sort((a, b) => {
+      if (a.title.toUpperCase() < b.title.toUpperCase()) return -1;
+      if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
+      return 0;
+    })
+  );
+});
 
 body.addEventListener("click", (e) => {
   deliverQuery(e);
