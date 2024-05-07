@@ -109,10 +109,12 @@ function searchResult(allTitles, text) {
 } //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
 
 function createCard(movie, target) {
-  const movieImgPath = `https://image.tmdb.org/t/p/w500${movie["backdrop_path"]}`; 
+  const movieImgPath = `https://image.tmdb.org/t/p/w500${movie["backdrop_path"]}`;
   let movieCard = `
     <li class="movie-card">
-        <img src=${movie["backdrop_path"] ? movieImgPath : '../image/default_image.png'} alt="">
+        <img src=${
+          movie["backdrop_path"] ? movieImgPath : "../image/default_image.png"
+        } alt="">
         <h3 class="movie-name">${movie["title"]}</h3>
         <h4 class="original-name">${movie["original_title"]}</h4>
         <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
@@ -167,16 +169,13 @@ function deliverQuery(e) {
 const searchBtn = document.querySelector(".search");
 const cancelIcon = searchBtn.querySelector(".fa-xmark");
 const magnifyIcon = searchBtn.querySelector(".fa-magnifying-glass");
-
 const topBtnWrap = document.querySelector(".top-btn-wrap");
 const topBtn = topBtnWrap.querySelector(".top-btn");
 const VISIBLE_POINT = 1300;
 
 const modeBtn = document.querySelector(".light-mode");
-
 const spinnerOuter = document.querySelector(".loading-spinner");
-const spinnerInner = document.querySelector(".spinner-inner");
-
+const spinnerInner = document.querySelector(".spinner-inner")
 const inputWrap = document.querySelector(".input-wrap");
 const searchInput = inputWrap.querySelector("input");
 
@@ -284,7 +283,6 @@ searchInput.addEventListener("keydown", async (e) => {
 /* searchToTitle이 끝나고 나서 실행 */
 // 검색 유효성 검사 기능 구현
 
-const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
 const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
 messageDisplay.classList.add("message"); // message 클래스 추가

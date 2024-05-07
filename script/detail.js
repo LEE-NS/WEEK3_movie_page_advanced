@@ -259,7 +259,7 @@ reviewForm.addEventListener("submit", (e) => {
     reviewMap.set(movieId, [...map, { ...temp }]);
   }
 
-  // reivew 생성
+  // review 생성
   createReview(temp);
 
   // localStorage에 data 저장
