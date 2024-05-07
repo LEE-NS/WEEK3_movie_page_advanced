@@ -109,14 +109,17 @@ function searchResult(allTitles, text) {
 } //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
 
 function createCard(movie, target) {
+  const movieImgPath = `https://image.tmdb.org/t/p/w500${movie["backdrop_path"]}`;
+  const emptyImgPath = `./image/default_image.png`;
+
   let movieCard = `
     <li class="movie-card">
-        <img src="https://image.tmdb.org/t/p/w500${
-          movie["backdrop_path"]
-        }" alt="">
+
+        <img src=${movie["backdrop_path"] ? movieImgPath : emptyImgPath} alt="">
         <h3 class="movie-name">${movie["title"]}</h3>
         <h4 class="original-name">${movie["original_title"]}</h4>
         <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
+
         <p class="movie-detail">${
           movie["overview"] || "등록된 줄거리가 없습니다."
         }</p>
@@ -153,19 +156,19 @@ body.addEventListener("click", (e) => {
 });
 // 영화 카드의 상세 페이지로 이동
 
-const url = new URLSearchParams([
-  ["id", null],
-]);
 // (다크 모드 완성해두기)
+const url = new URLSearchParams([["id", null]]);
 
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
+
     url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
+
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
-  };
-};
+  }
+}
 
 /* dynamic button action */
 const searchBtn = document.querySelector(".search");
@@ -201,17 +204,26 @@ modeBtn.addEventListener("click", () => {
 });
 
 function lightSwitch() {
-  if(localStorage.getItem("mode") === "dark") {
+  if (localStorage.getItem("mode") === "dark") {
     body.classList.add("light");
     localStorage.setItem("mode", "light");
   } else {
     body.classList.remove("light");
     localStorage.setItem("mode", "dark");
   }
-};
+}
 
-window.addEventListener('DOMContentLoaded', () => {
-  if(localStorage.getItem("mode") === "dark") {
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("mode") === "dark") {
+    body.classList.remove("light");
+  } else {
+    body.classList.remove("light");
+    localStorage.setItem("mode", "dark");
+  }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("mode") === "dark") {
     body.classList.remove("light");
   } else {
     body.classList.add("light");

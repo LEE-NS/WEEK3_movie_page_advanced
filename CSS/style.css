@@ -20,7 +20,6 @@ body {
 }
 #header-wrap {
   width: 100px;
-  background-color: #191919;
   background-color: #2727275e;
 }
 #contents-wrap {
@@ -174,9 +173,7 @@ header ul li .button-wrap {
   transition: opacity 0.3s, background-color 0.3s;
 }
 .button-wrap .input-wrap input {
-  width: 320px;
   width: 420px;
-
   height: 50px;
   position: absolute;
   left: 20px;
@@ -253,6 +250,7 @@ main {
   text-align: center;
 
   font-family: "Prompt", sans-serif;
+
   font-weight: 600;
   font-size: 60px;
 
@@ -267,6 +265,7 @@ main {
 }
 .main-bg a {
   font-family: "Prompt", sans-serif;
+
   font-weight: 600;
   font-size: 60px;
 
@@ -316,9 +315,6 @@ main .list-name {
 
   font-size: 40px;
   font-weight: 600;
-
-  color: #b4a0a7;
-
   color: #998189;
 }
 

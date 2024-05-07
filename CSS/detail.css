@@ -1,6 +1,7 @@
+@import "review.css";
 
 body {
-  background-color: #0c0c0c;
+  background-color: white;
 }
 
 textarea {
@@ -35,74 +36,12 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-
-/* 댓글 */
-.bodyBox {
-  /* width: 40%; */
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 100;
-  max-width: 700px;
-  display: flex;
-  /* top: -50px;
-  margin-left: 60%; */
-}
-
-.openClose {
-  background-color: transparent;
-  color: black;
-  width: 50px;
-  height: 50px;
-  font-size: 35px;
-  margin: auto 0;
-  /* position: relative;
-  top: 450px;
-  left: -40px; */
-}
-
-.commentBox {
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  overflow: scroll;
-  background-color: white;
-}
-
-.open {
-  transform: translateX(0px);
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
-}
-
-.close {
-  transform: translateX(calc(100% - 50px));
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
-}
-
 .commentInput {
   width: 100%;
   padding: 20px;
   margin-bottom: 15px;
   border-radius: 10px;
   border: 1px solid black;
-
-  display: flex;
-  display: inline-block;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-.commentCheck {
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
 
   display: flex;
   display: inline-block;
@@ -148,9 +87,7 @@ textarea::placeholder {
   border: none;
 }
 
-.inputBtn,
-.deleteBtn,
-.editBtn {
+.inputBtn {
   background-color: black;
   font-size: 15px;
   width: 100px;
@@ -163,40 +100,9 @@ textarea::placeholder {
   margin-top: 10px;
 }
 
-.editBtn {
-  margin-right: 10px;
-}
-
 .inputBtn:hover {
   background-color: black;
   color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-.deleteBtn:hover {
-  background-color: red;
-  border: red;
-  color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-.editBtn:hover {
-  background-color: blueviolet;
-  border: blueviolet;
-  color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-
-.commentBox h4 {
-  width: 160px;
-  color: black;
-  margin-bottom: 10px;
-  cursor: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }
 
 #commentPassword {
@@ -211,7 +117,7 @@ textarea::placeholder {
   margin-left: 7px;
 }
 
-.checkPassword {
+.review-check-password {
   display: none;
   font-size: 13px;
   font-weight: 500;
@@ -242,7 +148,344 @@ textarea::placeholder {
   padding: 5px;
 }
 
+.commentStar {
+  color: #f9bf3b;
+}
+
+/* star */
+.rating {
+  margin: 0px auto;
+  width: 130px;
+}
+
+.rating > * {
+  float: right;
+}
+
+.rating label {
+  height: 10px;
+  width: 20%;
+  display: block;
+  position: relative;
+  top: -43px;
+  left: 40px;
+  cursor: pointer;
+}
+
+.rating label::after {
+  transition: all 0.4s ease-out;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  content: "☆";
+  color: #444;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 10%;
+  text-align: center;
+  font-size: 30px;
+  -webkit-animation: 1s pluse ease;
+  animation: 1s pluse ease;
+}
+
+.rating label:hover::after {
+  color: #5e5e5e;
+  text-shadow: 0 0 15px #5e5e5e;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating input:checked + label::after,
+.rating input:checked ~ label::after {
+  content: "★";
+  color: #f9bf3b;
+  text-shadow: 0 0 20px #f9bf3b;
+}
+/* star */
+
 .light {
   background-color: #dedede !important;
 }
 
+/* 영화상세페이지 */
+main {
+  background-color: black;
+}
+.container1 {
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, 0.5) 25%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(0, 0, 0, 0.8) 75%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    url(../image/detail_test.jpg);
+  background-size: 100%;
+  width: auto;
+  height: 500px;
+  display: inherit;
+
+  color: #dedede;
+  text-align: justify;
+}
+
+.detailContent {
+  display: inline-block;
+  margin: 300px 10%;
+  width: 700px;
+}
+
+.detailTitle {
+  font-weight: bold;
+  font-size: 40px;
+  color: white;
+}
+
+.genreItem {
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: #53464b;
+  margin-right: 5px;
+  box-shadow: 2px 1px 1px #dedede;
+}
+
+.poster {
+  display: inline-block;
+  margin-top: 300px;
+}
+
+.poster iframe {
+  max-width: 400px;
+  width: 100%;
+  height: 200px;
+}
+
+.detailContent,
+.poster {
+  vertical-align: top;
+}
+
+/* 등장인물 */
+.casts {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  */
+  margin-top: 530px;
+  margin-left: 10%;
+  position: absolute;
+  top: 288px;
+  height: 200px;
+  width: 8%;
+}
+
+.casts h1 {
+  color: #dedede;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.castsItem {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  width: 240px;
+  display: flex;
+  float: left;
+  align-items: center;
+  height: 120px;
+  margin-right: 47px;
+}
+
+.castItem {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  width: 100px;
+  float: left;
+  margin-right: 50px;
+  line-height: 20px;
+}
+
+.castsItem:last-child {
+  margin: 0px;
+}
+
+.castsItemImg {
+  width: 90px;
+  height: 160px;
+  background-size: cover;
+  margin-bottom: 0.5rem;
+}
+
+.castName {
+  color: #dedede;
+}
+
+.trailer {
+  margin-top: 530px;
+  margin-left: 10%;
+}
+
+.trailer h2 {
+  color: #dedede;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.trailer iframe {
+  border-radius: 0.5rem;
+  max-width: 90%;
+  width: 100%;
+  height: 600px;
+  margin: 20px 0;
+}
+
+.detailContent,
+.trailer {
+  vertical-align: top;
+}
+
+/* 관련영화 */
+.movieListContainer {
+  margin-top: 30px;
+  color: #dedede;
+  margin-left: 10%;
+}
+
+.movieListTitle {
+  color: #dedede;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.featured-content {
+  height: 50vh;
+  padding: 50px;
+}
+
+.featured-title {
+  width: 200px;
+}
+
+.featured-desc {
+  width: 500px;
+  color: #dedede;
+  margin: 30px 0;
+}
+
+.featured-button {
+  background-color: #53464b;
+  color: #dedede;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+
+.movieListWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.movieList {
+  display: flex;
+  align-items: center;
+  height: 300px;
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.movieListItem {
+  margin-right: 30px;
+  position: relative;
+}
+
+.movieListItem:hover .movie-list-item-img {
+  transform: scale(1.2);
+  margin: 0 30px;
+  opacity: 0.5;
+}
+
+.movieListItem:hover .movieListItemTitle,
+.movieListItem:hover .movieListItemDesc,
+.movieListItem:hover .movieListItemButton {
+  opacity: 1;
+}
+
+.movieListItemImg {
+  transition: all 1s ease-in-out;
+  width: 270px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.movieListItemTitle {
+  background-color: #333;
+  padding: 0 10px;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10%;
+  left: 20px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movieListItemDesc {
+  background-color: #333;
+  padding: 10px;
+  font-size: 14px;
+  position: absolute;
+  top: 30%;
+  left: 20px;
+  width: 230px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movieListItemButton {
+  padding: 10px;
+  background-color: #dedede;
+  color: #53464b;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.arrow {
+  font-size: 120px;
+  position: absolute;
+  top: 90px;
+  right: 0;
+  color: lightgray;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.container.active {
+  background-color: white;
+}
+
+.movieListTitle.active {
+  color: black;
+}
+
+.light {
+  background-color: #dedede !important;
+}

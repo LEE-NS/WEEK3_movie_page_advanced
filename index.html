@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-    />
-    <title>Sample Cinema</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Prompt:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./CSS/reset.css" />
-    <link rel="stylesheet" href="./CSS/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="icon" href="./image/favicon.ico" />
-    <script defer src="./script/main.js"></script>
-  </head>
 
-  <body class="body">
-    <div class="circle">🍿</div>
-    <div class="modal-wrap">
-      <div class="modal">
-        <p class="modal-text">
-          <span class="m-name"></span>&nbsp;의 ID는&nbsp;<span
-            class="m-id"
-          ></span
-          >&nbsp;입니다.
-        </p>
-        <p class="confirm">확인</p>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+  <title>Sample Cinema</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./CSS/reset.css" />
+  <link rel="stylesheet" href="./CSS/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="icon" href="./image/favicon.ico" />
+  <script defer src="./script/main.js"></script>
+</head>
+
+<body class="body">
+  <div class="circle">🍿</div>
+  <div class="modal-wrap">
+    <div class="modal">
+      <p class="modal-text">
+        <span class="m-name"></span>&nbsp;의 ID는&nbsp;<span class="m-id"></span>&nbsp;입니다.
+      </p>
+      <p class="confirm">확인</p>
     </div>
-    <div id="wrap">
-      <div id="header-wrap">
-        <header>
-          <ul>
-            <li>
-              <div class="button-wrap">
-                <button class="search" tabindex="-1">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="input-wrap">
-                  <input
-                    type="text"
-                    placeholder="제목 입력 후 Enter로 검색"
-                    maxlength="31"
-                  />
-                  <div class="loading-spinner">
-                    <p class="spinner-inner"></p>
-                  </div>
+  </div>
+  <div id="wrap">
+    <div id="header-wrap">
+      <header>
+        <ul>
+          <li>
+            <div class="button-wrap">
+              <button class="search" tabindex="-1">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <div class="input-wrap">
+                <input type="text" placeholder="제목 입력 후 Enter로 검색" maxlength="31" />
+                <div class="loading-spinner">
+                  <p class="spinner-inner"></p>
                 </div>
               </div>
             </li>
@@ -98,16 +79,18 @@
                   <!-- 영화 카드가 들어온다. -->
                 </ul>
               </div>
-            </div>
-            <!-- 영화 리스트 -->
           </div>
-        </main>
-        <footer>
-          <p class="copyright">
-            © 2024 Sample Cinema, Inc. All Rights Reserved
-          </p>
-        </footer>
-      </div>
+          <!-- 영화 리스트 -->
+        </div>
+      </main>
+      <footer>
+        <p class="copyright">
+          © 2024 Sample Cinema, Inc. All Rights Reserved
+        </p>
+      </footer>
     </div>
-  </body>
+  </div>
+</body>
+
+>>>>>>> dd4f71009518faba89d3e721509ccedffb7288ce
 </html>
