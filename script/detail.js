@@ -1,6 +1,6 @@
 // review Data 저장할 map변수
 // data는 movieId별로 review를 여러개 가져야함.
-// review는 reviewid와 username, userpassword, reviewString(내용)을 가짐
+// review는 reviewId,userIdValue,userPasswordValue,userCommentValue,(내용)을 가짐
 let reviewMap = null;
 let deleteButtons = null;
 let updateButtons = null;
@@ -25,14 +25,16 @@ const getMovieReview = () => {
     reviewMap = new Map(JSON.parse(reviewMap));
   }
 };
+
 // textarea 개행 포멧팅
-const convertText = (text, type = 1) => {
+const convertText = (text, before, after) => {
   let output = "";
-  const arr = text.split("\n");
-  const separator = type ? "</br>" : "\n";
-  for (const str of arr) {
-    output += `${str}${separator}`;
+  const arr = text.split(before);
+
+  for (let i = 0; i < arr.length; i++) {
+    output += `${arr[i]}${i < arr.length - 1 ? after : ""}`;
   }
+
   return output;
 };
 // 삭제 및 수정 버튼 클릭 시
@@ -73,21 +75,6 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
-          /**
-           * <div class="review-update-box">
-                <textarea class="review-update-textarea"></textarea>
-                <div class="review-button-box">
-                  <button class="review-button-update" type="button">
-                    확인
-                  </button>
-                  <button class="review-button-delete" type="button">
-                    취소
-                  </button>
-                </div>
-              </div>
-           * 
-           */
-          console.log("수정");
           // 리뷰내용과 유효성검사한거 숨김
           checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
@@ -95,21 +82,24 @@ const buttonClickHandler = (buttons, buttonType) => {
           );
           reviewContentBox.style.display = "none";
           const reviewContentValue = thisMap.userCommentValue;
-          const textareaRow = reviewContentValue.split("\n").length;
           // update box 조립
           const reviewUpdateBox = document.createElement("div");
           reviewUpdateBox.className = "review-update-box";
 
           const reviewUpdateTextarea = document.createElement("textarea");
           reviewUpdateTextarea.className = "review-update-textarea";
-          reviewUpdateTextarea.value = convertText(reviewContentValue, 0);
+          reviewUpdateTextarea.value = convertText(
+            reviewContentValue,
+            "<br/>",
+            "\n"
+          );
+          const textareaRow = reviewUpdateTextarea.value.split("\n").length;
           reviewUpdateTextarea.rows = textareaRow;
-          reviewUpdateTextarea.oninput = () => {
-            console.log(reviewUpdateTextarea.scrollHeight);
+          reviewUpdateTextarea.addEventListener("input", () => {
             reviewUpdateTextarea.style.height = "auto";
             reviewUpdateTextarea.style.height =
               reviewUpdateTextarea.scrollHeight + `px`;
-          };
+          });
           const reviewButtonBox = document.createElement("div");
           reviewButtonBox.className = "review-button-box";
 
@@ -117,41 +107,37 @@ const buttonClickHandler = (buttons, buttonType) => {
           reviewButtonUpdate.className = "review-button-update";
           reviewButtonUpdate.type = "button";
           reviewButtonUpdate.innerText = "확인";
+          reviewButtonUpdate.addEventListener("click", () => {
+            const reviewContent =
+              reviewContentBox.querySelector(".review-content");
+            reviewContent.innerHTML = convertText(
+              reviewUpdateTextarea.value,
+              "\n",
+              "<br/>"
+            );
+            reviewMap
+              .get(movieId)
+              .find((data) => data.reviewId === key).userCommentValue =
+              convertText(reviewUpdateTextarea.value, "<br/>", "\n");
+            localStorage.setItem("review", JSON.stringify([...reviewMap]));
+            reviewContentBox.style.display = "block";
+            reviewCard.removeChild(reviewUpdateBox);
+          });
+
           const reviewButtonCancel = document.createElement("button");
           reviewButtonCancel.className = "review-button-delete";
           reviewButtonCancel.type = "button";
           reviewButtonCancel.innerText = "취소";
+          reviewButtonCancel.addEventListener("click", () => {
+            reviewContentBox.style.display = "block";
+            reviewCard.removeChild(reviewUpdateBox);
+          });
 
           reviewButtonBox.append(reviewButtonUpdate, reviewButtonCancel);
           reviewUpdateBox.append(reviewUpdateTextarea, reviewButtonBox);
           reviewCard.insertAdjacentElement("beforeend", reviewUpdateBox);
 
-          // const reviewContentBox = reviewCard.querySelector(
-          //   ".review-content-box"
-          // );
-
-          // const reviewContentUpdateInput = document.createElement("input");
-          // reviewContentUpdateInput.className = "reivew-content-input";
-          // reviewContentUpdateInput.value = reviewContentValue;
-          // reviewContent.textContent = "";
-
-          // const reviewContentUpdateButton = document.createElement("button");
-          // reviewContentUpdateButton.className = "reivew-content-button";
-          // reviewContentUpdateButton.type = "button";
-          // reviewContentUpdateButton.innerText = "확인";
-
-          // reviewContentBox.append(
-          //   reviewContentUpdateInput,
-          //   reviewContentUpdateButton
-          // );
-          // const input = li.querySelector(".update-test");
-
           // reviewContent.textContent = input.value;
-          // reviewMap
-          //   .get(movieId)
-          //   .find((data) => data.reviewId === key).reviewString = input.value;
-
-          // localStorage.setItem("review", JSON.stringify([...reviewMap]));
         }
       } else if (!inputPassword.length) {
         checkReviewPassword.innerText = "비밀번호를 입력해주세요.";
@@ -180,7 +166,11 @@ const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
       <p class="review-check-password"></p>
       <div class="review-content-box">
         <div class="review-content-main">
-          <p class="review-content">${convertText(userCommentValue)}</p>
+          <p class="review-content">${convertText(
+            userCommentValue,
+            "\n",
+            "<br/>"
+          )}</p>
         </div>
         <div class="review-button-box">
           <button review-id=${reviewId} class="review-button-update" type="button">수정</button>
