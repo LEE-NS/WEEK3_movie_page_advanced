@@ -45,10 +45,9 @@ const buttonClickHandler = (buttons, buttonType) => {
       const key = e.target.getAttribute("review-id");
       // 가져온 key로 삭제해야될 li node를 찾음
       const reviewCard = document.querySelector(`li[key=${key}]`);
-      // li안에 카드정보를 담고 있는 div
-      const reviewCardInfo = reviewCard.querySelector(".review-card-info");
       // 유저가 입력한 password
-      const inputPassword = reviewCardInfo.childNodes[3].value;
+      let inputPassword = reviewCard.querySelector("#review-input-password");
+      let inputPasswordValue = inputPassword.value;
       const thisMap = reviewMap
         .get(movieId)
         .filter((data) => data.reviewId === key)[0];
@@ -59,7 +58,9 @@ const buttonClickHandler = (buttons, buttonType) => {
         ".review-check-password"
       );
 
-      if (inputPassword === reviewPassword) {
+      if (inputPasswordValue === reviewPassword) {
+        checkReviewPassword.style.display = "none";
+        inputPassword.value = "";
         if (buttonType === "delete") {
           // reviewId와 key가 다른것만 가져옴
           const filteredMap = reviewMap
@@ -75,6 +76,16 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
+          // 별점
+          // const reviewInput = document.querySelector(
+          //   ".review-card-info-star input"
+          // );
+          // const reviewStar = document.querySelector(".review-star");
+
+          // reviewInput.addEventListener("input", () => {
+          //   reviewStar.style.width = `${rating_input.value * 10}%`;
+          // });
+
           // 리뷰내용과 유효성검사한거 숨김
           checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
@@ -139,7 +150,7 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           // reviewContent.textContent = input.value;
         }
-      } else if (!inputPassword.length) {
+      } else if (!inputPasswordValue.length) {
         checkReviewPassword.innerText = "비밀번호를 입력해주세요.";
         checkReviewPassword.style.display = "block";
       } else {
@@ -156,12 +167,23 @@ const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
   const html = `
     <li key=${reviewId} class="review-card">
       <div class="review-card-info">
-        <h4 id="userName">${userIdValue}</h4>
-        <input
-          id="review-input-password"
-          type="password"
-          placeholder="비밀번호"
-        />
+        <div class="review-card-info-user">
+          <h4 id="userName">${userIdValue}</h4>
+          <div class="review-card-info-star">
+            <span class="empty-star">
+              <span class="shining-star"></span>
+            </span>
+            <p>5</p>
+          </div>
+        </div>
+        <div class="review-card-info-password">
+          <input
+            id="review-input-password"
+            type="password"
+            placeholder="비밀번호"
+          />
+          <p class="review-check-password"></p>
+        </div>
       </div>
       <p class="review-check-password"></p>
       <div class="review-content-box">
