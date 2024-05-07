@@ -36,73 +36,12 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-/* 댓글 */
-.review {
-  /* width: 40%; */
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 100;
-  max-width: 700px;
-  display: flex;
-  /* top: -50px;
-  margin-left: 60%; */
-}
-
-.review-open-close-button {
-  background-color: transparent;
-  color: black;
-  width: 50px;
-  height: 50px;
-  font-size: 35px;
-  margin: auto 0;
-  /* position: relative;
-  top: 450px;
-  left: -40px; */
-}
-
-.review-main {
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  overflow: scroll;
-  background-color: white;
-}
-
-.open {
-  transform: translateX(0px);
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
-}
-
-.close {
-  transform: translateX(calc(100% - 50px));
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
-}
-
 .commentInput {
   width: 100%;
   padding: 20px;
   margin-bottom: 15px;
   border-radius: 10px;
   border: 1px solid black;
-
-  display: flex;
-  display: inline-block;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-.review-box {
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
 
   display: flex;
   display: inline-block;
@@ -148,9 +87,7 @@ textarea::placeholder {
   border: none;
 }
 
-.inputBtn,
-.review-button-delete,
-.review-button-update {
+.inputBtn {
   background-color: black;
   font-size: 15px;
   width: 100px;
@@ -166,17 +103,6 @@ textarea::placeholder {
 .inputBtn:hover {
   background-color: black;
   color: white;
-}
-
-.review-main h4 {
-  width: 160px;
-  color: black;
-  margin-bottom: 10px;
-  cursor: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }
 
 #commentPassword {
@@ -201,26 +127,6 @@ textarea::placeholder {
 
 .date {
   font-size: 12px;
-}
-
-.review-content {
-  position: relative;
-  font-size: 20px;
-  height: auto;
-  width: 100%;
-  color: black;
-  cursor: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-.review-card {
-  width: 100%;
-  height: auto;
-  margin-bottom: 40px;
-  padding: 5px;
 }
 
 .light {

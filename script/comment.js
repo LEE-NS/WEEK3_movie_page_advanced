@@ -47,7 +47,7 @@ let move = () => {
   let button = document.querySelector(".review-open-close-button");
   let is_CommentBtn = button.getAttribute("data-open") === "true";
   button.setAttribute("data-open", !is_CommentBtn);
-  let bodyBox = document.querySelector(".bodyBox");
+  let bodyBox = document.querySelector(".review");
   let commentBox = document.querySelector(".review-main");
 
   if (is_CommentBtn) {

@@ -17,7 +17,6 @@ const body = document.querySelector("body");
 // localStorage에 저장되어있는 review data를 가져오는 함수
 const getMovieReview = () => {
   // localStorage에 없으면 new Map()으로 만듬
-
   reviewMap = localStorage.getItem("review") || new Map();
 
   // 길이가 있다는것은 데이터가 있다는것
@@ -67,10 +66,26 @@ const buttonClickHandler = (buttons, buttonType) => {
           checkReviewPassword.style.display = "none";
           console.log("수정");
           const reviewContent = reviewCard.querySelector(".review-content");
+          const reviewContentValue = reviewContent.textContent;
+
+          const reviewContentBox = reviewCard.querySelector(
+            ".review-content-box"
+          );
+
           const reviewContentUpdateInput = document.createElement("input");
-          reviewContentUpdateInput.className = "reivew-content-update-input";
-          reviewContentUpdateInput.value = reviewContent.textContent;
-          reviewContent.append(reviewContentUpdateInput);
+          reviewContentUpdateInput.className = "reivew-content-input";
+          reviewContentUpdateInput.value = reviewContentValue;
+          reviewContent.textContent = "";
+
+          const reviewContentUpdateButton = document.createElement("button");
+          reviewContentUpdateButton.className = "reivew-content-button";
+          reviewContentUpdateButton.type = "button";
+          reviewContentUpdateButton.innerText = "확인";
+
+          reviewContentBox.append(
+            reviewContentUpdateInput,
+            reviewContentUpdateButton
+          );
           // const input = li.querySelector(".update-test");
 
           // reviewContent.textContent = input.value;
@@ -99,19 +114,19 @@ const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
       <div class="review-card-info">
         <h4 id="userName">${userIdValue}</h4>
         <input
-          id="commentPassword"
+          id="review-input-password"
           type="password"
           placeholder="비밀번호"
         />
       </div>
       <p class="review-check-password"></p>
-      <p class="review-content">${userCommentValue}</p>
-      <button review-id=${reviewId} class="review-button-delete" type="button">
-        삭제
-      </button>
-      <button review-id=${reviewId} class="review-button-update" type="button">
-        수정
-      </button>
+      <div class="review-content-box">
+        <p class="review-content">${userCommentValue}</p>
+      </div>
+      <div class="review-button-box">
+        <button review-id=${reviewId} class="review-button-update" type="button">수정</button>
+        <button review-id=${reviewId} class="review-button-delete" type="button">삭제</button>
+      </div>
     </li>
   `;
 
