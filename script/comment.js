@@ -106,12 +106,12 @@ let move = () => {
 const ratingInputs = document.querySelectorAll('input[name="rating"]');
 
 // 각 별을 클릭했을 때 값을 받아오는 함수
-function handleRatingClick(event) {
+function starCheck(event) {
   const selectedRating = event.target.value;
   console.log('선택된 별점: ', selectedRating);
 }
 
 // 각 별에 대한 클릭 이벤트 처리
 ratingInputs.forEach((input) => {
-  input.addEventListener('click', handleRatingClick);
+  input.addEventListener('click', starCheck);
 });
