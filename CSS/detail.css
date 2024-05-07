@@ -1,5 +1,9 @@
+@import "review.css";
+
 body {
-  background-color: white;
+  position: relative;
+  background-color: #000000;
+  color: #dedede;
 }
 
 textarea {
@@ -12,74 +16,30 @@ textarea::placeholder {
   font-weight: bold;
 }
 
-.homeBtn {
-  position: fixed;
-  left: 20px;
-  top: 20px;
-  width: 40px;
-  height: 40px;
-  background-image: url(../image/homeBtn.png);
-  background-size: contain;
-  cursor: pointer;
+.pageBtns {
+  position: absolute;
+  top: 35px;
+  left: 70px;
 }
 
-.backBtn {
-  position: fixed;
-  left: 100px;
-  top: 20px;
-  width: 40px;
-  height: 40px;
-  background-image: url(../image/backBtn.png);
-  background-size: contain;
-  cursor: pointer;
-}
-
-/* 댓글 */
-.bodyBox {
-  /* width: 40%; */
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 100;
-  max-width: 700px;
-  display: flex;
-  /* top: -50px;
-  margin-left: 60%; */
-}
-
-.openClose {
-  background-color: transparent;
-  color: black;
+.homeBtn, .backBtn {
+  border-radius: 50px;
   width: 50px;
   height: 50px;
-  font-size: 35px;
-  margin: auto 0;
-  /* position: relative;
-  top: 450px;
-  left: -40px; */
+  margin: 5px;
+  transition: all 0.2s;
+  background-color: #53464b;
+  color: #fefefe;
 }
 
-.commentBox {
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  overflow: scroll;
-  background-color: white;
+button i {
+  font-size: 15px;
 }
 
-.open {
-  transform: translateX(0px);
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
-}
-
-.close {
-  transform: translateX(calc(100% - 50px));
-  transition-property: all;
-  transition-duration: 1s;
-  transition-delay: 0.2s;
+.backBtn:hover, .homeBtn:hover {
+  background-color: #967f87;
+  color: #000000;
+  transition: all 0.2s;
 }
 
 .commentInput {
@@ -88,19 +48,6 @@ textarea::placeholder {
   margin-bottom: 15px;
   border-radius: 10px;
   border: 1px solid black;
-
-  display: flex;
-  display: inline-block;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-.commentCheck {
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
 
   display: flex;
   display: inline-block;
@@ -146,9 +93,7 @@ textarea::placeholder {
   border: none;
 }
 
-.inputBtn,
-.deleteBtn,
-.editBtn {
+.inputBtn {
   background-color: black;
   font-size: 15px;
   width: 100px;
@@ -161,40 +106,9 @@ textarea::placeholder {
   margin-top: 10px;
 }
 
-.editBtn {
-  margin-right: 10px;
-}
-
 .inputBtn:hover {
   background-color: black;
   color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-.deleteBtn:hover {
-  background-color: red;
-  border: red;
-  color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-.editBtn:hover {
-  background-color: blueviolet;
-  border: blueviolet;
-  color: white;
-  transition-duration: 0.3s;
-  transition-delay: 0.1s;
-}
-
-.commentBox h4 {
-  width: 160px;
-  color: black;
-  margin-bottom: 10px;
-  cursor: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }
 
 #commentPassword {
@@ -209,7 +123,7 @@ textarea::placeholder {
   margin-left: 7px;
 }
 
-.checkPassword {
+.review-check-password {
   display: none;
   font-size: 13px;
   font-weight: 500;
@@ -268,7 +182,7 @@ textarea::placeholder {
   transition: all 0.4s ease-out;
   -webkit-font-smoothing: antialiased;
   position: absolute;
-  content: '☆';
+  content: "☆";
   color: #444;
   top: 0;
   left: 0;
@@ -291,21 +205,14 @@ textarea::placeholder {
 
 .rating input:checked + label::after,
 .rating input:checked ~ label::after {
-  content: '★';
+  content: "★";
   color: #f9bf3b;
   text-shadow: 0 0 20px #f9bf3b;
 }
 /* star */
 
-.light {
-  background-color: #dedede !important;
-}
-
 
 /* 영화상세페이지 */
-main {
-  background-color: black;
-}
 .container1 {
   background: linear-gradient(
       to bottom,
@@ -316,47 +223,85 @@ main {
       rgba(0, 0, 0, 0.8) 75%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url(../image/detail_test.jpg);
-  background-size: 100%;
-  width: auto;
-  height: 500px;
-  display: inherit;
+    url(../image/detail_default_image.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 0 ;
+  min-width: 1020px;
+  height: 400px;
+  display: block;
+  text-indent: -99999px;
+}
 
-  color: #dedede;
-  text-align: justify;
+.content-summary {
+  display: flex;
+  justify-content: center;
+  width: 1020px;
+  margin: 70px auto 0;
 }
 
 .detailContent {
-  display: inline-block;
-  margin: 300px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 700px;
+  height: 400px;
+}
+
+.top-info div{
+  margin-bottom: 10px;
+}
+.top-info div:last-child {
+  margin-bottom: 0;
+}
+
+.poster {
+  display: inline-block;
+  width: 300px;
+  height: 450px;
+  margin-left: 100px;
 }
 
 .detailTitle {
   font-weight: bold;
   font-size: 40px;
-  color: white;
 }
 
 .genreItem {
-  padding: 0.5rem 1.5rem;
+  display: inline-block;
+  height: 45px;
+  padding: 0 15px;
+  line-height: 45px;
+  text-align: center;
   border-radius: 30px;
-  font-size: 0.8rem;
+  font-size: 14px;
   font-weight: 600;
-  background-color: #53464b;
   margin-right: 5px;
   transition: all 0.2s;
+  background-color: #53464b;
+  color: #dedede;
 }
 
-.genreItem:hover {
-  background-color: #967f87;
-  color: #272727;
-  transition: all 0.2s;
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50px;
 }
 
-.poster {
+.movie-info li .info-name, .movie-info li .info {
   display: inline-block;
-  margin-top: 300px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.movie-info li .info-name {
+  width: 80px;
+}
+
+.movie-info li .info {
+  width: 150px;
+  text-align: center;
 }
 
 .poster iframe {
@@ -365,29 +310,19 @@ main {
   height: 200px;
 }
 
-.detailContent,
-.poster {
-  vertical-align: top;
-}
-
 /* 등장인물 */
 .casts {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-  */
-  margin-top: 530px;
-  margin-left: 10%;
-  position: absolute;
-  top: 288px;
-  height: 200px;
-  width: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 70px auto 0;
+  width: 1020px;
+  height: 180px;
 }
 
 .casts h1 {
-  color: #dedede;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .castsItem {
@@ -423,26 +358,21 @@ main {
   margin-bottom: 0.5rem;
 }
 
-.castName {
-  color: #dedede;
-}
-
 .trailer {
-  margin-top: 530px;
-  margin-left: 10%;
+  width: 1020px;
+  margin: 70px auto;
+  
 }
 
 .trailer h2 {
-  color: #dedede;
   font-size: 20px;
   font-weight: bold;
 }
 
 .trailer iframe {
   border-radius: 0.5rem;
-  max-width: 90%;
-  width: 100%;
-  height: 600px;
+  width: 1020px;
+  height: 500px;
   margin: 20px 0;
 }
 
@@ -453,13 +383,28 @@ main {
 
 /* 관련영화 */
 .movieListContainer {
-  margin-top: 30px;
-  color: #dedede;
-  margin-left: 10%;
+  position: relative;
+  width: 1020px;
+  margin: 70px auto 0;
+}
+.scroll-btn {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-top: -25px;
+  z-index: 99;
+  
+  background-color: #dedede7a;
+}
+.scroll-btn i {
+  font-size: 30px;
+  color: #505050;
 }
 
 .movieListTitle {
-  color: #dedede;
   font-size: 20px;
   font-weight: bold;
 }
@@ -475,13 +420,11 @@ main {
 
 .featured-desc {
   width: 500px;
-  color: #dedede;
   margin: 30px 0;
 }
 
 .featured-button {
   background-color: #53464b;
-  color: #dedede;
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
@@ -492,9 +435,13 @@ main {
 .movieListWrapper {
   width: 100%;
   position: relative;
-  overflow-x: scroll;
-  
+  overflow-x: auto; 
 }
+
+/* .movieListWrapper::-webkit-scrollbar {
+  
+} */
+
 
 .movieList {
   display: flex;
@@ -509,11 +456,7 @@ main {
   position: relative;
 }
 
-.movieListItem:first-child
-
-.movieListItem:hover .movie-list-item-img {
-  transform: scale(1.2);
-  margin: 0 30px;
+.movieListItem:hover .movieListItemImg {
   opacity: 0.5;
 }
 
@@ -524,7 +467,7 @@ main {
 }
 
 .movieListItemImg {
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   width: 270px;
   height: 200px;
   object-fit: cover;
@@ -532,7 +475,6 @@ main {
 }
 
 .movieListItemTitle {
-  background-color: #333;
   padding: 0 10px;
   font-size: 30px;
   font-weight: bold;
@@ -540,11 +482,10 @@ main {
   top: 10%;
   left: 20px;
   opacity: 0;
-  transition: 1s all ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .movieListItemDesc {
-  background-color: #333;
   padding: 10px;
   font-size: 14px;
   position: absolute;
@@ -552,12 +493,11 @@ main {
   left: 20px;
   width: 230px;
   opacity: 0;
-  transition: 1s all ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .movieListItemButton {
   padding: 10px;
-  background-color: #dedede;
   color: #53464b;
   font-weight: bold;
   border-radius: 10px;
@@ -568,18 +508,10 @@ main {
   bottom: 20px;
   left: 20px;
   opacity: 0;
-  transition: 1s all ease-in-out;
+  transition: all 1s ease-in-out;
+  background-color: #dedede;
 }
 
-.arrow {
-  font-size: 120px;
-  position: absolute;
-  top: 90px;
-  right: 0;
-  color: lightgray;
-  opacity: 0.5;
-  cursor: pointer;
-}
 
 .container.active {
   background-color: white;
@@ -591,4 +523,5 @@ main {
 
 .light {
   background-color: #dedede !important;
+  color: #191919 !important;
 }
