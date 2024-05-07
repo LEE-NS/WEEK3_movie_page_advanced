@@ -3,36 +3,6 @@ let inputBtn = document.querySelector(".inputBtn");
 let commentCount = document.querySelector(".count");
 let reviewCard = document.querySelectorAll(".review-card");
 
-// 삭제, 수정 버튼 중복된 부분 꺼내온 후 함수로 추출
-function btnEvent (idx) {
-  let commentPassword = document.querySelectorAll('#commentPassword');
-  let checkPassword = document.querySelectorAll('.checkPassword');
-
-  if(Number(commentPassword[idx].value) === 1234) {
-    alert('비밀번호가 없습니다');
-      checkPassword[idx].style.display = 'none';
-      commentPassword[idx].value = '';
-  } else {
-    checkPassword[idx].innerHTML = '비밀번호가 다릅니다';
-    checkPassword[idx].style.display = 'block';
-  }
-}
-
-// 삭제 버튼
-for (let i = 0; i < deleteBtn.length; i++) {
-  deleteBtn[i].addEventListener('click', () => {
-    btnEvent(i);
-  });
-}
-
-// 수정 버튼
-for (let i = 0; i < editBtn.length; i++) {
-  editBtn[i].addEventListener('click', () => {
-    btnEvent(i);
-  });
-}
-
-
 // 댓글 수량 확인
 let count = () => {
   for (let i = 0; i < reviewCard.length; i++) {
