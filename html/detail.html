@@ -19,126 +19,95 @@
   <body>
     <a class="homeBtn" href="../index.html"></a>
     <div class="backBtn"></div>
-    <!-- 댓글 입력 -->
-    <div class="bodyBox">
-      <button type="button" class="openClose">></button>
-      <div class="commentBox">
-        <form action="">
+    <!-- 리뷰 창 -->
+    <div class="review">
+      <button type="button" class="review-open-close-button">></button>
+      <div class="review-main">
+        <!-- 리뷰 입력 -->
+        <form id="reviewForm">
           <div class="commentInput">
-            <h2>감상평 <span class="count"></span></h2>
+            <h2>리뷰 작성 <span class="count"></span></h2>
             <input id="userId" type="text" placeholder="아이디" />
             <input id="userPassword" type="password" placeholder="비밀번호" />
+            <div class="rating">
+              <!-- 1st star-->
+              <input type="radio" name="rating" id="r1" value="5" />
+              <label for="r1"></label>
+              <!-- 2nd star -->
+              <input type="radio" name="rating" id="r2" value="4" />
+              <label for="r2"></label>
+              <!-- 3rd star -->
+              <input type="radio" name="rating" id="r3" value="3" />
+              <label for="r3"></label>
+              <!-- 5rd star -->
+              <input type="radio" name="rating" id="r4" value="2" />
+              <label for="r4"></label>
+              <input type="radio" name="rating" id="r5" value="1" />
+              <label for="r5"></label>
+            </div>
+
             <p class="checkMsg"></p>
             <textarea
               class="comment"
-              name=""
-              id=""
+              id="userComment"
               cols="90"
               rows="3"
               placeholder="내용을 입력해주세요"
             ></textarea>
-            <button class="inputBtn" type="button">등록</button>
+            <button class="inputBtn" type="submit">등록</button>
           </div>
         </form>
-
-        <!-- 댓글 확인 -->
-        <div class="commentCheck">
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
+        <!-- 리뷰 확인 -->
+        <div class="review-box">
+          <ul class="review-list">
+            <li class="review-card">
+              <div class="review-card-info">
+                <h4 id="userName">이름</h4>
+                <input
+                  id="review-input-password"
+                  type="password"
+                  placeholder="비밀번호"
+                />
+              </div>
+              <p class="review-check-password"></p>
+              <!-- <div class="review-content-box">
+                <div class="review-content-main">
+                  <p class="review-content">
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                  </p>
+                </div>
+                <div class="review-button-box">
+                  <button class="review-button-update" type="button">
+                    수정
+                  </button>
+                  <button class="review-button-delete" type="button">
+                    삭제
+                  </button>
+                </div>
+              </div> -->
+              <div class="review-update-box">
+                <textarea class="review-update-textarea"></textarea>
+                <div class="review-button-box">
+                  <button class="review-button-update" type="button">
+                    확인
+                  </button>
+                  <button class="review-button-delete" type="button">
+                    취소
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <main>
-      <!--리뷰 읽고 쓰기 테스트용-->
-      <!-- <div>
-      <p>리뷰 테스트용</p>
-      <form id="reviewForm">
-        <input id="reviewUserName" type="text" placeholder="아이디" />
-        <input id="reviewUserPassword" type="password" placeholder="비밀번호" />
-        <textarea id="reviewArea" class="textarea" cols="50" rows="10" placeholder="리뷰 내용을 작성"></textarea>
-        <button type="submit">버튼</button>
-      </form>
 
-      <div>
-        <ul class="review-box"></ul>
-      </div>
-    </div> -->
+    <main>
       <div class="container1">
         <div class="detailContent">
           <div class="detailTitle">고질라 X 콩: 뉴 엠파이어</div>

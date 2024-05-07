@@ -20,11 +20,7 @@ body {
 }
 #header-wrap {
   width: 100px;
-  background-color: #191919;
-<<<<<<< HEAD
-=======
   background-color: #2727275e;
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
 }
 #contents-wrap {
   width: calc(100% - 100px);
@@ -73,21 +69,12 @@ body {
   color: #dedede;
 }
 .message {
-<<<<<<< HEAD
-    position: fixed;
-    margin: 90px 0px 0px 35px;
-    color:#878ccb;
-    font-size: 20px;
-    font-weight: 600;
-    width:100%;
-=======
   position: fixed;
   margin: 90px 0px 0px 35px;
   color: #878ccb;
   font-size: 20px;
   font-weight: 600;
   width: 100%;
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
 }
 .confirm {
   width: 150px;
@@ -171,10 +158,7 @@ header ul li .button-wrap {
   color: #272727;
   transition: all 0.2s;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
 .button-wrap button i {
   font-size: 16px;
 }
@@ -189,12 +173,7 @@ header ul li .button-wrap {
   transition: opacity 0.3s, background-color 0.3s;
 }
 .button-wrap .input-wrap input {
-  width: 320px;
-<<<<<<< HEAD
-=======
   width: 420px;
-
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
   height: 50px;
   position: absolute;
   left: 20px;
@@ -263,21 +242,15 @@ header ul li .button-wrap {
 main {
   overflow-y: auto;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
 .main-bg {
   width: 100%;
   height: 300px;
   line-height: 300px;
   text-align: center;
 
-<<<<<<< HEAD
-  font-family: 'Prompt', sans-serif;
-=======
   font-family: "Prompt", sans-serif;
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
+
   font-weight: 600;
   font-size: 60px;
 
@@ -291,11 +264,8 @@ main {
   color: #aa9ca1;
 }
 .main-bg a {
-<<<<<<< HEAD
-  font-family: 'Prompt', sans-serif;
-=======
   font-family: "Prompt", sans-serif;
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
+
   font-weight: 600;
   font-size: 60px;
 
@@ -326,14 +296,7 @@ main .list-name {
 
   font-size: 40px;
   font-weight: 600;
-<<<<<<< HEAD
-  color: #b4a0a7;
-=======
-
-  color: #b4a0a7;
-
   color: #998189;
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
 }
 
 .list-name .result-num {
@@ -637,11 +600,8 @@ body {
   margin-bottom: 40px;
   padding: 5px;
 }
-<<<<<<< HEAD
-=======
 
 /* mode */
 .light {
   background-color: #dedede !important;
 }
->>>>>>> ff5bfb884e7921883ffefabf6b9bf3537314845f
