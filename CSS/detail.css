@@ -1,5 +1,5 @@
 body {
-  background-color: #0c0c0c;
+  background-color: white;
 }
 
 textarea {
@@ -240,11 +240,69 @@ textarea::placeholder {
   padding: 5px;
 }
 
+.commentStar {
+  color: #f9bf3b;
+}
+
+/* star */
+.rating {
+  margin: 0px auto;
+  width: 130px;
+}
+
+.rating > * {
+  float: right;
+}
+
+.rating label {
+  height: 10px;
+  width: 20%;
+  display: block;
+  position: relative;
+  top: -43px;
+  left: 40px;
+  cursor: pointer;
+}
+
+.rating label::after {
+  transition: all 0.4s ease-out;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  content: '☆';
+  color: #444;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 10%;
+  text-align: center;
+  font-size: 30px;
+  -webkit-animation: 1s pluse ease;
+  animation: 1s pluse ease;
+}
+
+.rating label:hover::after {
+  color: #5e5e5e;
+  text-shadow: 0 0 15px #5e5e5e;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating input:checked + label::after,
+.rating input:checked ~ label::after {
+  content: '★';
+  color: #f9bf3b;
+  text-shadow: 0 0 20px #f9bf3b;
+}
+/* star */
+
 .light {
   background-color: #dedede !important;
 }
 
-/* 영화상세피이지 */
+
+/* 영화상세페이지 */
 main {
   background-color: black;
 }
@@ -519,4 +577,8 @@ main {
 
 .movieListTitle.active {
   color: black;
+}
+
+.light {
+  background-color: #dedede !important;
 }

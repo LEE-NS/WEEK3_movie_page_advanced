@@ -5,38 +5,32 @@ let commentCount = document.querySelector('.count');
 let commentCard = document.querySelectorAll('.commentCard');
 let editBtn = document.querySelectorAll('.editBtn');
 
+// 삭제, 수정 버튼 중복되는 부분 함수 추출
+function btnEvent(idx) {
+  let commentPassword = document.querySelectorAll('#commentPassword');
+  let checkPassword = document.querySelectorAll('.checkPassword');
+
+  if (Number(commentPassword[idx].value) === 1234) {
+    alert('비밀번호가 같습니다.');
+    checkPassword[idx].style.display = 'none';
+    commentPassword[idx].value = '';
+  } else {
+    checkPassword[idx].innerText = '비밀번호가 다릅니다.';
+    checkPassword[idx].style.display = 'block';
+  }
+}
+
 // 삭제 버튼
 for (let i = 0; i < deleteBtn.length; i++) {
   deleteBtn[i].addEventListener('click', () => {
-    // let passwordInput = prompt('비밀번호를 입력해주세요.', '');
-    let commentPassword = document.querySelectorAll('#commentPassword');
-    let checkPassword = document.querySelectorAll('.checkPassword');
-
-    if (Number(commentPassword[i].value) === 1234) {
-      alert('비밀번호가 같습니다.');
-      checkPassword[i].style.display = 'none';
-      commentPassword[i].value = '';
-    } else {
-      checkPassword[i].innerText = '비밀번호가 다릅니다.';
-      checkPassword[i].style.display = 'block';
-    }
+    btnEvent(i);
   });
 }
 
 // // 수정 버튼
 for (let i = 0; i < editBtn.length; i++) {
   editBtn[i].addEventListener('click', () => {
-    let commentPassword = document.querySelectorAll('#commentPassword');
-    let checkPassword = document.querySelectorAll('.checkPassword');
-
-    if (Number(commentPassword[i].value) === 1234) {
-      alert('비밀번호가 같습니다.');
-      checkPassword[i].style.display = 'none';
-      commentPassword[i].value = '';
-    } else {
-      checkPassword[i].innerText = '비밀번호가 다릅니다.';
-      checkPassword[i].style.display = 'block';
-    }
+    btnEvent[i];
   });
 }
 
@@ -102,3 +96,16 @@ let move = () => {
     }, 1100);
   }
 };
+
+const ratingInputs = document.querySelectorAll('input[name="rating"]');
+
+// 각 별을 클릭했을 때 값을 받아오는 함수
+function starCheck(event) {
+  const selectedRating = event.target.value;
+  console.log('선택된 별점: ', selectedRating);
+}
+
+// 각 별에 대한 클릭 이벤트 처리
+ratingInputs.forEach((input) => {
+  input.addEventListener('click', starCheck);
+});
