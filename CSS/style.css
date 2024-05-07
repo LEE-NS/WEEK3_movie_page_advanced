@@ -70,13 +70,12 @@ body {
   color: #dedede;
 }
 .message {
-    position: fixed;
-    margin: 90px 0px 0px 35px;
-    color:#878ccb;
-    font-size: 20px;
-    font-weight: 600;
-    width:100%;
-
+  position: fixed;
+  margin: 90px 0px 0px 35px;
+  color: #878ccb;
+  font-size: 20px;
+  font-weight: 600;
+  width: 100%;
   position: fixed;
   margin: 90px 0px 0px 35px;
   color: #878ccb;
@@ -182,9 +181,8 @@ header ul li .button-wrap {
 }
 .button-wrap .input-wrap input {
   width: 320px;
-
   width: 420px;
-
+  width: 420px;
   height: 50px;
   position: absolute;
   left: 20px;
@@ -261,7 +259,8 @@ main {
   text-align: center;
 
   font-family: 'Prompt', sans-serif;
-  font-family: "Prompt", sans-serif;
+  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -276,7 +275,9 @@ main {
 }
 .main-bg a {
   font-family: 'Prompt', sans-serif;
-  font-family: "Prompt", sans-serif;
+  font-family: 'Prompt', sans-serif;
+
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -310,7 +311,6 @@ main .list-name {
   color: #b4a0a7;
 
   color: #b4a0a7;
-
   color: #998189;
 }
 
@@ -620,4 +620,3 @@ body {
 .light {
   background-color: #dedede !important;
 }
-

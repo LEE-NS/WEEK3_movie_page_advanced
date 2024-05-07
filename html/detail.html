@@ -1,261 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <link rel="stylesheet" href="/CSS/reset.css" />
-    <link rel="icon" href="../image/favicon.ico">
-    <link rel="stylesheet" href="/CSS/detail.css">
-    <script type="module" src="../script/comment.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영화 상세 페이지</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/detail.css" />
+    <link rel="icon" href="../image/favicon.ico" />
+    <!-- 관련영화움직이기아이콘 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <script defer src="../script/comment.js"></script>
     <script defer src="../script/detail.js"></script>
   </head>
 
   <body>
-    <a href="../index.html">
-      <div class="homeBtn"></div>
-    </a>
+    <a class="homeBtn" href="../index.html"></a>
     <div class="backBtn"></div>
-    <!-- 댓글 입력 -->
-    <div class="bodyBox">
-      <button type="button" class="openClose">></button>
-      <div class="commentBox">
-        <form action="">
+    <!-- 리뷰 창 -->
+    <div class="review close">
+      <button type="button" class="review-open-close-button" data-open="true">></button>
+      <div class="review-main">
+        <!-- 리뷰 입력 -->
+        <form id="reviewForm">
           <div class="commentInput">
-            <h2>감상평 <span class="count"></span></h2>
-             <input id="userId" type="text" placeholder="아이디" />
-             <input id="userPassword" type="password" placeholder="비밀번호" />
-             <div class="rating">
+            <h2>리뷰 작성 <span class="count"></span></h2>
+            <input id="userId" type="text" placeholder="아이디" />
+            <input id="userPassword" type="password" placeholder="비밀번호" />
+            <div class="rating">
               <!-- 1st star-->
-              <input type="radio" name="rating" id="r1" value="5">
+              <input type="radio" name="rating" id="r1" value="5" />
               <label for="r1"></label>
               <!-- 2nd star -->
-              <input type="radio" name="rating" id="r2" value="4">
+              <input type="radio" name="rating" id="r2" value="4" />
               <label for="r2"></label>
               <!-- 3rd star -->
-              <input type="radio" name="rating" id="r3" value="3">
+              <input type="radio" name="rating" id="r3" value="3" />
               <label for="r3"></label>
-               <!-- 5rd star -->
-               <input type="radio" name="rating" id="r4" value="2">
-               <label for="r4"></label>
-               <input type="radio" name="rating" id="r5" value="1">
-               <label for="r5"></label>
-             </div>
+              <!-- 5rd star -->
+              <input type="radio" name="rating" id="r4" value="2" />
+              <label for="r4"></label>
+              <input type="radio" name="rating" id="r5" value="1" />
+              <label for="r5"></label>
+            </div>
+
             <p class="checkMsg"></p>
             <textarea
               class="comment"
-              name=""
-              id=""
+              id="userComment"
               cols="90"
               rows="3"
               placeholder="내용을 입력해주세요"
             ></textarea>
-            <button class="inputBtn" type="button">등록</button>
+            <button class="inputBtn" type="submit">등록</button>
           </div>
         </form>
-
-        <!-- 댓글 확인 -->
-        <div class="commentCheck">
-          <div class="commentCard">
-            <p class="commentStar">★</p>
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
-          <div class="commentCard">
-            <h4 id="userName">
-              이름<input
-                id="commentPassword"
-                type="password"
-                placeholder="비밀번호"
-              />
-            </h4>
-            <p class="checkPassword"></p>
-            <p class="commentContent">내용</p>
-            <button class="deleteBtn" type="button">삭제</button>
-            <button class="editBtn" type="button">수정</button>
-          </div>
+        <!-- 리뷰 확인 -->
+        <div class="review-box">
+          <ul class="review-list">
+            <li class="review-card">
+              <div class="review-card-info">
+                <h4 id="userName">이름</h4>
+                <input
+                  id="review-input-password"
+                  type="password"
+                  placeholder="비밀번호"
+                />
+              </div>
+              <p class="review-check-password"></p>
+              <!-- <div class="review-content-box">
+                <div class="review-content-main">
+                  <p class="review-content">
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용
+                  </p>
+                </div>
+                <div class="review-button-box">
+                  <button class="review-button-update" type="button">
+                    수정
+                  </button>
+                  <button class="review-button-delete" type="button">
+                    삭제
+                  </button>
+                </div>
+              </div> -->
+              <div class="review-update-box">
+                <textarea class="review-update-textarea"></textarea>
+                <div class="review-button-box">
+                  <button class="review-button-update" type="button">
+                    확인
+                  </button>
+                  <button class="review-button-delete" type="button">
+                    취소
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-
-    <script src="../script/detail.js"></script>
-
-
-    <link rel="stylesheet" href="../CSS/detail.css" />
-    <link rel="icon" href="../image/favicon.ico" />
-    <script defer src="../script/detail.js"></script>
-  </head>
-  <body>
-    <a href="../index.html">
-      <div class="homeBtn"></div>
-    </a>
-    <div class="backBtn"></div>
 
     <main>
-      <!--리뷰 읽고 쓰기 테스트용-->
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>영화 상세 페이지</title>
+      <div class="container1">
+        <div class="detailContent">
+          <div class="detailTitle">고질라 X 콩: 뉴 엠파이어</div>
+          <br />
+          <div class="detailOriginalTitle">
+            Godzilla x Kong:The New Empire 2024
+          </div>
+          <br />
 
-  <link rel="stylesheet" href="../CSS/reset.css" />
-  <link rel="stylesheet" href="../CSS/detail.css" />
-  <link rel="icon" href="../image/favicon.ico" />
-  <script defer src="../script/comment.js"></script>
-  <script defer src="../script/detail.js"></script>
-</head>
-
-<body>
-  <a class="homeBtn" href="../index.html"></a>
-  <div class="backBtn"></div>
-  <!-- 댓글 입력 -->
-  <div class="bodyBox">
-    <button type="button" class="openClose">></button>
-    <div class="commentBox">
-      <form action="">
-        <div class="commentInput">
-          <h2>감상평 <span class="count"></span></h2>
-          <input id="userId" type="text" placeholder="아이디" />
-          <input id="userPassword" type="password" placeholder="비밀번호" />
-          <p class="checkMsg"></p>
-          <textarea class="comment" name="" id="" cols="90" rows="3" placeholder="내용을 입력해주세요"></textarea>
-          <button class="inputBtn" type="button">등록</button>
+          <div class="overview">
+            ‘고질라’ VS ‘콩’, 두 타이탄의 전설적인 대결 이후 할로우 어스에 남은
+            ‘콩’은 드디어 애타게 찾던 동족을 발견하지만 그 뒤에 도사리고 있는
+            예상치 못한 위협에 맞닥뜨린다. 한편, 깊은 동면에 빠진 ‘고질라’는 알
+            수 없는 신호로 인해 깨어나고 푸른 눈의 폭군 ‘스카 킹’의 지배 아래
+            위기에 처한 할로우 어스를 마주하게 된다. 할로우 어스는 물론,
+            지구상에도 출몰해 전세계를 초토화시키는 타이탄들의 도발 속에서
+            ‘고질라’와 ‘콩’은 사상 처음으로 한 팀을 이뤄 반격에 나서기로 하는데…
+          </div>
+          <br />
+          <div class="genre">
+            <a class="genreItem">animation</a>
+            <a class="genreItem">action</a>
+            <a class="genreItem">adventure</a>
+          </div>
+          <br />
+          <div class="adult">연령제한 : under 18</div>
+          <br />
+          <div class="releaseDate">개봉일자 : 2023-12-06</div>
+          <br />
+          <div class="viewTime">상영시간 : 83분</div>
+          <br />
+          <div class="voteAverage">평점 : ⭐6.6</div>
+          <br />
         </div>
-      </form>
-
-      <!-- 댓글 확인 -->
-      <div class="commentCheck">
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
-        </div>
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
-        </div>
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
-        </div>
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
-        </div>
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
-        </div>
-        <div class="commentCard">
-          <h4 id="userName">
-            이름<input id="commentPassword" type="password" placeholder="비밀번호" />
-          </h4>
-          <p class="checkPassword"></p>
-          <p class="commentContent">내용</p>
-          <button class="deleteBtn" type="button">삭제</button>
-          <button class="editBtn" type="button">수정</button>
+        <div class="poster">
+          <img
+            src="../image/detail_test2.jpg"
+            alt=""
+            width="300px"
+            height="500px"
+          />
         </div>
       </div>
-    </div>
-  </div>
-  <main>
-    <!--리뷰 읽고 쓰기 테스트용-->
-    <div>
-      <p>리뷰 테스트용</p>
-      <form id="reviewForm">
-        <input id="reviewUserName" type="text" placeholder="아이디" />
-        <input id="reviewUserPassword" type="password" placeholder="비밀번호" />
-        <textarea id="reviewArea" class="textarea" cols="50" rows="10" placeholder="리뷰 내용을 작성"></textarea>
-        <button type="submit">버튼</button>
-      </form>
-
-      <div>
-        <ul class="review-box"></ul>
+      <!-- 등장인물 -->
+      <div class="casts">
+        <h1>CASTS</h1>
+        <br />
+        <div class="castsItem">
+          <div class="castItem">
+            <img
+              src="../image/detail_test.jpg"
+              alt="Actor 1"
+              width="80px"
+              height="80px"
+              style="border-radius: 50%"
+            />
+            <div class="castName">
+              <p>Pter Dinkelage</p>
+            </div>
+          </div>
+          <div class="castItem">
+            <img
+              src="../image/detail_test.jpg"
+              alt="Actor 1"
+              width="80px"
+              height="80px"
+              style="border-radius: 50%"
+            />
+            <div class="castName">
+              <p>Pter Dinkelage</p>
+            </div>
+          </div>
+          <div class="castItem">
+            <img
+              src="../image/detail_test.jpg"
+              alt="Actor 1"
+              width="80px"
+              height="80px"
+              style="border-radius: 50%"
+            />
+            <div class="castName">
+              <p>Pter Dinkelage</p>
+            </div>
+          </div>
+          <div class="castItem">
+            <img
+              src="../image/detail_test.jpg"
+              alt="Actor 1"
+              width="80px"
+              height="80px"
+              style="border-radius: 50%"
+            />
+            <div class="castName">
+              <p>Pter Dinkelage</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 </body>
 
+      <!-- 트레일러 -->
+      <div class="trailer">
+        <h2>Trailer</h2>
+        <iframe
+          src="https://www.youtube.com/embed/Kmo8NLKkfcQ"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <!-- 관련영화 -->
+      <div class="movieListContainer">
+        <h1 class="movieListTitle">SIMILAR</h1>
+        <div class="movieListWrapper">
+          <div class="movieList">
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+              <span class="movieListItemTitle">Her</span>
+              <p class="movieListItemDesc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+                fugit similique accusantium.
+              </p>
+              <button class="movieListItemButton">Detail</button>
+            </div>
+            <div class="movieListItem">
+              <img
+                class="movieListItemImg"
+                src="../image/detail_test.jpg"
+                alt=""
+              />
+            </div>
+            <i class="fas fa-chevron-right arrow"></i>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
