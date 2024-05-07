@@ -91,7 +91,7 @@ let move = () => {
     bodyBox.classList.remove("open");
     button.innerText = "<";
     setTimeout(() => {
-      commentBox.style.display = "none";
+      // commentBox.style.display = "none";
     }, 1100);
   }
 };
