@@ -345,7 +345,13 @@ main {
   font-weight: 600;
   background-color: #53464b;
   margin-right: 5px;
-  box-shadow: 2px 1px 1px #dedede;
+  transition: all 0.2s;
+}
+
+.genreItem:hover {
+  background-color: #967f87;
+  color: #272727;
+  transition: all 0.2s;
 }
 
 .poster {
@@ -484,8 +490,10 @@ main {
 }
 
 .movieListWrapper {
+  width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-x: scroll;
+  
 }
 
 .movieList {
@@ -500,6 +508,8 @@ main {
   margin-right: 30px;
   position: relative;
 }
+
+.movieListItem:first-child
 
 .movieListItem:hover .movie-list-item-img {
   transform: scale(1.2);
