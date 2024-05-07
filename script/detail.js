@@ -104,6 +104,12 @@ const buttonClickHandler = (buttons, buttonType) => {
           reviewUpdateTextarea.className = "review-update-textarea";
           reviewUpdateTextarea.value = convertText(reviewContentValue, 0);
           reviewUpdateTextarea.rows = textareaRow;
+          reviewUpdateTextarea.oninput = () => {
+            console.log(reviewUpdateTextarea.scrollHeight);
+            reviewUpdateTextarea.style.height = "auto";
+            reviewUpdateTextarea.style.height =
+              reviewUpdateTextarea.scrollHeight + `px`;
+          };
           const reviewButtonBox = document.createElement("div");
           reviewButtonBox.className = "review-button-box";
 

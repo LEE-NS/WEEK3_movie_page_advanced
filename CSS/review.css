@@ -121,9 +121,10 @@
 
 .review-update-textarea {
   width: 100%;
-  height: fit-content;
+  height: auto;
   padding: 2px;
   font-size: 12px;
+  overflow-y: hidden;
 }
 
 .reivew-content-button,
