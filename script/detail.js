@@ -25,7 +25,16 @@ const getMovieReview = () => {
     reviewMap = new Map(JSON.parse(reviewMap));
   }
 };
-
+// textarea 개행 포멧팅
+const convertText = (text, type = 1) => {
+  let output = "";
+  const arr = text.split("\n");
+  const separator = type ? "</br>" : "\n";
+  for (const str of arr) {
+    output += `${str}${separator}`;
+  }
+  return output;
+};
 // 삭제 및 수정 버튼 클릭 시
 const buttonClickHandler = (buttons, buttonType) => {
   buttons.forEach((btn) => {
@@ -38,10 +47,11 @@ const buttonClickHandler = (buttons, buttonType) => {
       const reviewCardInfo = reviewCard.querySelector(".review-card-info");
       // 유저가 입력한 password
       const inputPassword = reviewCardInfo.childNodes[3].value;
-      // 저장되어있는 review password
-      const reviewPassword = reviewMap
+      const thisMap = reviewMap
         .get(movieId)
-        .filter((data) => data.reviewId === key)[0].userPasswordValue;
+        .filter((data) => data.reviewId === key)[0];
+      // 저장되어있는 review password
+      const reviewPassword = thisMap.userPasswordValue;
 
       const checkReviewPassword = reviewCard.querySelector(
         ".review-check-password"
@@ -63,29 +73,71 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
-          checkReviewPassword.style.display = "none";
+          /**
+           * <div class="review-update-box">
+                <textarea class="review-update-textarea"></textarea>
+                <div class="review-button-box">
+                  <button class="review-button-update" type="button">
+                    확인
+                  </button>
+                  <button class="review-button-delete" type="button">
+                    취소
+                  </button>
+                </div>
+              </div>
+           * 
+           */
           console.log("수정");
-          const reviewContent = reviewCard.querySelector(".review-content");
-          const reviewContentValue = reviewContent.textContent;
-
+          // 리뷰내용과 유효성검사한거 숨김
+          checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
             ".review-content-box"
           );
+          reviewContentBox.style.display = "none";
+          const reviewContentValue = thisMap.userCommentValue;
+          const textareaRow = reviewContentValue.split("\n").length;
+          // update box 조립
+          const reviewUpdateBox = document.createElement("div");
+          reviewUpdateBox.className = "review-update-box";
 
-          const reviewContentUpdateInput = document.createElement("input");
-          reviewContentUpdateInput.className = "reivew-content-input";
-          reviewContentUpdateInput.value = reviewContentValue;
-          reviewContent.textContent = "";
+          const reviewUpdateTextarea = document.createElement("textarea");
+          reviewUpdateTextarea.className = "review-update-textarea";
+          reviewUpdateTextarea.value = convertText(reviewContentValue, 0);
+          reviewUpdateTextarea.rows = textareaRow;
+          const reviewButtonBox = document.createElement("div");
+          reviewButtonBox.className = "review-button-box";
 
-          const reviewContentUpdateButton = document.createElement("button");
-          reviewContentUpdateButton.className = "reivew-content-button";
-          reviewContentUpdateButton.type = "button";
-          reviewContentUpdateButton.innerText = "확인";
+          const reviewButtonUpdate = document.createElement("button");
+          reviewButtonUpdate.className = "review-button-update";
+          reviewButtonUpdate.type = "button";
+          reviewButtonUpdate.innerText = "확인";
+          const reviewButtonCancel = document.createElement("button");
+          reviewButtonCancel.className = "review-button-delete";
+          reviewButtonCancel.type = "button";
+          reviewButtonCancel.innerText = "취소";
 
-          reviewContentBox.append(
-            reviewContentUpdateInput,
-            reviewContentUpdateButton
-          );
+          reviewButtonBox.append(reviewButtonUpdate, reviewButtonCancel);
+          reviewUpdateBox.append(reviewUpdateTextarea, reviewButtonBox);
+          reviewCard.insertAdjacentElement("beforeend", reviewUpdateBox);
+
+          // const reviewContentBox = reviewCard.querySelector(
+          //   ".review-content-box"
+          // );
+
+          // const reviewContentUpdateInput = document.createElement("input");
+          // reviewContentUpdateInput.className = "reivew-content-input";
+          // reviewContentUpdateInput.value = reviewContentValue;
+          // reviewContent.textContent = "";
+
+          // const reviewContentUpdateButton = document.createElement("button");
+          // reviewContentUpdateButton.className = "reivew-content-button";
+          // reviewContentUpdateButton.type = "button";
+          // reviewContentUpdateButton.innerText = "확인";
+
+          // reviewContentBox.append(
+          //   reviewContentUpdateInput,
+          //   reviewContentUpdateButton
+          // );
           // const input = li.querySelector(".update-test");
 
           // reviewContent.textContent = input.value;
@@ -121,11 +173,13 @@ const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
       </div>
       <p class="review-check-password"></p>
       <div class="review-content-box">
-        <p class="review-content">${userCommentValue}</p>
-      </div>
-      <div class="review-button-box">
-        <button review-id=${reviewId} class="review-button-update" type="button">수정</button>
-        <button review-id=${reviewId} class="review-button-delete" type="button">삭제</button>
+        <div class="review-content-main">
+          <p class="review-content">${convertText(userCommentValue)}</p>
+        </div>
+        <div class="review-button-box">
+          <button review-id=${reviewId} class="review-button-update" type="button">수정</button>
+          <button review-id=${reviewId} class="review-button-delete" type="button">삭제</button>
+        </div>
       </div>
     </li>
   `;
