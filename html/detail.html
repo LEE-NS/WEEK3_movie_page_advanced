@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>영화 상세 페이지</title>
-
     <link rel="stylesheet" href="../CSS/reset.css" />
-    <link rel="stylesheet" href="../CSS/detail.css" />
     <link rel="icon" href="../image/favicon.ico" />
+    <link rel="stylesheet" href="../CSS/detail.css" />
     <script defer src="../script/comment.js"></script>
     <script defer src="../script/detail.js"></script>
   </head>
 
   <body>
-    <a class="homeBtn" href="../index.html"></a>
+    <a href="../index.html">
+      <div class="homeBtn"></div>
+    </a>
     <div class="backBtn"></div>
     <!-- 리뷰 창 -->
     <div class="review">
@@ -25,6 +23,22 @@
             <h2>리뷰 작성 <span class="count"></span></h2>
             <input id="userId" type="text" placeholder="아이디" />
             <input id="userPassword" type="password" placeholder="비밀번호" />
+            <div class="rating">
+              <!-- 1st star-->
+              <input type="radio" name="rating" id="r1" value="5" />
+              <label for="r1"></label>
+              <!-- 2nd star -->
+              <input type="radio" name="rating" id="r2" value="4" />
+              <label for="r2"></label>
+              <!-- 3rd star -->
+              <input type="radio" name="rating" id="r3" value="3" />
+              <label for="r3"></label>
+              <!-- 5rd star -->
+              <input type="radio" name="rating" id="r4" value="2" />
+              <label for="r4"></label>
+              <input type="radio" name="rating" id="r5" value="1" />
+              <label for="r5"></label>
+            </div>
             <p class="checkMsg"></p>
             <textarea
               class="comment"
