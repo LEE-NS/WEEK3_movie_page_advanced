@@ -20,7 +20,6 @@ body {
 }
 #header-wrap {
   width: 100px;
-  background-color: #191919;
   background-color: #2727275e;
 }
 #contents-wrap {
@@ -115,8 +114,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  background-color: #272727;
 }
 header ul li {
   height: 100px;
