@@ -17,31 +17,6 @@ openCloseBtn.addEventListener("click", () => {
   move();
 });
 
-// 댓글 등록 유효성 검사
-inputBtn.addEventListener("click", () => {
-  let userId = document.getElementById("userId");
-  let userPassword = document.getElementById("userPassword");
-  let comment = document.querySelector(".comment");
-  let checkMsg = document.querySelector(".checkMsg");
-
-  if (userId.value.length < 2) {
-    checkMsg.innerText = "아이디는 2글자 이상 입력해주세요.";
-    checkMsg.style.display = "block";
-  } else if (userPassword.value.length < 6) {
-    checkMsg.innerText = "비밀번호는 6자 이상 입력해주세요.";
-    checkMsg.style.display = "block";
-  } else if (comment.value === "") {
-    checkMsg.innerText = "내용을 입력해주세요.";
-    checkMsg.style.display = "block";
-  } else {
-    checkMsg.style.display = "none";
-    alert("등록 완료");
-    // userId.value = '';
-    // userPassword.value = '';
-    // comment.value = '';
-  }
-});
-
 // 댓글 애니메이션
 let move = () => {
   let button = document.querySelector(".review-open-close-button");

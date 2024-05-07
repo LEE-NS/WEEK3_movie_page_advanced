@@ -212,10 +212,27 @@ reviewForm.addEventListener("submit", (e) => {
   let userId = document.querySelector("#userId");
   let userPassword = document.querySelector("#userPassword");
   let userComment = document.querySelector("#userComment");
+  let checkMsg = document.querySelector(".checkMsg");
 
   const userIdValue = userId.value;
   const userPasswordValue = userPassword.value;
   const userCommentValue = userComment.value;
+  // 댓글 등록 유효성 검사
+  if (userIdValue.length < 2) {
+    checkMsg.innerText = "아이디는 2글자 이상 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else if (userPasswordValue.length < 6) {
+    checkMsg.innerText = "비밀번호는 6자 이상 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else if (!userCommentValue.length) {
+    checkMsg.innerText = "내용을 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else {
+    checkMsg.style.display = "none";
+  }
 
   // movieId를 key로써 map에 접근해서 데이터 가져옴
   const map = reviewMap.get(movieId);
