@@ -110,12 +110,12 @@ function searchResult(allTitles, text) {
 
 function createCard(movie, target) {
   const movieImgPath = `https://image.tmdb.org/t/p/w500${movie["backdrop_path"]}`;
+  const emptyImgPath = `./image/default_image.png`;
+
   let movieCard = `
     <li class="movie-card">
 
-        <img src=${
-          movie["backdrop_path"] ? movieImgPath : "../image/default_image.png"
-        } alt="">
+        <img src=${movie["backdrop_path"] ? movieImgPath : emptyImgPath} alt="">
         <h3 class="movie-name">${movie["title"]}</h3>
         <h4 class="original-name">${movie["original_title"]}</h4>
         <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
