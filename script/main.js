@@ -109,11 +109,10 @@ function searchResult(allTitles, text) {
 } //searchToTitle(text)로부터 받은 인자로 중복을 없애고 영화 정보를 가져와서 카드로 게시하는 함수
 
 function createCard(movie, target) {
+  const movieImgPath = `https://image.tmdb.org/t/p/w500${movie["backdrop_path"]}`; 
   let movieCard = `
     <li class="movie-card">
-        <img src="https://image.tmdb.org/t/p/w500${
-          movie["backdrop_path"]
-        }" alt="">
+        <img src=${movie["backdrop_path"] ? movieImgPath : '../image/default_image.png'} alt="">
         <h3 class="movie-name">${movie["title"]}</h3>
         <h4 class="original-name">${movie["original_title"]}</h4>
         <p class="release-date">${movie["release_date"].slice(0, 4)}</p>
