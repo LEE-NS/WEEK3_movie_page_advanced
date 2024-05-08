@@ -385,8 +385,6 @@ async function genreRender(genreList, genreArr) {
     };
   });
 
-  console.log(genreNames)
-
   genreNames.forEach(genreName => {
     let genreArea = document.querySelector('.genre');
     let genreCard = `<p class="genreItem">${genreName}</p>`
@@ -394,9 +392,28 @@ async function genreRender(genreList, genreArr) {
   });
 };
 
+// async function getSimilarMovie() {
+
+// };
+
+
+
+
 // 비슷한 영화 
 //
-// fetch('https://api.themoviedb.org/3/movie/823464/similar?language=en-US&page=1', options)
+// fetch('https://api.themoviedb.org/3/movie/823464/similar?language=ko&page=1', options)
 //   .then(response => response.json())
 //   .then(response => console.log(response))
 //   .catch(err => console.error(err));
+
+
+
+/* <li class="movieListItem">
+  <img class="movieListItemImg" src="../image/detail_test.jpg" alt="" />
+  <span class="movieListItemTitle">Her</span>
+  <p class="movieListItemDesc">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
+    fugit similique accusantium.
+  </p>
+  <button class="movieListItemButton">Detail</button>
+</li> */
