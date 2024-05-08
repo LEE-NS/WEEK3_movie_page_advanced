@@ -18,29 +18,6 @@ function btnEvent(idx) {
   }
 }
 
-// // 삭제 버튼
-// for (let i = 0; i < deleteBtn.length; i++) {
-//   deleteBtn[i].addEventListener('click', () => {
-//     btnEvent(i);
-//   });
-// }
-
-// // 수정 버튼
-// for (let i = 0; i < editBtn.length; i++) {
-//   editBtn[i].addEventListener('click', () => {
-//     btnEvent(i);
-//   });
-// }
-
-// 댓글 수량 확인
-let count = () => {
-  for (let i = 0; i < reviewCard.length; i++) {
-    commentCount.innerText = reviewCard.length;
-  }
-};
-
-count();
-
 // 댓글 애니메이션 버튼
 openCloseBtn.addEventListener('click', () => {
   move();
@@ -57,30 +34,16 @@ let move = () => {
   if (is_CommentBtn) {
     commentBox.style.display = 'block';
     // button.innerText = ">";
-    button.style.backgroundImage = 'url(/image/commentBtn_right.png)';
+    button.style.backgroundImage = 'url(../image/commentBtn_right.png)';
     bodyBox.classList.add('open');
     bodyBox.classList.remove('close');
-    count();
   } else {
     bodyBox.classList.add('close');
     bodyBox.classList.remove('open');
-    button.style.backgroundImage = 'url(/image/commentBtn_left.png)';
+    button.style.backgroundImage = 'url(../image/commentBtn_left.png)';
     // button.innerText = "<";
     setTimeout(() => {
       // commentBox.style.display = "none";
     }, 1100);
   }
 };
-
-const ratingInputs = document.querySelectorAll('input[name="rating"]');
-
-// 각 별을 클릭했을 때 값을 받아오는 함수
-function starCheck(event) {
-  const selectedRating = event.target.value;
-  console.log('선택된 별점: ', selectedRating);
-}
-
-// 각 별에 대한 클릭 이벤트 처리
-ratingInputs.forEach((input) => {
-  input.addEventListener('click', starCheck);
-});

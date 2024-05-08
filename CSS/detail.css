@@ -21,7 +21,6 @@ textarea::placeholder {
 }
 
 .review-card-info input {
-  cursor: text;
   width: 130px;
 }
 
@@ -79,13 +78,15 @@ textarea::placeholder {
   background-color: white;
   width: 120px;
   height: 25px;
-  cursor: text;
-  padding: 5px;
-  margin: 0px 5px 3px 0px;
   border-radius: 5px;
   border: 1px solid black;
   color: black;
   outline: black;
+}
+
+#userId,
+#userPassword {
+  cursor: text;
 }
 
 .checkMsg {
