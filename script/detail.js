@@ -76,16 +76,6 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
-          // 별점
-          // const reviewInput = document.querySelector(
-          //   ".review-card-info-star input"
-          // );
-          // const reviewStar = document.querySelector(".review-star");
-
-          // reviewInput.addEventListener("input", () => {
-          //   reviewStar.style.width = `${rating_input.value * 10}%`;
-          // });
-
           // 리뷰내용과 유효성검사한거 숨김
           checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
@@ -162,18 +152,24 @@ const buttonClickHandler = (buttons, buttonType) => {
 };
 
 // review html 만드는 함수
-const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
+const createReview = ({
+  reviewId,
+  userIdValue,
+  userCommentValue,
+  userRatingValue,
+}) => {
   // 이름 18자 까지만
   const html = `
     <li key=${reviewId} class="review-card">
       <div class="review-card-info">
         <div class="review-card-info-user">
           <h4 id="userName">${userIdValue}</h4>
-          <div class="review-card-info-star">
-            <span class="empty-star">
-              <span class="shining-star"></span>
-            </span>
-            <p>5</p>
+          <div class="review-rating review-card-rating">
+            ★★★★★
+            <span style="width:${
+              userRatingValue * 10
+            }%" class="review-star">★★★★★</span>
+            <input type="range" value="1" step="1" min="0" max="10" />
           </div>
         </div>
         <div class="review-card-info-password">
@@ -224,6 +220,15 @@ document.addEventListener("DOMContentLoaded", () => {
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
   });
+
+  // 별점
+  const reviewFormInput = document.querySelector(".review-form-rating input");
+  const reviewFormStar = document.querySelector(
+    ".review-form-rating .review-star"
+  );
+  reviewFormInput.addEventListener("input", () => {
+    reviewFormStar.style.width = `${reviewFormInput.value * 10}%`;
+  });
 });
 
 // submit 이벤트 발생시 리뷰 등록하는 함수
@@ -235,10 +240,15 @@ reviewForm.addEventListener("submit", (e) => {
   let userPassword = document.querySelector("#userPassword");
   let userComment = document.querySelector("#userComment");
   let checkMsg = document.querySelector(".checkMsg");
+  // 별점
+  const reviewRating = document.querySelector(".review-form-rating");
+  const reviewRatingInput = reviewRating.lastElementChild;
 
+  const userRatingValue = reviewRatingInput.value;
   const userIdValue = userId.value;
   const userPasswordValue = userPassword.value;
   const userCommentValue = userComment.value;
+
   // 댓글 등록 유효성 검사
   if (userIdValue.length < 2) {
     checkMsg.innerText = "아이디는 2글자 이상 입력해주세요.";
@@ -273,6 +283,7 @@ reviewForm.addEventListener("submit", (e) => {
     userIdValue,
     userPasswordValue,
     userCommentValue,
+    userRatingValue,
   };
 
   // map이 비어있다는건 review가 없다는 것, 즉 첫 리뷰
@@ -294,6 +305,7 @@ reviewForm.addEventListener("submit", (e) => {
   userId.value = "";
   userPassword.value = "";
   userComment.value = "";
+  reviewRatingInput.value = 0;
 });
 
 // 뒤로가기 함수
