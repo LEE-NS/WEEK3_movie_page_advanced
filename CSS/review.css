@@ -11,7 +11,7 @@
 
 /* 리뷰 창 여닫기 */
 .review-open-close-button {
-  background-image: url(/image/commentBtn_left.png);
+  background-image: url(../image/commentBtn_left.png);
   background-color: white;
   border-radius: 30px 0px 0px 30px;
   color: white;
@@ -107,7 +107,7 @@
 .review-card-info h4 {
   width: 160px;
   border: 1px solid black;
-
+}
 .review-star {
   width: 0;
   color: #ffc107;
@@ -152,8 +152,7 @@
 }
 
 /* 리뷰 내용 */
-.review-content-box {
-}
+
 .review-content-main {
   position: relative;
   width: 100%;
