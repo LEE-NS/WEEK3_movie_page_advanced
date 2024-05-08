@@ -82,10 +82,22 @@
 }
 .review-card-info-user {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  /* align-items: flex-end; */
   gap: 1rem;
-  width: fit-content;
+  /* width: fit-content; */
 }
+
+.review-name-edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-button-edit {
+  font-size: 13px;
+  color: gray;
+}
+
 .review-card-info-user h4 {
   width: fit-content;
   border: none;
@@ -107,6 +119,7 @@
 .review-card-info h4 {
   width: 160px;
   border: 1px solid black;
+  font-size: 20px;
 }
 
 .review-star {
