@@ -95,6 +95,7 @@
 .review-card-info h4 {
   width: 160px;
   border: 1px solid black;
+}
 
 .review-star {
   width: 0;
@@ -105,6 +106,7 @@
   overflow: hidden;
   pointer-events: none;
 }
+
 .review-card-info-star input {
   position: absolute;
   left: 0;
@@ -124,7 +126,7 @@
   outline: none;
 }
 .review-check-password {
-  /* display: none; */
+  display: none;
   font-size: 13px;
   font-weight: 500;
   color: red;
