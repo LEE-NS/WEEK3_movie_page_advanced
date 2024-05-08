@@ -288,7 +288,7 @@ window.addEventListener("DOMContentLoaded", () => {
 }); // 다른 페이지에 이동했더라도 화면 모드 유지
 
 homeBtn.addEventListener('click', () => {
-  document.location.href = "/WEEK3_movie_page_advanced/index.html";
+  location.href = "index.html";
 });
 
 searchBtn.addEventListener("click", () => {
