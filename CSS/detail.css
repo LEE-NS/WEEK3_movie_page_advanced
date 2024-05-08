@@ -1,4 +1,4 @@
-@import "review.css";
+@import 'review.css';
 
 body {
   background-color: black;
@@ -82,6 +82,11 @@ textarea::placeholder {
   border: 1px solid black;
   color: black;
   outline: black;
+}
+
+#userId,
+#userPassword {
+  cursor: text;
 }
 
 .checkMsg {
@@ -186,7 +191,7 @@ textarea::placeholder {
   transition: all 0.4s ease-out;
   -webkit-font-smoothing: antialiased;
   position: absolute;
-  content: "☆";
+  content: '☆';
   /* color: #444; */
   color: white;
   top: 0;
@@ -210,7 +215,7 @@ textarea::placeholder {
 
 .rating input:checked + label::after,
 .rating input:checked ~ label::after {
-  content: "★";
+  content: '★';
   color: #f9bf3b;
   text-shadow: 0 0 20px #f9bf3b;
 }
