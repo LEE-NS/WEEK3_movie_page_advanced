@@ -353,7 +353,7 @@ document.querySelector('.backBtn').addEventListener('click', function () {
 
 // 메인으로 이동
 document.querySelector('.homeBtn').addEventListener('click', () => {
-  location.href = "index.html";
+  window.location.href = "/WEEK3_movie_page_advanced/index.html";
 });
 
 const options = {
