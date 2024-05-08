@@ -297,32 +297,37 @@ main {
   animation: slide 1.3s ease-in-out;
 }
 
-.sort-wrap {
-    width: 300px;
-    height: 40px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sort-wrap button {
-    font-size: 1rem;
-    color: #fff;
-    background-color: #53464b;
-
-    width: 30%;
-    height: 100%;
-    border-radius: 15px;
-}
-
 main .movie-list-place {
   width: 1020px;
   margin: 100px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main .sort-wrap {
+  width: 300px;
+  height: 40px;
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  order: 2;
+}
+
+main .sort-wrap button {
+  font-size: 1rem;
+  color: #fff;
+  background-color: #53464b;
+
+  width: 30%;
+  height: 100%;
+  border-radius: 15px;
 }
 
 main .list-name {
-  width: 100%;
+  /* width: 100%; */
   padding: 0 50px 50px;
 
   font-size: 40px;
@@ -331,6 +336,14 @@ main .list-name {
 
   color: #b4a0a7;
   color: #998189;
+
+  flex-basis: 66%;
+  order: 1;
+}
+
+main .list-wrap {
+  width: 100%;
+  order: 3;
 }
 
 .list-name .result-num {
