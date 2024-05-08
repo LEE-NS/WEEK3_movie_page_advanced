@@ -236,17 +236,16 @@ main {
   animation: slide 0.9s ease-in-out;
 }
 
+/* 필터 버튼 */
 .filltering-btns {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
 }
-
 .filltering_row1, .filltering-row2 {
   display: flex;
   justify-content: center;
 }
-
 .filltering-btn {
   color: #fff;
   background-color: #53464b;
@@ -258,7 +257,6 @@ main {
   align-items: center;
   cursor: pointer;
 }
-
 .filltering-btn:hover {
   background-color: #967f87;
   color: #272727;
@@ -279,11 +277,13 @@ main .movie-list-place {
 .sort-wrap {
   /* width: 100%; */
   height: 43px;
-  margin-top: 10px;
+  margin: 20px auto;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  order: 2;
 }
 
 .sort-wrap button {
@@ -316,7 +316,7 @@ main .list-name {
   color: #b4a0a7;
   color: #998189;
 
-  flex-basis: 63%;
+  flex-basis: 60%;
   order: 1;
 }
 
