@@ -62,6 +62,7 @@ const buttonClickHandler = (buttons, buttonType) => {
         checkReviewPassword.style.display = "none";
         inputPassword.value = "";
         if (buttonType === "delete") {
+          // 삭제
           // reviewId와 key가 다른것만 가져옴
           const filteredMap = reviewMap
             .get(movieId)
@@ -76,6 +77,7 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
+          // 수정
           // 리뷰내용과 유효성검사한거 숨김
           checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
@@ -83,6 +85,19 @@ const buttonClickHandler = (buttons, buttonType) => {
           );
           reviewContentBox.style.display = "none";
           const reviewContentValue = thisMap.userCommentValue;
+          // 별점 조절할 수 있게 함.
+          const reviewUpdateRatingInput = reviewCard.querySelector(
+            ".review-card-rating input"
+          );
+          const reviewpdateRatingStar = reviewCard.querySelector(
+            ".review-card-rating .review-star"
+          );
+
+          reviewUpdateRatingInput.addEventListener("input", () => {
+            reviewpdateRatingStar.style.width = `${
+              reviewUpdateRatingInput.value * 10
+            }%`;
+          });
           // update box 조립
           const reviewUpdateBox = document.createElement("div");
           reviewUpdateBox.className = "review-update-box";
@@ -116,10 +131,17 @@ const buttonClickHandler = (buttons, buttonType) => {
               "\n",
               "<br/>"
             );
+
+            reviewMap
+              .get(movieId)
+              .find((data) => data.reviewId === key).userRatingValue =
+              reviewUpdateRatingInput.value;
+
             reviewMap
               .get(movieId)
               .find((data) => data.reviewId === key).userCommentValue =
               convertText(reviewUpdateTextarea.value, "<br/>", "\n");
+
             localStorage.setItem("review", JSON.stringify([...reviewMap]));
             reviewContentBox.style.display = "block";
             reviewCard.removeChild(reviewUpdateBox);
