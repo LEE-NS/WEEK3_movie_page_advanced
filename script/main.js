@@ -151,9 +151,9 @@ for (let page = 1; page <= 2; page++) {
 //     });
 // } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
 
-const POINT_BTN = document.querySelector("#vote-average-btn"); // 별점 순 버튼
-const DATE_BTN = document.querySelector("#release-date-btn"); // 개봉일 순 버튼
-const TITLE_BTN = document.querySelector("#title-btn"); // 제목 순 버튼
+const POINT_BTN = document.querySelector("#vote-average-btn");
+const DATE_BTN = document.querySelector("#release-date-btn");
+const TITLE_BTN = document.querySelector("#title-btn");
 
 // 들어온 영화 데이터를 저장할 변수
 let movieData = [];
