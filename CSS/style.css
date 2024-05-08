@@ -20,6 +20,7 @@ body {
 }
 #header-wrap {
   width: 100px;
+  background-color: #191919;
   background-color: #2727275e;
 }
 #contents-wrap {
@@ -69,6 +70,12 @@ body {
   color: #dedede;
 }
 .message {
+  position: fixed;
+  margin: 90px 0px 0px 35px;
+  color: #878ccb;
+  font-size: 20px;
+  font-weight: 600;
+  width: 100%;
   position: fixed;
   margin: 90px 0px 0px 35px;
   color: #878ccb;
@@ -173,6 +180,8 @@ header ul li .button-wrap {
   transition: opacity 0.3s, background-color 0.3s;
 }
 .button-wrap .input-wrap input {
+  width: 320px;
+  width: 420px;
   width: 420px;
   height: 50px;
   position: absolute;
@@ -249,8 +258,9 @@ main {
   line-height: 300px;
   text-align: center;
 
-  font-family: "Prompt", sans-serif;
-
+  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -264,8 +274,10 @@ main {
   color: #aa9ca1;
 }
 .main-bg a {
-  font-family: "Prompt", sans-serif;
+  font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif;
 
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   font-size: 60px;
 
@@ -315,6 +327,9 @@ main .list-name {
 
   font-size: 40px;
   font-weight: 600;
+  color: #b4a0a7;
+
+  color: #b4a0a7;
   color: #998189;
 }
 
