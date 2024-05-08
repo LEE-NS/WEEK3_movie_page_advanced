@@ -108,6 +108,7 @@
   width: 160px;
   border: 1px solid black;
 }
+
 .review-star {
   width: 0;
   color: #ffc107;
@@ -117,6 +118,8 @@
   overflow: hidden;
   pointer-events: none;
 }
+
+
 .review-rating input {
   position: absolute;
   left: 0;
@@ -126,17 +129,19 @@
   opacity: 0;
   cursor: pointer;
 }
+
 /* 리뷰 비밀번호 */
 .review-card-info-password input {
   border: none;
   border-bottom: 2px solid black;
   margin-bottom: 8px;
+  cursor: text;
 }
 .review-card-info-password input:focus {
   outline: none;
 }
 .review-check-password {
-  /* display: none; */
+  display: none;
   font-size: 13px;
   font-weight: 500;
   color: red;
