@@ -236,14 +236,50 @@ main {
   animation: slide 0.9s ease-in-out;
 }
 
+.filltering-btns {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+}
+
+.filltering_row1, .filltering-row2 {
+  display: flex;
+  justify-content: center;
+}
+
+.filltering-btn {
+  color: #fff;
+  background-color: #53464b;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filltering-btn:hover {
+  background-color: #967f87;
+  color: #272727;
+  transition: all 0.2s;
+}
+
 .movie-list-wrap {
   animation: slide 1.3s ease-in-out;
 }
 
+main .movie-list-place {
+  width: 1020px;
+  margin: 100px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .sort-wrap {
-  width: 300px;
-  height: 40px;
-  margin-left: 30px;
+  /* width: 100%; */
+  height: 43px;
+  margin-top: 10px;
 
   display: flex;
   justify-content: space-between;
@@ -255,14 +291,18 @@ main {
   color: #fff;
   background-color: #53464b;
 
-  width: 30%;
+  /* width: 30%; */
+  padding: 10px 20px;
+  margin: 10px;
   height: 100%;
+  line-height: 100%;
   border-radius: 15px;
 }
 
-main .movie-list-place {
-  width: 1020px;
-  margin: 100px auto;
+.sort-wrap button:hover {
+  background-color: #967f87;
+  color: #272727;
+  transition: all 0.2s;
 }
 
 main .list-name {
@@ -272,6 +312,17 @@ main .list-name {
   font-size: 40px;
   font-weight: 600;
   color: #b4a0a7;
+
+  color: #b4a0a7;
+  color: #998189;
+
+  flex-basis: 63%;
+  order: 1;
+}
+
+main .list-wrap {
+  width: 100%;
+  order: 3;
 }
 
 .list-name .result-num {
