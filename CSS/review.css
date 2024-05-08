@@ -11,7 +11,7 @@
 
 /* 리뷰 창 여닫기 */
 .review-open-close-button {
-  background-image: url(/image/commentBtn_left.png);
+  background-image: url(../image/commentBtn_left.png);
   background-color: white;
   border-radius: 30px 0px 0px 30px;
   color: white;
@@ -40,7 +40,18 @@
   overflow: scroll;
   background-color: #e7e7e7;
 }
-
+/* 리뷰 작성 폼 */
+.review-form-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.review-form-user input:nth-child(-n + 2) {
+  padding-left: 2px;
+}
+.review-form-user input:last-child {
+  width: 100%;
+}
 /* 작성한 리뷰 */
 .review-box {
   width: 100%;
@@ -81,21 +92,22 @@
   border-bottom: 2px solid black;
 }
 /* 별점 */
-.review-card-info-star {
+.review-form-rating,
+.review-card-rating {
   position: relative;
   border: none;
-  border-bottom: 2px solid black;
+  height: 25px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
   color: #ddd;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .review-card-info h4 {
   width: 160px;
   border: 1px solid black;
-
+}
 .review-star {
   width: 0;
   color: #ffc107;
@@ -105,7 +117,7 @@
   overflow: hidden;
   pointer-events: none;
 }
-.review-card-info-star input {
+.review-rating input {
   position: absolute;
   left: 0;
   right: 0;
@@ -140,8 +152,7 @@
 }
 
 /* 리뷰 내용 */
-.review-content-box {
-}
+
 .review-content-main {
   position: relative;
   width: 100%;
