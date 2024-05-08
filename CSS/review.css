@@ -11,8 +11,10 @@
 
 /* 리뷰 창 여닫기 */
 .review-open-close-button {
-  background-color: transparent;
-  color: black;
+  background-image: url(/image/commentBtn_left.png);
+  background-color: white;
+  border-radius: 30px 0px 0px 30px;
+  color: white;
   width: 50px;
   height: 50px;
   font-size: 35px;
@@ -36,7 +38,7 @@
   width: 100%;
   position: relative;
   overflow: scroll;
-  background-color: white;
+  background-color: #e7e7e7;
 }
 
 /* 작성한 리뷰 */
@@ -52,6 +54,7 @@
   align-content: center;
 }
 .review-card {
+  background-color: white;
   width: 100%;
   height: auto;
   padding: 8px;
@@ -88,6 +91,11 @@
   color: #ddd;
   font-size: 20px;
 }
+
+.review-card-info h4 {
+  width: 160px;
+  border: 1px solid black;
+
 .review-star {
   width: 0;
   color: #ffc107;
@@ -121,6 +129,16 @@
   font-weight: 500;
   color: red;
 }
+
+.review-card-info input {
+  width: 130px;
+  height: 25px;
+  border: 1px solid black;
+  outline: black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 /* 리뷰 내용 */
 .review-content-box {
 }
