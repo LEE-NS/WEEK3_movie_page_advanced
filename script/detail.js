@@ -246,7 +246,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await creditsRender(); // 배역 정보 렌더링
 
+
   await similarRender(); // 비슷한 영화 정보 렌더링
+
+  await videoRender() // 선행영상 정보 렌더링
+
+  await similarRender() // 비슷한 영화 정보 렌더링
+
 
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
@@ -549,8 +555,33 @@ async function creditsRender() {
           }&nbsp;역</p>
         </li>
       `;
-        creditsArea.innerHTML += castHTML; // 배역 붙여넣기
-      }
-    })
-    .catch((err) => console.error(err));
+
+      creditsArea.innerHTML += castHTML; // 배역 붙여넣기
+    }
+  })
+  .catch(err => console.error(err));
+};
+
+async function videoRender() {
+  let videoArea = document.querySelector('.video-content');
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=ko`, options)
+  .then(response => response.json())
+  .then(videos => {
+    console.log(videos)
+    if(videos["results"].length === 0) {
+      videoArea.innerHTML = '';
+      let noVideoHTML = `<p class="no-video">관련 영상이 없습니다.</p>`
+      videoArea.innerHTML += noVideoHTML;
+    } else {
+      const videoIframe = videoArea.querySelector("iframe");
+      videoIframe.src = `https://www.youtube.com/embed/${videos["results"][0]["key"]}`;
+      videoIframe.title = "YouTube video player";
+      videoIframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      videoIframe.allowFullscreen = true;
+      videoIframe.style.width = '854px';
+      videoIframe.style.height = '480px';
+    }
+  })
+  .catch(err => console.error(err));
 }

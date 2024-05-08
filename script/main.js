@@ -361,8 +361,9 @@ searchInput.addEventListener("input", function () {
   }
 });
 
-const circle = document.querySelector(".circle");
+// 팝콘 마우스무브 이벤트
+const popcorn = document.querySelector(".popcorn");
 body.addEventListener("mousemove", (event) => {
-  circle.style.top = `${event.clientY}px`;
-  circle.style.left = `${event.clientX}px`;
+  popcorn.style.top = `${event.clientY}px`;
+  popcorn.style.left = `${event.clientX}px`;
 });
