@@ -24,12 +24,12 @@
       <button type="button" class="review-open-close-button" data-open="true"></button>
       <div class="review-main">
         <!-- 리뷰 입력 -->
-        <h2>리뷰 작성 <span class="count"></span></h2>
         <form id="reviewForm">
           <div class="commentInput">
+            <h2>리뷰 작성 <span class="count"></span></h2>
             <div class="review-form-user">
-              <input id="userId" type="text" placeholder="아이디" />
-              <input id="userPassword" type="password" placeholder="비밀번호" />
+              <input id="userId" type="text" placeholder="Name" />
+              <input id="userPassword" type="password" placeholder="Password" />
               <div class="review-rating review-form-rating">
                 ★★★★★
                 <span class="review-star">★★★★★</span>
@@ -43,7 +43,7 @@
               id="userComment"
               cols="90"
               rows="3"
-              placeholder="내용을 입력해주세요"
+              placeholder="리뷰를 작성해주세요."
             ></textarea>
             <button class="inputBtn" type="submit">등록</button>
           </div>

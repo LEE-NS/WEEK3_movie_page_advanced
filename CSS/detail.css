@@ -58,8 +58,8 @@ textarea::placeholder {
   width: 100%;
   padding: 20px;
   margin-bottom: 15px;
-  border-radius: 10px;
-  background-color: #212221;
+  border-radius: 15px;
+  background-color: #4e4e4e;
   /* border: 1px solid black; */
 
   display: flex;
@@ -77,11 +77,12 @@ textarea::placeholder {
 .commentInput input {
   background-color: white;
   width: 120px;
-  height: 25px;
-  border-radius: 5px;
-  border: 1px solid black;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #a6a6a6;
   color: black;
   outline: black;
+  padding: 5px;
 }
 
 #userId,
@@ -100,25 +101,26 @@ textarea::placeholder {
   resize: none;
   background-color: white;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   width: 100%;
+  height: 80px;
   cursor: text;
   margin-top: 5px;
   padding: 5px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid #bdbdbd;
   outline: black;
 }
 
 .inputBtn {
   font-size: 15px;
   width: 100px;
-  height: 30px;
+  height: 35px;
   float: right;
-  background-color: transparent;
-  border: 1px solid white;
+  background-color: #222222;
+  border: 1px solid black;
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   margin-top: 10px;
 }
 

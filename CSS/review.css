@@ -27,7 +27,7 @@
   transition-delay: 0.2s;
 }
 .close {
-  transform: translateX(calc(100% - 50px));
+  transform: translateX(calc(101% - 50px));
   transition-property: all;
   transition-duration: 1s;
   transition-delay: 0.2s;
@@ -37,8 +37,8 @@
   padding: 20px;
   width: 100%;
   position: relative;
-  overflow: scroll;
-  background-color: #e7e7e7;
+  overflow-y: auto;
+  background-color: #222222;
 }
 /* 리뷰 작성 폼 */
 .review-form-user {
@@ -119,7 +119,6 @@
   pointer-events: none;
 }
 
-
 .review-rating input {
   position: absolute;
   left: 0;
@@ -132,10 +131,10 @@
 
 /* 리뷰 비밀번호 */
 .review-card-info-password input {
-  border: none;
-  border-bottom: 2px solid black;
+  border: 1px solid #a6a6a6;
   margin-bottom: 8px;
   cursor: text;
+  /* display: none; */
 }
 .review-card-info-password input:focus {
   outline: none;
@@ -148,11 +147,13 @@
 }
 
 .review-card-info input {
-  width: 130px;
-  height: 25px;
-  border: 1px solid black;
+  background-color: white;
+  width: 120px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #a6a6a6;
+  color: black;
   outline: black;
-  border-radius: 5px;
   padding: 5px;
 }
 
@@ -220,6 +221,7 @@
   height: 30px;
   border: 1.5px solid black;
   border-radius: 15px;
+  /* display: none; */
 }
 
 .review-button-delete:hover {
