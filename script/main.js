@@ -230,7 +230,7 @@ function deliverQuery(e) {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
     url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
-    location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
+    document.location.href = `WEEK3_movie_page_advanced/html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
   }
 }
 
@@ -288,7 +288,7 @@ window.addEventListener("DOMContentLoaded", () => {
 }); // 다른 페이지에 이동했더라도 화면 모드 유지
 
 homeBtn.addEventListener('click', () => {
-  window.location.href = "../index.html";
+  document.location.href = "/WEEK3_movie_page_advanced/index.html";
 });
 
 searchBtn.addEventListener("click", () => {
