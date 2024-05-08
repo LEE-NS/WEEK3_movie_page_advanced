@@ -17,11 +17,19 @@
   </head>
 
   <body>
-    <a class="homeBtn" href="../index.html"></a>
-    <div class="backBtn"></div>
+    <div class="pageBtns">
+      <button class="backBtn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <button class="homeBtn" href="../index.html">
+        <i class="fa-solid fa-house"></i>
+      </button>
+    </div>
     <!-- 리뷰 창 -->
     <div class="review close">
-      <button type="button" class="review-open-close-button" data-open="true"></button>
+      <button type="button" class="review-open-close-button" data-open="true">
+        <i class="fa-solid fa-grip-lines-vertical"></i>
+      </button>
       <div class="review-main">
         <!-- 리뷰 입력 -->
         <form id="reviewForm">
@@ -51,281 +59,32 @@
         <!-- 리뷰 확인 -->
         <div class="review-box">
           <ul class="review-list">
-            <!-- <li class="review-card">
-              <div class="review-card-info">
-                <div class="review-card-info-user">
-                  <h4 id="userName">이름</h4>
-                  <div class="review-rating review-card-rating">
-                    ★★★★★
-                    <span class="review-star">★★★★★</span>
-                    <input type="range" value="1" step="1" min="0" max="10" />
-                  </div>
-                </div>
-                <div class="review-card-info-password">
-                  <input
-                    id="review-input-password"
-                    type="password"
-                    placeholder="비밀번호"
-                  />
-                  <p class="review-check-password">here</p>
-                </div>
-              </div>
-              <div class="review-content-box">
-                <div class="review-content-main">
-                  <p class="review-content">
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                  </p>
-                </div>
-                <div class="review-button-box">
-                  <button class="review-button-update" type="button">
-                    수정
-                  </button>
-                  <button class="review-button-delete" type="button">
-                    삭제
-                  </button>
-                </div>
-              </div> 
-              <div class="review-update-box">
-                <textarea class="review-update-textarea"></textarea>
-                <div class="review-button-box">
-                  <button class="review-button-update" type="button">
-                    확인
-                  </button>
-                  <button class="review-button-delete" type="button">
-                    취소
-                  </button>
-                </div>
-              </div>
-            </li> -->
+            <!-- 리뷰 내용이 들어온다 -->
           </ul>
         </div>
       </div>
     </div>
 
     <main>
-      <div class="container1">
-        <div class="detailContent">
-          <div class="detailTitle">고질라 X 콩: 뉴 엠파이어</div>
-          <br />
-          <div class="detailOriginalTitle">
-            Godzilla x Kong:The New Empire 2024
-          </div>
-          <br />
-
-          <div class="overview">
-            ‘고질라’ VS ‘콩’, 두 타이탄의 전설적인 대결 이후 할로우 어스에 남은
-            ‘콩’은 드디어 애타게 찾던 동족을 발견하지만 그 뒤에 도사리고 있는
-            예상치 못한 위협에 맞닥뜨린다. 한편, 깊은 동면에 빠진 ‘고질라’는 알
-            수 없는 신호로 인해 깨어나고 푸른 눈의 폭군 ‘스카 킹’의 지배 아래
-            위기에 처한 할로우 어스를 마주하게 된다. 할로우 어스는 물론,
-            지구상에도 출몰해 전세계를 초토화시키는 타이탄들의 도발 속에서
-            ‘고질라’와 ‘콩’은 사상 처음으로 한 팀을 이뤄 반격에 나서기로 하는데…
-          </div>
-          <br />
-          <div class="genre">
-            <a class="genreItem">animation</a>
-            <a class="genreItem">action</a>
-            <a class="genreItem">adventure</a>
-          </div>
-          <br />
-          <div class="adult">연령제한 : under 18</div>
-          <br />
-          <div class="releaseDate">개봉일자 : 2023-12-06</div>
-          <br />
-          <div class="viewTime">상영시간 : 83분</div>
-          <br />
-          <div class="voteAverage">평점 : ⭐6.6</div>
-          <br />
-        </div>
-        <div class="poster">
-          <img
-            src="../image/detail_test2.jpg"
-            alt=""
-            width="300px"
-            height="500px"
-          />
-        </div>
+      <div class="container1">배경 이미지</div>
+      <!-- 배경 이미지 -->
+      <div class="content-summary">
+        <!-- id에 맞는 내용이 들어온다 -->
       </div>
-      <!-- 등장인물 -->
-      <div class="casts">
-        <h1>CASTS</h1>
-        <br />
-        <div class="castsItem">
-          <div class="castItem">
-            <img
-              src="../image/detail_test.jpg"
-              alt="Actor 1"
-              width="80px"
-              height="80px"
-              style="border-radius: 50%"
-            />
-            <div class="castName">
-              <p>Pter Dinkelage</p>
-            </div>
-          </div>
-          <div class="castItem">
-            <img
-              src="../image/detail_test.jpg"
-              alt="Actor 1"
-              width="80px"
-              height="80px"
-              style="border-radius: 50%"
-            />
-            <div class="castName">
-              <p>Pter Dinkelage</p>
-            </div>
-          </div>
-          <div class="castItem">
-            <img
-              src="../image/detail_test.jpg"
-              alt="Actor 1"
-              width="80px"
-              height="80px"
-              style="border-radius: 50%"
-            />
-            <div class="castName">
-              <p>Pter Dinkelage</p>
-            </div>
-          </div>
-          <div class="castItem">
-            <img
-              src="../image/detail_test.jpg"
-              alt="Actor 1"
-              width="80px"
-              height="80px"
-              style="border-radius: 50%"
-            />
-            <div class="castName">
-              <p>Pter Dinkelage</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-</body>
-
-      <!-- 트레일러 -->
-      <div class="trailer">
-        <h2>Trailer</h2>
-        <iframe
-          src="https://www.youtube.com/embed/Kmo8NLKkfcQ"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <!-- 배역 정보 -->
+      <div class="credits">
+        <h2>Credits</h2>
+        <ul>
+          <!-- 감독 1명, 배역 5명 -->
+        </ul>
       </div>
       <!-- 관련영화 -->
-      <div class="movieListContainer">
-        <h1 class="movieListTitle">SIMILAR</h1>
-        <div class="movieListWrapper">
-          <div class="movieList">
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-              <span class="movieListItemTitle">Her</span>
-              <p class="movieListItemDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic
-                fugit similique accusantium.
-              </p>
-              <button class="movieListItemButton">Detail</button>
-            </div>
-            <div class="movieListItem">
-              <img
-                class="movieListItemImg"
-                src="../image/detail_test.jpg"
-                alt=""
-              />
-            </div>
-            <i class="fas fa-chevron-right arrow"></i>
-          </div>
+      <div class="movie-list-container">
+        <h2 class="movie-list-title">Similar</h2>
+        <div class="movie-list-wrap">
+          <ul class="movie-list">
+            <!-- 비슷한 영화 정보가 들어온다 -->
+          </ul>
         </div>
       </div>
     </main>

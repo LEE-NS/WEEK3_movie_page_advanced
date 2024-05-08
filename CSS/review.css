@@ -3,22 +3,24 @@
   position: fixed;
   right: 0;
   top: 0;
-  bottom: 0;
   z-index: 100;
+  height: 100%;
   max-width: 700px;
   display: flex;
 }
 
 /* 리뷰 창 여닫기 */
 .review-open-close-button {
-  background-image: url(../image/commentBtn_left.png);
   background-color: white;
   border-radius: 30px 0px 0px 30px;
-  color: white;
+  color: #dedede;
   width: 50px;
   height: 50px;
-  font-size: 35px;
   margin: auto 0;
+  background-color: #53464b;
+}
+.review-open-close-button i {
+  font-size: 25px;
 }
 .open {
   transform: translateX(0px);
@@ -39,6 +41,9 @@
   position: relative;
   overflow-y: auto;
   background-color: #222222;
+}
+.review-main::-webkit-scrollbar {
+  display: none;
 }
 /* 리뷰 작성 폼 */
 .review-form-user {
@@ -80,17 +85,18 @@
   gap: 0.5rem;
   margin-bottom: 10px;
 }
-.review-card-info-user {
+/* .review-card-info-user {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-end; */
+  align-items: flex-end;
   gap: 1rem;
-  /* width: fit-content; */
-}
+  width: fit-content;
+} */
 
 .review-name-edit {
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 }
 
 .review-button-edit {
@@ -101,17 +107,20 @@
 .review-card-info-user h4 {
   width: fit-content;
   border: none;
+  color: black;
   border-bottom: 2px solid black;
 }
 /* 별점 */
 .review-form-rating,
 .review-card-rating {
   position: relative;
+  top: -10px;
   border: none;
   height: 25px;
-  display: flex;
+  width: fit-content;
+  /* display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 8px; */
   color: #ddd;
   font-size: 25px;
 }
@@ -171,7 +180,6 @@
 }
 
 /* 리뷰 내용 */
-
 .review-content-main {
   position: relative;
   width: 100%;
@@ -234,6 +242,7 @@
   height: 30px;
   border: 1.5px solid black;
   border-radius: 15px;
+  color: black;
   /* display: none; */
 }
 
