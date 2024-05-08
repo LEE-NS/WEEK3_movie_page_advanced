@@ -7,7 +7,7 @@
 
 
 ## Deployment
-[Sample Cinema](https://lee-ns.github.io/WEEK3_movie_page_advanced/)
+🔗[Sample Cinema](https://lee-ns.github.io/WEEK3_movie_page_advanced/)
 
 
 ## Built With
