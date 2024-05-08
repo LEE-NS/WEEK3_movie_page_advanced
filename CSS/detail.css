@@ -244,21 +244,53 @@ button i {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 700px;
-  height: 400px;
+  width: 578px;
+  height: 490px;
 }
 
 .top-info div{
   margin-bottom: 10px;
 }
+
 .top-info div:last-child {
   margin-bottom: 0;
 }
 
+.credits {
+  width: 1020px;
+  margin: 70px auto 0;
+}
+.credits h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.credits ul {
+  display: flex;
+}
+.person {
+  width: 110px;
+  margin-right: 30px;
+}
+.person:last-child {
+  margin-right: 0;
+}
+.person img {
+  height: 165px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+.person .name {
+  font-size: 14px;
+}
+.person .character {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 .poster {
   display: inline-block;
-  width: 300px;
-  height: 450px;
+  height: 490px;
   margin-left: 100px;
 }
 
@@ -276,7 +308,7 @@ button i {
   border-radius: 30px;
   font-size: 14px;
   font-weight: 600;
-  margin-right: 5px;
+  margin-right: 10px;
   transition: all 0.2s;
   background-color: #53464b;
   color: #dedede;
@@ -286,7 +318,9 @@ button i {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 50px;
+}
+.movie-info li {
+  margin-bottom: 10px;
 }
 
 .movie-info li .info-name, .movie-info li .info {
@@ -301,85 +335,9 @@ button i {
 
 .movie-info li .info {
   width: 150px;
-  text-align: center;
+  margin-left: 30px;
 }
 
-.poster iframe {
-  max-width: 400px;
-  width: 100%;
-  height: 200px;
-}
-
-/* 등장인물 */
-.casts {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 70px auto 0;
-  width: 1020px;
-  height: 180px;
-}
-
-.casts h1 {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.castsItem {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  width: 240px;
-  display: flex;
-  float: left;
-  align-items: center;
-  height: 120px;
-  margin-right: 47px;
-}
-
-.castItem {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  width: 100px;
-  float: left;
-  margin-right: 50px;
-  line-height: 20px;
-}
-
-.castsItem:last-child {
-  margin: 0px;
-}
-
-.castsItemImg {
-  width: 90px;
-  height: 160px;
-  background-size: cover;
-  margin-bottom: 0.5rem;
-}
-
-.trailer {
-  width: 1020px;
-  margin: 70px auto;
-  
-}
-
-.trailer h2 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.trailer iframe {
-  border-radius: 0.5rem;
-  width: 1020px;
-  height: 500px;
-  margin: 20px 0;
-}
-
-.detailContent,
-.trailer {
-  vertical-align: top;
-}
 
 /* 관련영화 */
 .movieListContainer {
@@ -434,14 +392,7 @@ button i {
 
 .movieListWrapper {
   width: 100%;
-  position: relative;
-  overflow-x: auto; 
 }
-
-/* .movieListWrapper::-webkit-scrollbar {
-  
-} */
-
 
 .movieList {
   display: flex;
@@ -455,61 +406,81 @@ button i {
   margin-right: 30px;
   position: relative;
 }
+.movieListItem:last-child {
+  margin-right: 0;
+}
 
 .movieListItem:hover .movieListItemImg {
   opacity: 0.5;
 }
 
-.movieListItem:hover .movieListItemTitle,
-.movieListItem:hover .movieListItemDesc,
-.movieListItem:hover .movieListItemButton {
+.movieListItem:hover .over-text {
   opacity: 1;
 }
 
 .movieListItemImg {
   transition: all 0.5s ease-in-out;
-  width: 270px;
+  width: 320px;
   height: 200px;
   object-fit: cover;
   border-radius: 20px;
 }
 
-.movieListItemTitle {
-  padding: 0 10px;
-  font-size: 30px;
-  font-weight: bold;
+.over-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 280px;
+  height: 160px;
   position: absolute;
-  top: 10%;
+  top: 20px;
   left: 20px;
   opacity: 0;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.movieListItemTitle {
+  font-size: 25px;
+  font-weight: bold;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
 }
 
 .movieListItemDesc {
-  padding: 10px;
+  display: -webkit-box;
+
+  width: 280px;
+  height: 60px;
   font-size: 14px;
-  position: absolute;
-  top: 30%;
-  left: 20px;
-  width: 230px;
-  opacity: 0;
-  transition: all 1s ease-in-out;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .movieListItemButton {
-  padding: 10px;
-  color: #53464b;
+  width: 60px;
+  height: 40px;
   font-weight: bold;
   border-radius: 10px;
-  outline: none;
-  border: none;
   cursor: pointer;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  opacity: 0;
-  transition: all 1s ease-in-out;
   background-color: #dedede;
+  color: #53464b;
+}
+
+.no-similar {
+  height: 200px;
+  width: 1020px;
+  line-height: 200px;
+  text-align: center;
+}
+
+.movie-id {
+  display: none;
 }
 
 
