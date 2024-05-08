@@ -32,18 +32,14 @@ let move = () => {
   let commentBox = document.querySelector('.review-main');
 
   if (is_CommentBtn) {
-    commentBox.style.display = 'block';
-    // button.innerText = ">";
-    button.style.backgroundImage = 'url(../image/commentBtn_right.png)';
-    bodyBox.classList.add('open');
-    bodyBox.classList.remove('close');
+    commentBox.style.display = "block";
+    button.innerHTML = `<i class="fa-solid fa-angle-right"></i>`;
+    bodyBox.classList.add("open");
+    bodyBox.classList.remove("close");
+    count();
   } else {
-    bodyBox.classList.add('close');
-    bodyBox.classList.remove('open');
-    button.style.backgroundImage = 'url(../image/commentBtn_left.png)';
-    // button.innerText = "<";
-    setTimeout(() => {
-      // commentBox.style.display = "none";
-    }, 1100);
+    bodyBox.classList.add("close");
+    bodyBox.classList.remove("open");
+    button.innerHTML = `<i class="fa-solid fa-grip-lines-vertical"></i>`;
   }
 };

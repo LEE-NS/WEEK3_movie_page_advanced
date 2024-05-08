@@ -135,22 +135,6 @@ for (let page = 1; page <= 2; page++) {
   spreadContents(page);
 } // 1,2 페이지의 콘텐츠를 메인에 게시
 
-// function spreadContents(page) {
-//   let listingSection = listName
-//     .item(0)
-//     .nextSibling.nextSibling.childNodes.item(1);
-//   fetch(
-//     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       data["results"].forEach((movie) => {
-//         createCard(movie, listingSection);
-//       });
-//     });
-// } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
-
 const POINT_BTN = document.querySelector("#vote-average-btn");
 const DATE_BTN = document.querySelector("#release-date-btn");
 const TITLE_BTN = document.querySelector("#title-btn");
@@ -165,6 +149,9 @@ const listTitle = document.querySelector(".list-name");
 
 // 페이지 로드 시 영화 데이터 가져오는 함수
 function spreadContents(page) {
+  let listingSection = listName
+    .item(0)
+    .nextSibling.nextSibling.childNodes.item(1);
   fetch(
     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
     options
@@ -220,15 +207,12 @@ body.addEventListener("click", (e) => {
 });
 // 영화 카드의 상세 페이지로 이동
 
-// (다크 모드 완성해두기)
 const url = new URLSearchParams([["id", null]]);
 
 function deliverQuery(e) {
   if (e.target.parentNode.className === "movie-card") {
     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-
     url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
-
     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
   }
@@ -245,6 +229,8 @@ const VISIBLE_POINT = 1300;
 
 const modeBtn = document.querySelector(".light-mode");
 
+const homeBtn = document.querySelector('.home');
+
 const spinnerOuter = document.querySelector(".loading-spinner");
 const spinnerInner = document.querySelector(".spinner-inner");
 
@@ -255,17 +241,17 @@ let isClickedSearch = false;
 
 window.addEventListener("scroll", () => {
   VISIBLE_POINT < document.documentElement.scrollTop
-    ? topBtnWrap.classList.add("visible")
-    : topBtnWrap.classList.remove("visible");
-});
+    ? topBtnWrap.classList.add('visible')
+    : topBtnWrap.classList.remove('visible');
+}); // top 버튼을 보이게 한다
 
 topBtn.addEventListener("click", () => {
   document.documentElement.scrollTop = 0;
-});
+}); // top 버튼 동작
 
 modeBtn.addEventListener("click", () => {
   lightSwitch();
-});
+}); // 화면 모드 전환
 
 function lightSwitch() {
   if (localStorage.getItem("mode") === "dark") {
@@ -275,16 +261,7 @@ function lightSwitch() {
     body.classList.remove("light");
     localStorage.setItem("mode", "dark");
   }
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("mode") === "dark") {
-    body.classList.remove("light");
-  } else {
-    body.classList.remove("light");
-    localStorage.setItem("mode", "dark");
-  }
-});
+} // 화면 모드 전환 로직
 
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("mode") === "dark") {
@@ -292,6 +269,10 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     body.classList.add("light");
   }
+}); // 다른 페이지에 이동했더라도 화면 모드 유지
+
+homeBtn.addEventListener('click', () => {
+  window.location.href = "../index.html";
 });
 
 searchBtn.addEventListener("click", () => {
@@ -361,10 +342,8 @@ searchInput.addEventListener("keydown", async (e) => {
   }
 });
 
-/* searchToTitle이 끝나고 나서 실행 */
 // 검색 유효성 검사 기능 구현
 
-const inputValidation = document.querySelector(".input-wrap input"); //input-wrap 요소 안 input
 const inputValidationMaxLength = 30; // 인풋 최대 길이 30 설정
 const messageDisplay = document.createElement("div"); // 메세지 표시 div 생성
 messageDisplay.classList.add("message"); // message 클래스 추가

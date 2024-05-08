@@ -232,12 +232,18 @@ const createReview = ({
 };
 
 // DOM이 만들어 진 후 실행되는 함수
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   if (localStorage.getItem("mode") !== "dark") {
     body.classList.add("light");
   } // 페이지 진입 시 화면 모드 결정
 
   getMovieReview();
+
+  await render(); // 상세 정보 렌더링
+
+  await creditsRender() // 배역 정보 렌더링
+
+  await similarRender() // 비슷한 영화 정보 렌더링
 
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
@@ -316,7 +322,7 @@ reviewForm.addEventListener("submit", (e) => {
     reviewMap.set(movieId, [...map, { ...temp }]);
   }
 
-  // reivew 생성
+  // review 생성
   createReview(temp);
 
   // localStorage에 data 저장
@@ -339,3 +345,183 @@ function backSpace() {
 document.querySelector(".backBtn").addEventListener("click", function () {
   backSpace();
 });
+
+// 메인으로 이동
+document.querySelector(".homeBtn").addEventListener("click", () => {
+  window.location.href = "../index.html";
+});
+
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTE4NTdhNTg1MThiOWVjZWRjMzE4ZDVkYjE1OWRkOSIsInN1YiI6IjY2MjhhZmRmNjNkOTM3MDE0YTcyMmMxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrKj2Zyb565lbyPKH1RQSzBsq3AYrMAoFe7QZKm-P2Q",
+  },
+}; // 영화 API 사용자 정보
+
+function response(page) {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
+    options
+  );
+}
+
+let spreadInfos = document.querySelector(".content-summary");
+let background = document.querySelector(".container1");
+
+async function render() {
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=ko`,options)
+  .then((response) => response.json())
+  .then((movie) => {
+    const movieImgPath = `https://image.tmdb.org/t/p/w342${movie["poster_path"]}`;
+    const movieBgPath = `https://image.tmdb.org/t/p/w1280${movie["backdrop_path"]}`;
+    const genreList = movie["genres"];
+    let movieCard = `
+      <div class="detail-content">
+        <div class="top-info">
+          <div class="detail-title">${movie["title"]}</div>
+          <div class="detail-original-title">${movie["original_title"]}</div>
+          <div class="overview">${
+            movie["overview"] || "등록된 줄거리가 없습니다."
+          }</div>
+        </div>
+        <div class="genre"></div>
+        <ul class="movie-info">
+          <li class="release-date">
+            <span class="info-name">⦁ 개봉일자</span>
+            <span class="info">${movie["release_date"]}</span>
+          </li>
+          <li class="runtime">
+            <span class="info-name">⦁ 재생시간</span>
+            <span class="info">${movie["runtime"]}분</span>
+          </li>
+          <li class="vote-average">
+            <span class="info-name">⦁ 평점</span>
+            <span class="info">평균&nbsp;${movie["vote_average"].toFixed(1)}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="poster">
+        <img src=${
+          movie["poster_path"] ? movieImgPath : "../image/default_image.png"
+        } alt=""/>
+      </div>
+    `;
+      spreadInfos.innerHTML += movieCard;
+
+      background.setAttribute(
+        "style",
+        `
+    background: linear-gradient( to bottom,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0.5) 25%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.8) 75%,
+    rgba(0, 0, 0, 1) 100%
+  ),
+  url(${
+    movie["backdrop_path"]
+      ? movieBgPath
+      : "../image/detail_default_image.png"
+  }); background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 0 ;`
+      );
+
+      genreRender(genreList);
+
+      return 
+  })
+  .catch((err) => console.error(err));
+}
+  
+
+async function genreRender(genreList) {
+  let genreArea = document.querySelector(".genre");
+  genreList.forEach(genre => {
+    let genreBlock = `<p class="genre-item">${genre["name"]}</p>`;
+    genreArea.innerHTML += genreBlock
+  });
+};
+
+async function similarRender() {
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?language=ko&page=1`, options)
+  .then(response => response.json())
+  .then(data => {
+    let similarList = document.querySelector('.movie-list');
+    if (data["results"].length === 0) {
+      let similarCard = `<p class="no-similar">연관된 콘텐츠가 없습니다.</p>`;
+      similarList.innerHTML += similarCard;
+      return
+    }
+    for(let i = 0; i < 3; i++) {
+      let similar = data["results"][i];
+      let similarBgPath = `https://image.tmdb.org/t/p/w780${similar["backdrop_path"]}`;
+      let similarCard = `
+      <li class="movie-list-item">
+        <img class="movie-list-item-img" src=${similar["backdrop_path"] ? similarBgPath : '../image/default_image.png'} alt=""/>
+        <div class="over-text">
+          <h3 class="movie-list-item-title">${similar["title"]}</h3>
+          <p class="movie-list-item-desc">${similar["overview"] || '등록된 줄거리가 없습니다.'}</p>
+          <div class="movie-id">${similar["id"]}</div>
+          <button class="movie-list-item-btn">더 보기</button>
+        </div>
+      </li>
+      `;
+      similarList.innerHTML += similarCard;
+    };
+  })
+  .catch(err => console.error(err));
+};
+
+let movieList = document.querySelector('.movie-list')
+
+movieList.addEventListener("click", (e) => {
+  const ITEM_NUM = [3, 5, 7]
+  ITEM_NUM.forEach(num => {
+    let detailBtn = movieList.childNodes.item(num).childNodes.item(3).childNodes.item(7);
+    let similarMovieId = movieList.childNodes.item(num).childNodes.item(3).childNodes.item(5).innerText;
+    if(e.target === detailBtn) {
+      console.log('클릭')
+      urlParams.set("id", similarMovieId);
+      const urlQuery = url.toString();
+      console.log(urlQuery);
+      location.href = `?id=${similarMovieId}`;
+    }
+  }); 
+}); // 비슷한 영화의 상세보기 클릭 시 해당 페이지로 이동
+
+async function creditsRender() {
+  fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko`, options)
+  .then(response => response.json())
+  .then(credits => {
+    let creditsArea = document.querySelector('.credits ul');
+    let director = credits["crew"][0];
+    let creditImgPath = `https://image.tmdb.org/t/p/w185${director["profile_path"]}`;
+    let directorHTML = `
+    <li class="person">
+      <img src=${director["profile_path"] ? creditImgPath : "../image/profile_default_image.png"} alt="">
+      <p class="name">${director["name"]}</p>
+      <p class="character">${director["department"]}</p>
+    </li>
+    `;
+    creditsArea.innerHTML += directorHTML; // 감독 붙여넣기
+
+    for(let i = 0; i < 5; i++) {
+      let person = credits["cast"][i];
+      let creditImgPath = `https://image.tmdb.org/t/p/w185${person["profile_path"]}`;
+      let castHTML = `
+        <li class="person">
+          <img src=${person["profile_path"] ? creditImgPath : "../image/profile_default_image.png"} alt="">
+          <p class="name">${person["name"]}</p>
+          <p class="character">${person["character"] || '알 수 없음'}&nbsp;역</p>
+        </li>
+      `;
+      creditsArea.innerHTML += castHTML; // 배역 붙여넣기
+    }
+  })
+  .catch(err => console.error(err));
+};
+
