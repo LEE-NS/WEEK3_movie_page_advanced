@@ -29,7 +29,7 @@
   transition-delay: 0.2s;
 }
 .close {
-  transform: translateX(calc(100% - 40px));
+  transform: translateX(calc(101% - 50px));
   transition-property: all;
   transition-duration: 1s;
   transition-delay: 0.2s;
@@ -40,7 +40,7 @@
   width: 100%;
   position: relative;
   overflow-y: auto;
-  background-color: #e7e7e7;
+  background-color: #222222;
 }
 .review-main::-webkit-scrollbar {
   display: none;
@@ -85,26 +85,42 @@
   gap: 0.5rem;
   margin-bottom: 10px;
 }
-.review-card-info-user {
+/* .review-card-info-user {
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
   width: fit-content;
+} */
+
+.review-name-edit {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
+
+.review-button-edit {
+  font-size: 13px;
+  color: gray;
+}
+
 .review-card-info-user h4 {
   width: fit-content;
   border: none;
+  color: black;
   border-bottom: 2px solid black;
 }
 /* 별점 */
 .review-form-rating,
 .review-card-rating {
   position: relative;
+  top: -10px;
   border: none;
   height: 25px;
-  display: flex;
+  width: fit-content;
+  /* display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 8px; */
   color: #ddd;
   font-size: 25px;
 }
@@ -112,6 +128,7 @@
 .review-card-info h4 {
   width: 160px;
   border: 1px solid black;
+  font-size: 20px;
 }
 
 .review-star {
@@ -123,7 +140,6 @@
   overflow: hidden;
   pointer-events: none;
 }
-
 
 .review-rating input {
   position: absolute;
@@ -137,10 +153,10 @@
 
 /* 리뷰 비밀번호 */
 .review-card-info-password input {
-  border: none;
-  border-bottom: 2px solid black;
+  border: 1px solid #a6a6a6;
   margin-bottom: 8px;
   cursor: text;
+  /* display: none; */
 }
 .review-card-info-password input:focus {
   outline: none;
@@ -153,11 +169,13 @@
 }
 
 .review-card-info input {
-  width: 130px;
-  height: 25px;
-  border: 1px solid black;
+  background-color: white;
+  width: 120px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #a6a6a6;
+  color: black;
   outline: black;
-  border-radius: 5px;
   padding: 5px;
 }
 
@@ -224,6 +242,8 @@
   height: 30px;
   border: 1.5px solid black;
   border-radius: 15px;
+  color: black;
+  /* display: none; */
 }
 
 .review-button-delete:hover {

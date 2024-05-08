@@ -32,14 +32,13 @@ let move = () => {
   let commentBox = document.querySelector('.review-main');
 
   if (is_CommentBtn) {
-    commentBox.style.display = "block";
+    commentBox.style.display = 'block';
     button.innerHTML = `<i class="fa-solid fa-angle-right"></i>`;
-    bodyBox.classList.add("open");
-    bodyBox.classList.remove("close");
-    count();
+    bodyBox.classList.add('open');
+    bodyBox.classList.remove('close');
   } else {
-    bodyBox.classList.add("close");
-    bodyBox.classList.remove("open");
+    bodyBox.classList.add('close');
+    bodyBox.classList.remove('open');
     button.innerHTML = `<i class="fa-solid fa-grip-lines-vertical"></i>`;
   }
 };

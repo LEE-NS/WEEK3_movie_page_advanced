@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>영화 상세 페이지</title>
-  <link rel="stylesheet" href="../CSS/reset.css" />
-  <link rel="stylesheet" href="../CSS/detail.css" />
-  <link rel="icon" href="../image/favicon.ico" />
-  <!-- 관련영화움직이기아이콘 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <script defer src="../script/comment.js"></script>
-  <script defer src="../script/detail.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영화 상세 페이지</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/detail.css" />
+    <link rel="icon" href="../image/favicon.ico" />
+    <!-- 관련영화움직이기아이콘 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <script defer src="../script/comment.js"></script>
+    <script defer src="../script/detail.js"></script>
+  </head>
 
   <body>
     <div class="pageBtns">
@@ -30,12 +32,12 @@
       </button>
       <div class="review-main">
         <!-- 리뷰 입력 -->
-        <h2>리뷰 작성 <span class="count"></span></h2>
         <form id="reviewForm">
           <div class="commentInput">
+            <h2>리뷰 작성 <span class="count"></span></h2>
             <div class="review-form-user">
-              <input id="userId" type="text" placeholder="아이디" />
-              <input id="userPassword" type="password" placeholder="비밀번호" />
+              <input id="userId" type="text" placeholder="Name" />
+              <input id="userPassword" type="password" placeholder="Password" />
               <div class="review-rating review-form-rating">
                 ★★★★★
                 <span class="review-star">★★★★★</span>
@@ -49,7 +51,7 @@
               id="userComment"
               cols="90"
               rows="3"
-              placeholder="내용을 입력해주세요"
+              placeholder="리뷰를 작성해주세요."
             ></textarea>
             <button class="inputBtn" type="submit">등록</button>
           </div>
@@ -63,6 +65,32 @@
       </div>
     </div>
 
+
+    <main>
+      <div class="container1">배경 이미지</div>
+      <!-- 배경 이미지 -->
+      <div class="content-summary">
+        <!-- id에 맞는 내용이 들어온다 -->
+      </div>
+      <!-- 배역 정보 -->
+      <div class="credits">
+        <h2>Credits</h2>
+        <ul>
+          <!-- 감독 1명, 배역 5명 -->
+        </ul>
+      </div>
+      <!-- 관련영화 -->
+      <div class="movie-list-container">
+        <h2 class="movie-list-title">Similar</h2>
+        <div class="movie-list-wrap">
+          <ul class="movie-list">
+            <!-- 비슷한 영화 정보가 들어온다 -->
+          </ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
   <main>
     <div class="container1">배경 이미지</div>
     <!-- 배경 이미지 -->
