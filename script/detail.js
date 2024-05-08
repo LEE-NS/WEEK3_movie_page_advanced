@@ -45,10 +45,9 @@ const buttonClickHandler = (buttons, buttonType) => {
       const key = e.target.getAttribute("review-id");
       // 가져온 key로 삭제해야될 li node를 찾음
       const reviewCard = document.querySelector(`li[key=${key}]`);
-      // li안에 카드정보를 담고 있는 div
-      const reviewCardInfo = reviewCard.querySelector(".review-card-info");
       // 유저가 입력한 password
-      const inputPassword = reviewCardInfo.childNodes[3].value;
+      let inputPassword = reviewCard.querySelector("#review-input-password");
+      let inputPasswordValue = inputPassword.value;
       const thisMap = reviewMap
         .get(movieId)
         .filter((data) => data.reviewId === key)[0];
@@ -59,8 +58,11 @@ const buttonClickHandler = (buttons, buttonType) => {
         ".review-check-password"
       );
 
-      if (inputPassword === reviewPassword) {
+      if (inputPasswordValue === reviewPassword) {
+        checkReviewPassword.style.display = "none";
+        inputPassword.value = "";
         if (buttonType === "delete") {
+          // 삭제
           // reviewId와 key가 다른것만 가져옴
           const filteredMap = reviewMap
             .get(movieId)
@@ -75,6 +77,7 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           alert("삭제되었습니다.");
         } else {
+          // 수정
           // 리뷰내용과 유효성검사한거 숨김
           checkReviewPassword.style.display = "none";
           const reviewContentBox = reviewCard.querySelector(
@@ -82,6 +85,19 @@ const buttonClickHandler = (buttons, buttonType) => {
           );
           reviewContentBox.style.display = "none";
           const reviewContentValue = thisMap.userCommentValue;
+          // 별점 조절할 수 있게 함.
+          const reviewUpdateRatingInput = reviewCard.querySelector(
+            ".review-card-rating input"
+          );
+          const reviewpdateRatingStar = reviewCard.querySelector(
+            ".review-card-rating .review-star"
+          );
+
+          reviewUpdateRatingInput.addEventListener("input", () => {
+            reviewpdateRatingStar.style.width = `${
+              reviewUpdateRatingInput.value * 10
+            }%`;
+          });
           // update box 조립
           const reviewUpdateBox = document.createElement("div");
           reviewUpdateBox.className = "review-update-box";
@@ -115,10 +131,17 @@ const buttonClickHandler = (buttons, buttonType) => {
               "\n",
               "<br/>"
             );
+
+            reviewMap
+              .get(movieId)
+              .find((data) => data.reviewId === key).userRatingValue =
+              reviewUpdateRatingInput.value;
+
             reviewMap
               .get(movieId)
               .find((data) => data.reviewId === key).userCommentValue =
               convertText(reviewUpdateTextarea.value, "<br/>", "\n");
+
             localStorage.setItem("review", JSON.stringify([...reviewMap]));
             reviewContentBox.style.display = "block";
             reviewCard.removeChild(reviewUpdateBox);
@@ -139,7 +162,7 @@ const buttonClickHandler = (buttons, buttonType) => {
 
           // reviewContent.textContent = input.value;
         }
-      } else if (!inputPassword.length) {
+      } else if (!inputPasswordValue.length) {
         checkReviewPassword.innerText = "비밀번호를 입력해주세요.";
         checkReviewPassword.style.display = "block";
       } else {
@@ -151,17 +174,34 @@ const buttonClickHandler = (buttons, buttonType) => {
 };
 
 // review html 만드는 함수
-const createReview = ({ reviewId, userIdValue, userCommentValue }) => {
+const createReview = ({
+  reviewId,
+  userIdValue,
+  userCommentValue,
+  userRatingValue,
+}) => {
   // 이름 18자 까지만
   const html = `
     <li key=${reviewId} class="review-card">
       <div class="review-card-info">
-        <h4 id="userName">${userIdValue}</h4>
-        <input
-          id="review-input-password"
-          type="password"
-          placeholder="비밀번호"
-        />
+        <div class="review-card-info-user">
+          <h4 id="userName">${userIdValue}</h4>
+          <div class="review-rating review-card-rating">
+            ★★★★★
+            <span style="width:${
+              userRatingValue * 10
+            }%" class="review-star">★★★★★</span>
+            <input type="range" value="1" step="1" min="0" max="10" />
+          </div>
+        </div>
+        <div class="review-card-info-password">
+          <input
+            id="review-input-password"
+            type="password"
+            placeholder="비밀번호"
+          />
+          <p class="review-check-password"></p>
+        </div>
       </div>
       <p class="review-check-password"></p>
       <div class="review-content-box">
@@ -208,6 +248,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
   });
+
+  // 별점
+  const reviewFormInput = document.querySelector(".review-form-rating input");
+  const reviewFormStar = document.querySelector(
+    ".review-form-rating .review-star"
+  );
+  reviewFormInput.addEventListener("input", () => {
+    reviewFormStar.style.width = `${reviewFormInput.value * 10}%`;
+  });
 });
 
 // submit 이벤트 발생시 리뷰 등록하는 함수
@@ -218,10 +267,32 @@ reviewForm.addEventListener("submit", (e) => {
   let userId = document.querySelector("#userId");
   let userPassword = document.querySelector("#userPassword");
   let userComment = document.querySelector("#userComment");
+  let checkMsg = document.querySelector(".checkMsg");
+  // 별점
+  const reviewRating = document.querySelector(".review-form-rating");
+  const reviewRatingInput = reviewRating.lastElementChild;
 
+  const userRatingValue = reviewRatingInput.value;
   const userIdValue = userId.value;
   const userPasswordValue = userPassword.value;
   const userCommentValue = userComment.value;
+
+  // 댓글 등록 유효성 검사
+  if (userIdValue.length < 2) {
+    checkMsg.innerText = "아이디는 2글자 이상 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else if (userPasswordValue.length < 6) {
+    checkMsg.innerText = "비밀번호는 6자 이상 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else if (!userCommentValue.length) {
+    checkMsg.innerText = "내용을 입력해주세요.";
+    checkMsg.style.display = "block";
+    return null;
+  } else {
+    checkMsg.style.display = "none";
+  }
 
   // movieId를 key로써 map에 접근해서 데이터 가져옴
   const map = reviewMap.get(movieId);
@@ -240,6 +311,7 @@ reviewForm.addEventListener("submit", (e) => {
     userIdValue,
     userPasswordValue,
     userCommentValue,
+    userRatingValue,
   };
 
   // map이 비어있다는건 review가 없다는 것, 즉 첫 리뷰
@@ -261,6 +333,7 @@ reviewForm.addEventListener("submit", (e) => {
   userId.value = "";
   userPassword.value = "";
   userComment.value = "";
+  reviewRatingInput.value = 0;
 });
 
 // 뒤로가기 함수
@@ -301,30 +374,29 @@ async function render() {
   fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=ko`,options)
   .then((response) => response.json())
   .then((movie) => {
-    console.log(movie)
     const movieImgPath = `https://image.tmdb.org/t/p/w342${movie["poster_path"]}`;
     const movieBgPath = `https://image.tmdb.org/t/p/w1280${movie["backdrop_path"]}`;
     const genreList = movie["genres"];
     let movieCard = `
-      <div class="detailContent">
+      <div class="detail-content">
         <div class="top-info">
-          <div class="detailTitle">${movie["title"]}</div>
-          <div class="detailOriginalTitle">${movie["original_title"]}</div>
+          <div class="detail-title">${movie["title"]}</div>
+          <div class="detail-original-title">${movie["original_title"]}</div>
           <div class="overview">${
             movie["overview"] || "등록된 줄거리가 없습니다."
           }</div>
         </div>
         <div class="genre"></div>
         <ul class="movie-info">
-          <li class="releaseDate">
+          <li class="release-date">
             <span class="info-name">⦁ 개봉일자</span>
             <span class="info">${movie["release_date"]}</span>
           </li>
-          <li class="voteAverage">
+          <li class="runtime">
             <span class="info-name">⦁ 재생시간</span>
             <span class="info">${movie["runtime"]}분</span>
           </li>
-          <li class="voteAverage">
+          <li class="vote-average">
             <span class="info-name">⦁ 평점</span>
             <span class="info">평균&nbsp;${movie["vote_average"].toFixed(1)}</span>
           </li>
@@ -369,7 +441,7 @@ async function render() {
 async function genreRender(genreList) {
   let genreArea = document.querySelector(".genre");
   genreList.forEach(genre => {
-    let genreBlock = `<p class="genreItem">${genre["name"]}</p>`;
+    let genreBlock = `<p class="genre-item">${genre["name"]}</p>`;
     genreArea.innerHTML += genreBlock
   });
 };
@@ -378,7 +450,7 @@ async function similarRender() {
   fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?language=ko&page=1`, options)
   .then(response => response.json())
   .then(data => {
-    let similarList = document.querySelector('.movieList');
+    let similarList = document.querySelector('.movie-list');
     if (data["results"].length === 0) {
       let similarCard = `<p class="no-similar">연관된 콘텐츠가 없습니다.</p>`;
       similarList.innerHTML += similarCard;
@@ -388,13 +460,13 @@ async function similarRender() {
       let similar = data["results"][i];
       let similarBgPath = `https://image.tmdb.org/t/p/w780${similar["backdrop_path"]}`;
       let similarCard = `
-      <li class="movieListItem">
-        <img class="movieListItemImg" src=${similar["backdrop_path"] ? similarBgPath : '../image/default_image.png'} alt=""/>
+      <li class="movie-list-item">
+        <img class="movie-list-item-img" src=${similar["backdrop_path"] ? similarBgPath : '../image/default_image.png'} alt=""/>
         <div class="over-text">
-          <h3 class="movieListItemTitle">${similar["title"]}</h3>
-          <p class="movieListItemDesc">${similar["overview"] || '등록된 줄거리가 없습니다.'}</p>
+          <h3 class="movie-list-item-title">${similar["title"]}</h3>
+          <p class="movie-list-item-desc">${similar["overview"] || '등록된 줄거리가 없습니다.'}</p>
           <div class="movie-id">${similar["id"]}</div>
-          <button class="movieListItemButton">더 보기</button>
+          <button class="movie-list-item-btn">더 보기</button>
         </div>
       </li>
       `;
@@ -404,20 +476,22 @@ async function similarRender() {
   .catch(err => console.error(err));
 };
 
-// console.log(url)
+let movieList = document.querySelector('.movie-list')
 
-// async function goAnotherDetail() {
-//   const url = new URLSearchParams([["id", null]]);
-
-// function deliverQuery(e) {
-//   if (e.target.parentNode.className === "movie-card") {
-//     const movieId = e.target.parentNode.childNodes.item(13).innerText; // 카드에서 id 정보 추출
-//     url.set("id", movieId); // URL 객체의 "id" 배열의 1번째 index의 값을 영화 아이디로 지정
-//     const urlQuery = url.toString(); // 쿼리들을 문자열로 바꾼다.
-//     location.href = `html/detail.html?${urlQuery}`; // 이동할 페이지에 쿼리들을 적용해준다.
-//   }
-// }
-// }
+movieList.addEventListener("click", (e) => {
+  const ITEM_NUM = [3, 5, 7]
+  ITEM_NUM.forEach(num => {
+    let detailBtn = movieList.childNodes.item(num).childNodes.item(3).childNodes.item(7);
+    let similarMovieId = movieList.childNodes.item(num).childNodes.item(3).childNodes.item(5).innerText;
+    if(e.target === detailBtn) {
+      console.log('클릭')
+      urlParams.set("id", similarMovieId);
+      const urlQuery = url.toString();
+      console.log(urlQuery);
+      location.href = `?id=${similarMovieId}`;
+    }
+  }); 
+}); // 비슷한 영화의 상세보기 클릭 시 해당 페이지로 이동
 
 async function creditsRender() {
   fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko`, options)

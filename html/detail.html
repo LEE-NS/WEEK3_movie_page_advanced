@@ -14,95 +14,54 @@
   <script defer src="../script/detail.js"></script>
 </head>
 
-<body>
-  <div class="pageBtns">
-    <button class="backBtn">
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
-    <button class="homeBtn" href="../index.html">
-      <i class="fa-solid fa-house"></i>
-    </button>
-  </div>
-  <!-- 리뷰 창 -->
-  <div class="review close">
-    <button type="button" class="review-open-close-button">
-      <i class="fa-solid fa-grip-lines-vertical"></i>
-    </button>
-    <div class="review-main">
-      <!-- 리뷰 입력 -->
-      <form id="reviewForm">
-        <div class="commentInput">
-          <h2>리뷰 작성 <span class="count"></span></h2>
-          <input id="userId" type="text" placeholder="아이디" />
-          <input id="userPassword" type="password" placeholder="비밀번호" />
-          <div class="rating">
-            <!-- 1st star-->
-            <input type="radio" name="rating" id="r1" value="5" />
-            <label for="r1"></label>
-            <!-- 2nd star -->
-            <input type="radio" name="rating" id="r2" value="4" />
-            <label for="r2"></label>
-            <!-- 3rd star -->
-            <input type="radio" name="rating" id="r3" value="3" />
-            <label for="r3"></label>
-            <!-- 4th star -->
-            <input type="radio" name="rating" id="r4" value="2" />
-            <label for="r4"></label>
-            <!-- 5th star -->
-            <input type="radio" name="rating" id="r5" value="1" />
-            <label for="r5"></label>
-          </div>
-
-          <p class="checkMsg"></p>
-          <textarea class="comment" id="userComment" cols="90" rows="3" placeholder="내용을 입력해주세요"></textarea>
-          <button class="inputBtn" type="submit">등록</button>
-        </div>
-      </form>
-      <!-- 리뷰 확인 -->
-      <div class="review-box">
-        <ul class="review-list">
-          <li class="review-card">
-            <div class="review-card-info">
-              <h4 id="userName">이름</h4>
-              <input id="review-input-password" type="password" placeholder="비밀번호" />
-            </div>
-            <p class="review-check-password"></p>
-            <!-- <div class="review-content-box">
-                <div class="review-content-main">
-                  <p class="review-content">
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용
-                  </p>
-                </div>
-                <div class="review-button-box">
-                  <button class="review-button-update" type="button">
-                    수정
-                  </button>
-                  <button class="review-button-delete" type="button">
-                    삭제
-                  </button>
-                </div>
-              </div> -->
-            <div class="review-update-box">
-              <textarea class="review-update-textarea"></textarea>
-              <div class="review-button-box">
-                <button class="review-button-update" type="button">
-                  확인
-                </button>
-                <button class="review-button-delete" type="button">
-                  취소
-                </button>
+  <body>
+    <div class="pageBtns">
+      <button class="backBtn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <button class="homeBtn" href="../index.html">
+        <i class="fa-solid fa-house"></i>
+      </button>
+    </div>
+    <!-- 리뷰 창 -->
+    <div class="review close">
+      <button type="button" class="review-open-close-button" data-open="true">
+        <i class="fa-solid fa-grip-lines-vertical"></i>
+      </button>
+      <div class="review-main">
+        <!-- 리뷰 입력 -->
+        <h2>리뷰 작성 <span class="count"></span></h2>
+        <form id="reviewForm">
+          <div class="commentInput">
+            <div class="review-form-user">
+              <input id="userId" type="text" placeholder="아이디" />
+              <input id="userPassword" type="password" placeholder="비밀번호" />
+              <div class="review-rating review-form-rating">
+                ★★★★★
+                <span class="review-star">★★★★★</span>
+                <input type="range" value="0" step="1" min="0" max="10" />
               </div>
             </div>
-          </li>
-        </ul>
+
+            <p class="checkMsg"></p>
+            <textarea
+              class="comment"
+              id="userComment"
+              cols="90"
+              rows="3"
+              placeholder="내용을 입력해주세요"
+            ></textarea>
+            <button class="inputBtn" type="submit">등록</button>
+          </div>
+        </form>
+        <!-- 리뷰 확인 -->
+        <div class="review-box">
+          <ul class="review-list">
+            <!-- 리뷰 내용이 들어온다 -->
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
   <main>
     <div class="container1">배경 이미지</div>
@@ -118,10 +77,10 @@
       </ul>
     </div>
     <!-- 관련영화 -->
-    <div class="movieListContainer">
-      <h2 class="movieListTitle">Similar</h2>
-      <div class="movieListWrapper">
-        <ul class="movieList">
+    <div class="movie-list-container">
+      <h2 class="movie-list-title">Similar</h2>
+      <div class="movie-list-wrap">
+        <ul class="movie-list">
           <!-- 비슷한 영화 정보가 들어온다 -->
         </ul>
       </div>
