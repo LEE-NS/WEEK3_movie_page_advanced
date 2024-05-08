@@ -246,13 +246,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await creditsRender(); // 배역 정보 렌더링
 
-
-  await similarRender(); // 비슷한 영화 정보 렌더링
-
   await videoRender() // 선행영상 정보 렌더링
 
   await similarRender() // 비슷한 영화 정보 렌더링
-
 
   reviewMap.get(movieId)?.forEach((data) => {
     createReview(data);
