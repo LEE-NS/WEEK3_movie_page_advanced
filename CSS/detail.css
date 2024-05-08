@@ -352,12 +352,12 @@ button i {
 
 .credits {
   width: 1020px;
-  margin: 70px auto 0;
+  margin: 150px auto 0;
 }
 .credits h2 {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .credits ul {
   display: flex;
@@ -381,22 +381,34 @@ button i {
   font-size: 12px;
   opacity: 0.8;
 }
-
 .poster {
   display: inline-block;
   height: 490px;
   margin-left: 100px;
 }
+/* 선행영상 */
+.video {
+  width: 1020px;
+  margin: 150px auto 0;
+}
+.video h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+.video-content {
+  width: 854px;
+  margin: 0 auto;
+}
+.no-video {
+  text-align: center;
 
-
-
-
-
+}
 /* 관련영화 */
 .movie-list-container {
   position: relative;
   width: 1020px;
-  margin: 70px auto 0;
+  margin: 150px auto 0;
 }
 .scroll-btn {
   position: absolute;
