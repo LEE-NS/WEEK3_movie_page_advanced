@@ -237,7 +237,7 @@ main {
 }
 
 /* 필터 버튼 */
-/* .filltering-btns {
+.filltering-btns {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
@@ -261,7 +261,7 @@ main {
   background-color: #967f87;
   color: #272727;
   transition: all 0.2s;
-} */
+}
 
 .movie-list-wrap {
   animation: slide 1.3s ease-in-out;
