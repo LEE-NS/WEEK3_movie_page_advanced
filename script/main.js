@@ -135,23 +135,6 @@ for (let page = 1; page <= 2; page++) {
   spreadContents(page);
 } // 1,2 페이지의 콘텐츠를 메인에 게시
 
-// function spreadContents(page) {
-//   let listingSection = listName
-//     .item(0)
-//     .nextSibling.nextSibling.childNodes.item(1);
-//   fetch(
-//     `https://api.themoviedb.org/3/movie/popular?language=ko&page=${page}`,
-//     options
-//   )
-//     .then((response) => response.json())
-//     .then((data) => {
-//       data["results"].forEach((movie) => {
-//         createCard(movie, listingSection);
-//       });
-//     });
-// } // 들어온 영화 데이터를 카드 형식으로 만들어서 해당 섹션에 배치시켜주는 함수
-
-// 들어온 영화 데이터를 저장할 변수
 let movieData = [];
 
 let listingSection = listName
