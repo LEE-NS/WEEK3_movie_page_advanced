@@ -21,7 +21,6 @@ body {
 #header-wrap {
   width: 100px;
   min-height: 100vh;
-  background-color: #2727275e;
 }
 #contents-wrap {
   width: calc(100% - 100px);
@@ -76,12 +75,12 @@ body {
 
 /* header */
 #header-wrap header {
-  position: relative;
+  position: fixed;
   color: #dedede;
+  background-color: #2F2F2F;
 }
 #header-wrap header ul {
   height: 100vh;
-  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
