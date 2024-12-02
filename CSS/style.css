@@ -207,6 +207,7 @@ header ul li .button-wrap {
 
 /* main */
 main {
+  /* width: 100%; */
   overflow-y: auto;
 }
 .main-bg {
